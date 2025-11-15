@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SHD Каталог и не только!</title>
+<style>
+body { margin:0; font-family:'Arial',sans-serif; background:#1a1a1a; color:#eee; }
+header { background:#660000; padding:20px; text-align:center; font-size:32px; font-weight:bold; letter-spacing:2px; }
+nav { display:flex; justify-content:center; background:#222; padding:15px; flex-wrap:wrap; }
+nav button { margin:5px 10px; padding:12px 20px; background:#880000; color:#fff; border:none; border-radius:5px; cursor:pointer; transition: transform 0.2s ease, background 0.25s ease; }
+nav button:hover { background:#ff0000; transform:scale(1.07); }
+nav button:active { transform:scale(0.95); }
+section { display:none; padding:30px 20px; }
+section.active { display:block; }
+#home-content { background:#2b2b2b; border-radius:15px; padding:20px; text-align:center; margin-top:30px; }
+.card { background:#2a2a2a; border-radius:15px; padding:15px; margin:15px 0; display:flex; align-items:center; justify-content:flex-start; cursor:pointer; transition: transform 0.2s ease, background 0.2s ease; position:relative; }
+.card:hover { transform:scale(1.03); background:#333; }
+.card img { width:40px; height:40px; margin-right:15px; border-radius:10px; filter: drop-shadow(0 0 14px #ff3333); }
+.card.online img { filter: drop-shadow(0 0 14px #ff3333); }
+.card h3 { color:#ff5555; margin-bottom:5px; }
+.card p { color:#ccc; line-height:1.4; }
+.description-btn { width:30px; height:30px; background:url('Описание.png') no-repeat center/cover; border:none; cursor:pointer; position:absolute; right:15px; top:50%; transform:translateY(-50%); filter: drop-shadow(0 0 10px black); }
+.rule { background:#2b2b2b; border-left:5px solid #ff4444; padding:15px; margin:10px 0; border-radius:10px; font-size:16px; }
+.calendar { background:#2b2b2b; border-radius:10px; padding:20px; width:100%; max-width:300px; margin:auto; position:relative; }
+.calendar h3 { margin-bottom:10px; color:#ff5555; }
+.calendar small { position:absolute; bottom:5px; left:10px; font-size:11px; color:#999; }
+.leaders { display:flex; flex-wrap:wrap; gap:20px; }
+.leader-card { background:#2b2b2b; border-radius:10px; padding:15px; width:200px; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,0.5); }
+.leader-card h3 { color:#ff5555; margin-bottom:10px; }
+footer { position:fixed; bottom:5px; left:5px; font-size:10px; color:#777; }
+.button-switch { background:#2b2b2b; border-left:5px solid #0077ff; padding:12px 20px; margin:10px 0; border-radius:10px; color:#fff; text-align:center; cursor:pointer; transition: transform 0.2s ease, background 0.25s ease; }
+.button-switch:hover { transform:scale(1.05); background:#005bbb; }
+.button-switch.active { background:#005bbb; }
+.modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); justify-content:center; align-items:center; z-index:999; }
+.modal-content { background:#2a2a2a; padding:20px; border-radius:10px; max-width:500px; text-align:center; color:#eee; }
+.modal-content button { margin-top:10px; padding:8px 15px; border:none; background:#ff5555; color:#fff; cursor:pointer; border-radius:5px; }
+
+@media(max-width:600px){ nav button{padding:10px 12px;font-size:14px;margin:3px 5px;} .card{flex-direction:column; align-items:flex-start;} .leader-card{width:100%;} .card img{margin-bottom:10px;} .description-btn{position:static; transform:none; margin-top:10px;} }
+</style>
+</head>
+<body>
+
+<header>SHD Каталог и не только!</header>
+
+<nav>
+<button onclick="showSection('home')">Главная</button>
+<button onclick="showSection('servers')">Официальные</button>
+<button onclick="showSection('rules')">Правила</button>
+<button onclick="showSection('calendar')">События</button>
+<button onclick="showSection('leaders')">Должности</button>
+</nav>
+
+<section id="home" class="active">
+<div id="home-content">
+<h2>Здравствуйте! Вы попали в SHD Catalog v4.0, в котором собрана информация о проектах и серверах клана, также правила и события.</h2>
+<p>Одна из целей клана: собрать самых адекватных игроков и создать своё комьюнити адекватных серверов!</p>
+<p>Catalog/каталог By R1SS5</p>
+</div>
+</section>
+
+<section id="servers">
+<h2>Официальные</h2>
+
+<div>
+<div class="button-switch active" onclick="showServerList('servers-list')">Сервера</div>
+<div class="button-switch" onclick="showServerList('projects-list')">Проекты</div>
+</div>
+
+<div id="servers-list">
+<div class="card"><img src="Офлайн.png"><div><h3>Пусто</h3><p>Статус: Офлайн</p></div><button class="description-btn" onclick="openModal('Пока что ничего нет.')"></button></div>
+<div class="card online"><img src="Офлайн.png"><div><h3>Пусто</h3><p>Статус: Офлайн</p></div><button class="description-btn" onclick="openModal('Пока что ничего нет.')"></button></div>
+<div class="card"><img src="Офлайн.png"><div><h3>Пусто</h3><p>Статус: Офлайн</p></div><button class="description-btn" onclick="openModal('Пока что ничего нет.')"></button></div>
+<div class="card online"><img src="Офлайн.png"><div><h3>Пусто</h3><p>Статус: Онлайн</p></div><button class="description-btn" onclick="openModal'Пока что ничего нет.')"></button></div>
+</div>
+
+<div id="projects-list" style="display:none;">
+<div class="card online"><img src="Офлайн.png"><div><h3>RayRP</h3><p>Статус: Офлайн</p></div><button class="description-btn" onclick="openModal('Очень хорошое рп с модами, есть куча всего. Мы пытались максимально оптимизировать карту и мод. Есть очень много фич, мы баним на сервере если люди нон-рп или неадекваты. (Пожалуйтесь на них в чат)')"></button></div>
+<div class="card"><img src="Офлайн.png"><div><h3>Пусто</h3><p>Статус: Офлайн</p></div><button class="description-btn" onclick="openModal('Пока что ничего нет.')"></button></div>
+<div class="card"><img src="Офлайн.png"><div><h3>Пусто</h3><p>Статус: Офлайн</p></div><button class="description-btn" onclick="openModal('Пока что ничего нет')"></button></div>
+<div class="card online"><img src="Офлайн.png"><div><h3>Пусто</h3><p>Статус: Офлайн</p></div><button class="description-btn" onclick="openModal('Пока что ничего нет')"></button></div>
+</div>
+
+</section>
+
+<section id="rules">
+<h2>Правила</h2>
+<div class="rule">1. 18+ контент запрещен – Кик</div>
+<div class="rule">2. Спам запрещён – Мут</div>
+<div class="rule">3. Скам и мошенничество запрещено – Бан</div>
+<div class="rule">4. Оскорбления запрещены – Мут</div>
+<div class="rule">5. Предательство – Бан</div>
+<div class="rule">6. Неактив – Кик</div>
+<div class="rule">7. Не перечить Администратору – Мут</div>
+<div class="rule">8. Не шутить про политику</div>
+<div class="rule">9. Не пиарить сервера без разрешения (можно получить у Президента/лидера)</div>
+</section>
+
+<section id="calendar">
+<h2>События</h2>
+<div class="calendar">
+<h3>6 число</h3>
+<p>Собрание клана</p>
+<small>КАЖДЫЙ МЕСЯЦ</small>
+</div>
+</section>
+
+<section id="leaders">
+<h2>Должности</h2>
+<div class="leaders">
+<div class="leaders">
+<div class="leader-card"><h3>М-3 [SHD]</h3><p>Вождь</p></div>
+<div class="leader-card"><h3>REisain [SHD]</h3><p>Заместитель</p></div>
+<div class="leader-card"><h3>Красный [SHD]</h3><p>Заместитель</p></div>
+<div class="leader-card"><h3>Melope [SHD]</h3><p>Министр</p></div>
+</div>
+</section>
+
+<footer>BY R1SS5|REisain</footer>
+
+<!-- Модальное окно -->
+<div id="modal" class="modal">
+<div class="modal-content">
+<p id="modal-text" style="white-space:pre-wrap"></p>
+<button onclick="closeModal()">Закрыть</button>
+</div>
+</div>
+
+<script>
+function showSection(id){
+    const sections = document.querySelectorAll('section');
+    sections.forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+}
+
+function showServerList(listId){
+    document.getElementById('servers-list').style.display = 'none';
+    document.getElementById('projects-list').style.display = 'none';
+    document.getElementById(listId).style.display = 'block';
+
+    const buttons = document.querySelectorAll('.button-switch');
+    buttons.forEach(b => b.classList.remove('active'));
+    if(listId === 'servers-list') buttons[0].classList.add('active');
+    else buttons[1].classList.add('active');
+}
+
+function openModal(text){
+    document.getElementById('modal-text').innerText = text;
+    document.getElementById('modal').style.display = 'flex';
+}
+
+function closeModal(){
+    document.getElementById('modal').style.display = 'none';
+}
+</script>
+
+</body>
+</html>
