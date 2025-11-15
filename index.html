@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SHD Каталог</title>
+<style>
+body {
+    margin:0;
+    font-family:'Arial',sans-serif;
+    background:#1a1a1a;
+    color:#eee;
+}
+header {
+    background:#660000;
+    padding:20px;
+    text-align:center;
+    font-size:32px;
+    font-weight:bold;
+    letter-spacing:2px;
+}
+nav {
+    display:flex;
+    justify-content:center;
+    background:#222;
+    padding:15px;
+    flex-wrap:wrap;
+}
+nav button {
+    margin:5px 10px;
+    padding:12px 20px;
+    background:#880000;
+    color:#fff;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    transition:0.3s;
+}
+nav button:hover {
+    background:#ff0000;
+}
+section {
+    display:none;
+    padding:30px 20px;
+}
+section.active {
+    display:block;
+}
+#home-images {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:30px;
+    margin-top:30px;
+}
+#home-images img {
+    width:150px;
+    height:150px;
+    border-radius:15px;
+    box-shadow:0 4px 12px rgba(255,0,0,0.5);
+}
+.card {
+    background:#2a2a2a;
+    border-radius:15px;
+    padding:15px;
+    margin:15px 0;
+    display:flex;
+    align-items:center;
+}
+.card img {
+    width:50px;
+    height:50px;
+    margin-right:15px;
+}
+.card h3 {
+    color:#ff5555;
+    margin-bottom:5px;
+}
+.card p {
+    color:#ccc;
+    line-height:1.4;
+}
+.rule {
+    background:#2b2b2b;
+    border-left:5px solid #ff4444;
+    padding:15px;
+    margin:10px 0;
+    border-radius:10px;
+    font-size:16px;
+}
+.calendar {
+    background:#2b2b2b;
+    border-radius:10px;
+    padding:20px;
+    width:100%;
+    max-width:300px;
+    margin:auto;
+}
+.calendar h3 {
+    margin-bottom:10px;
+    color:#ff5555;
+}
+.leaders {
+    display:flex;
+    flex-wrap:wrap;
+    gap:20px;
+}
+.leader-card {
+    background:#2b2b2b;
+    border-radius:10px;
+    padding:15px;
+    width:200px;
+    text-align:center;
+    box-shadow:0 2px 8px rgba(255,0,0,0.5);
+}
+.leader-card h3 {color:#ff5555;margin-bottom:10px;}
+/* Мобильная адаптация */
+@media(max-width:600px){
+    nav button{padding:10px 12px;font-size:14px;margin:3px 5px;}
+    #home-images img{width:120px;height:120px;}
+    .card img{width:40px;height:40px;}
+    .leader-card{width:100%;}
+}
+</style>
+</head>
+<body>
+
+<header>SHD Каталог</header>
+<nav>
+  <button onclick="showSection('home')">Главная</button>
+  <button onclick="showSection('servers')">Сервера</button>
+  <button onclick="showSection('rules')">Правила</button>
+  <button onclick="showSection('calendar')">Календарь</button>
+  <button onclick="showSection('leaders')">Лидеры</button>
+</nav>
+
+<section id="home" class="active">
+  <h2 style="text-align:center;">Добро пожаловать в SHD Каталог</h2>
+  <div id="home-images">
+    <img src="Онлайн.png" alt="Онлайн">
+    <img src="Офлайн.png" alt="Офлайн">
+  </div>
+</section>
+
+<section id="servers">
+  <h2>Сервера SHD</h2>
+  <!-- Добавим больше офлайн серверов -->
+  <div class="card">
+    <img src="Офлайн.png" alt="Офлайн">
+    <div>
+      <h3>SHD Server 1</h3>
+      <p>Статус: Офлайн</p>
+    </div>
+  </div>
+  <div class="card">
+    <img src="Офлайн.png" alt="Офлайн">
+    <div>
+      <h3>SHD Server 2</h3>
+      <p>Статус: Офлайн</p>
+    </div>
+  </div>
+  <div class="card">
+    <img src="Офлайн.png" alt="Офлайн">
+    <div>
+      <h3>SHD Server 3</h3>
+      <p>Статус: Офлайн</p>
+    </div>
+  </div>
+  <div class="card">
+    <img src="Офлайн.png" alt="Офлайн">
+    <div>
+      <h3>SHD Server 4</h3>
+      <p>Статус: Офлайн</p>
+    </div>
+  </div>
+  <div class="card">
+    <img src="Офлайн.png" alt="Офлайн">
+    <div>
+      <h3>SHD Server 5</h3>
+      <p>Статус: Офлайн</p>
+    </div>
+  </div>
+</section>
+
+<section id="rules">
+  <h2>Правила</h2>
+  <div class="rule">1. 18+ контент запрещен – Кик</div>
+  <div class="rule">2. Спам запрещён – Мут</div>
+  <div class="rule">3. Скам и мошенничество запрещено – Бан</div>
+  <div class="rule">4. Оскорбления запрещены 🔴 – Мут</div>
+  <div class="rule">5. Предательство – Бан</div>
+  <div class="rule">6. Неактив – Кик</div>
+  <div class="rule">7. Не перечить Администратору – Мут</div>
+  <div class="rule">8. Не шутить про политику</div>
+  <div class="rule">9. Не пиарить сервера без разрешения (можно получить у Президента/лидера)</div>
+</section>
+
+<section id="calendar">
+  <h2>Календарь</h2>
+  <div class="calendar">
+    <h3>Ноябрь</h3>
+    <p>6 день: Собрание клана</p>
+  </div>
+</section>
+
+<section id="leaders">
+  <h2>Лидеры клана SHD</h2>
+  <div class="leaders">
+    <div class="leader-card">
+      <h3>REisain [SHD]</h3>
+      <p>Лидер</p>
+    </div>
+    <div class="leader-card">
+      <h3>М-3 [SHD]</h3>
+      <p>да</p>
+    </div>
+  </div>
+</section>
+
+<script>
+function showSection(id){
+  const sections=document.querySelectorAll('section');
+  sections.forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+</script>
+
+</body>
+</html>
