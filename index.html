@@ -16,7 +16,7 @@ body {
     transition: opacity 1s ease-out; 
 }
 
-/* --- Стили для Header и новой кнопки Настроек вверху --- */
+/* --- Стили для Header и кнопки Настроек (по умолчанию - сверху) --- */
 header { 
     background: linear-gradient(120deg, #660000, #990000); 
     padding:20px; 
@@ -28,9 +28,10 @@ header {
     text-shadow: 0 0 10px #ff0000, 0 0 20px #ff2222; 
     transition: all 0.3s ease;
     animation: textFlicker 3s infinite alternate; 
-    position: relative; /* Чтобы кнопка настроек позиционировалась относительно хедера */
+    position: relative; 
 }
 
+/* Настройки: Положение по умолчанию (ДЕКСТОП - СВЕРХУ) */
 #settings-btn {
     position: absolute;
     top: 50%;
@@ -360,13 +361,13 @@ section.active { display:block; }
     box-shadow: 0 0 20px #ff0000, 0 0 30px #ff5555;
 }
 
-/* --- 8. Настройки (Перемещена панель) --- */
+/* --- 8. Панель настроек (ДЕКСТОП - СВЕРХУ) --- */
 #settings-panel {
-    position: absolute; /* Теперь относительно хедера */
+    position: absolute; 
     top: 75px;
     right: 15px;
     z-index: 999;
-    display: none; /* Скрыта по умолчанию */
+    display: none; 
     flex-direction: column;
     gap: 8px;
     padding: 10px;
@@ -403,10 +404,9 @@ section.active { display:block; }
 
 
 /* --- 9. РЕЖИМ ТЕСТИРОВЩИКА (УСИЛЕННЫЙ GLOW MODE) --- */
-
 .tester-glow * {
     transition: none !important; 
-    animation-duration: 0.5s !important; /* Ускоряем анимации */
+    animation-duration: 0.5s !important; 
 }
 
 .tester-glow header, 
@@ -416,20 +416,19 @@ section.active { display:block; }
 .tester-glow .leader-card:hover,
 .tester-glow .button-switch.active,
 .tester-glow .filter-btn.active {
-    animation: testerPulse 0.5s infinite alternate !important; /* Быстрая пульсация */
+    animation: testerPulse 0.5s infinite alternate !important; 
 }
 
 .tester-glow .card:hover,
 .tester-glow .rule:hover,
 .tester-glow .calendar:hover,
 .tester-glow .leader-card:hover {
-    transform: scale(1.1) rotate(2deg) !important; /* Усиленное масштабирование/вращение */
+    transform: scale(1.1) rotate(2deg) !important; 
 }
 
-/* Ключевая анимация сильного свечения */
 @keyframes testerPulse {
     0% {
-        box-shadow: 0 0 30px #ff0000, 0 0 60px #8a2be2, 0 0 90px #0000ff; /* Красный, Фиолетовый, Синий */
+        box-shadow: 0 0 30px #ff0000, 0 0 60px #8a2be2, 0 0 90px #0000ff; 
         text-shadow: 0 0 10px #fff, 0 0 20px #ff00ff;
     }
     100% {
@@ -463,7 +462,7 @@ section.active { display:block; }
     display: none !important;
 }
 
-/* --- 10. Анимации --- */
+/* --- 10. Анимации (без изменений) --- */
 @keyframes floatRule { 
     0% { transform: translateY(0) rotate(0deg); } 
     25% { transform: translateY(-6px) rotate(-1deg); } 
@@ -511,19 +510,39 @@ section.active { display:block; }
     }
 }
 
-/* --- 11. Медиа-запросы --- */
+/* --- 11. Медиа-запросы (Мобильная адаптация) --- */
 @media(max-width:600px){ 
     nav button{padding:10px 12px;font-size:14px;margin:3px 5px;} 
     .card{flex-direction:column; align-items:flex-start;} 
     .leader-card{width:100%;} 
     .card img{margin-bottom:10px;} 
     .description-btn{position:static; transform:none; margin-top:10px;} 
-    #settings-btn { right: 5px; padding: 8px 10px; font-size: 14px;}
-    #settings-panel { right: 5px; top: 60px; }
+    
+    /* 💥 МОБИЛЬНЫЕ НАСТРОЙКИ: ФИКСАЦИЯ СНИЗУ */
+    #settings-btn { 
+        position: fixed; /* Фиксируем на экране */
+        top: auto; /* Снимаем привязку к верху */
+        bottom: 10px; /* Привязка к низу */
+        right: 10px; /* Привязка к правой стороне */
+        transform: none; /* Снимаем translateY(-50%) */
+        padding: 8px 10px; 
+        font-size: 14px;
+    }
+    
+    #settings-panel { 
+        position: fixed; /* Фиксируем на экране */
+        top: auto; /* Снимаем привязку к верху */
+        bottom: 50px; /* Располагаем над кнопкой настроек */
+        right: 10px; 
+        box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.7); /* Тень снизу вверх */
+    }
+    /* 💥 Конец мобильных настроек */
+    
 }
 
 #servers, #rules { overflow: hidden; }
 
+/* Футер должен быть ниже панели настроек на мобильных, поэтому оставляем его как есть. */
 footer { position:fixed; bottom:5px; left:5px; font-size:10px; color:#777; }
     </style>
 </head>
@@ -545,7 +564,7 @@ footer { position:fixed; bottom:5px; left:5px; font-size:10px; color:#777; }
 
 <section id="home" class="active">
     <div id="home-content">
-        <h2>Здравствуйте! Вы попали в SHD Catalog v5.9.0, в котором собрана информация о проектах и серверах клана, также правила и события.</h2>
+        <h2>Здравствуйте! Вы попали в SHD Catalog v4.0, в котором собрана информация о проектах и серверах клана, также правила и события.</h2>
         <p>Одна из целей клана: собрать самых адекватных игроков и создать своё комьюнити адекватных серверов!</p>
         <p>Catalog/каталог By R1SS5</p>
     </div>
@@ -653,7 +672,7 @@ footer { position:fixed; bottom:5px; left:5px; font-size:10px; color:#777; }
 </section>
 
 <div id="settings-panel">
-    <button id="glow-toggle" class="setting-btn" onclick="toggleGlowMode()">Режим оптимизация (TEST FUNCTION)</button>
+    <button id="glow-toggle" class="setting-btn" onclick="toggleGlowMode()">Режим Экономии</button>
     <button id="tester-toggle" class="setting-btn" onclick="toggleTesterMode()">Тестировщик</button>
 </div>
 
@@ -733,7 +752,7 @@ function closeModal(){
     setTimeout(()=> modal.style.display='none', 400); 
 }
 
-// --- Новая функция для кнопки "Настройки" ---
+// --- Функции управления режимами ---
 function toggleSettingsPanel() {
     const panel = document.getElementById('settings-panel');
     if (panel.style.display === 'flex') {
@@ -743,7 +762,6 @@ function toggleSettingsPanel() {
     }
 }
 
-// --- Функции управления режимами ---
 function toggleGlowMode() {
     document.body.classList.remove('tester-glow'); // Убеждаемся, что режим тестировщика отключен
     document.getElementById('tester-toggle').classList.remove('active');
