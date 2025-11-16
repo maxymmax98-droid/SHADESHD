@@ -6,7 +6,9 @@
     <title>SHD Каталог и не только!</title>
     
     <style>
-/* --- 1. Основные стили --- */
+/* ---------------------------------------------------- */
+/* --- 1. Основные и общие стили ---------------------- */
+/* ---------------------------------------------------- */
 body { 
     margin:0; 
     font-family:'Arial',sans-serif; 
@@ -16,7 +18,28 @@ body {
     transition: opacity 1s ease-out; 
 }
 
-/* --- Стили для Header и кнопки Настроек --- */
+/* --- НОВЫЙ КОНТЕЙНЕР ДЛЯ ИМИТАЦИИ ОКНА --- */
+.container {
+    max-width: 900px; /* Максимальная ширина "окна" */
+    margin: 20px auto; /* Центрирование по горизонтали с отступами */
+    background: #222; /* Фон основного контента */
+    border-radius: 15px; /* Скругленные углы "окна" */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 50px rgba(255, 0, 0, 0.4); /* Красивая тень */
+    padding: 0;
+    overflow: hidden; /* Обрезка содержимого */
+}
+/* Стилизация header для вставки в контейнер */
+.container header {
+    margin: 0;
+    border-radius: 15px 15px 0 0; /* Скругление только верхних углов */
+}
+/* Стилизация nav для вставки в контейнер */
+.container nav {
+    border-radius: 0;
+}
+/* --- КОНЕЦ НОВОГО КОНТЕЙНЕРА --- */
+
+/* --- Стили Header (Версия V1) --- */
 header { 
     background: linear-gradient(120deg, #660000, #990000); 
     padding:20px; 
@@ -30,8 +53,19 @@ header {
     animation: textFlicker 3s infinite alternate; 
     position: relative; 
 }
+header::after {
+    content: "v1"; 
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    font-size: 10px;
+    color: #ff5555;
+    text-shadow: none;
+    letter-spacing: 0;
+}
+header:hover { text-shadow: 0 0 20px #ff4444, 0 0 40px #ff0000; }
 
-/* Настройки: Положение по умолчанию (ДЕКСТОП - СВЕРХУ) */
+/* --- Кнопка и Панель Настроек (Общие) --- */
 #settings-btn {
     position: absolute;
     top: 50%;
@@ -47,99 +81,129 @@ header {
     transition: all 0.3s ease;
     z-index: 10;
     box-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
-    /* Видима по умолчанию */
 }
-#settings-btn:hover {
-    background: #ff0000;
-    box-shadow: 0 0 15px rgba(255, 0, 0, 1), 0 0 25px rgba(255, 100, 100, 0.8);
+#settings-btn:hover { background: #ff0000; box-shadow: 0 0 15px rgba(255, 0, 0, 1); }
+
+#settings-panel-desktop, #settings-panel-mobile {
+    z-index: 999;
+    display: none; 
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px;
+    background: rgba(43, 43, 43, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+    animation: fadeIn 0.3s ease-out;
+}
+#settings-panel-desktop { top: 75px; right: 15px; position: absolute; }
+#settings-panel-mobile { position: static; margin: 10px 0; width: calc(100% - 30px); }
+
+/* Дополнительные настройки в панели (Тестировщик) */
+.setting-group { display: flex; flex-direction: column; gap: 5px; }
+.setting-group label { font-weight: bold; color: #ff9999; font-size: 14px; }
+.toggle-btn {
+    padding: 8px 12px;
+    background: #555;
+    color: #fff;
+    border: 1px solid #777;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.toggle-btn.active {
+    background: #008800;
+    border-color: #00ff00;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
 }
 
-header:hover { text-shadow: 0 0 20px #ff4444, 0 0 40px #ff0000; }
-
+/* --- Навигация --- */
 nav { display:flex; justify-content:center; background:#222; padding:15px; flex-wrap:wrap; }
-
-nav button { margin:5px 10px; padding:12px 20px; background:#880000; color:#fff; border:none; border-radius:5px; cursor:pointer; transition: transform 0.2s ease, background 0.25s ease; }
-
-nav button:hover { 
-    background:#ff0000; 
-    transform:scale(1.1); 
-    box-shadow: 0 0 15px rgba(255, 0, 0, 0.9), 0 0 30px rgba(255, 100, 100, 0.6); 
+nav button { 
+    margin:5px 10px; padding:12px 20px; background:#880000; color:#fff; border:none; 
+    border-radius:5px; cursor:pointer; transition: transform 0.2s ease, background 0.25s ease; 
 }
-
+nav button:hover { background:#ff0000; transform:scale(1.1); box-shadow: 0 0 15px rgba(255, 0, 0, 0.9); }
 nav button:active { transform:scale(0.95); }
 
-section { display:none; padding:30px 20px; }
+/* --- Кнопки переключения (Сервера/Проекты) --- */
+.button-switch { 
+    background: #2b2b2b; border: 2px solid #555; padding: 12px 20px; 
+    margin: 10px 10px; border-radius: 10px; color: #fff; text-align: center; 
+    cursor: pointer; transition: all 0.3s ease; flex-grow: 1; max-width: 200px;
+}
+.button-switch:hover { 
+    transform: scale(1.05); background: #444; box-shadow: 0 0 15px rgba(255, 50, 50, 0.5); 
+}
+.button-switch.active { 
+    background: #ff0000; border-color: #ff5555; 
+    box-shadow: 0 0 30px rgba(255, 0, 0, 1), 0 0 60px rgba(0, 50, 255, 0.7); 
+    transform: scale(1.05); animation: switchPulse 0.8s infinite alternate; 
+}
 
-section.active { display:block; }
+/* --- Кнопки фильтрации (PvP, Parkour и т.д.) --- */
+.filter-btn { margin:5px; padding:10px 15px; border:none; border-radius:5px; background:#444; color:#fff; cursor:pointer; transition:0.2s; }
+.filter-btn:hover { 
+    background:#C00000; transform:scale(1.1); box-shadow: 0 0 12px rgba(255, 0, 0, 0.8); 
+}
+.filter-btn.active { 
+    background:#ff0000; box-shadow: 0 0 15px rgba(255, 0, 0, 1); 
+    animation: filterPulse 1.5s infinite alternate; 
+}
 
-#calendar.active { display: flex; }
-
-#home-content { background:#2b2b2b; border-radius:15px; padding:20px; text-align:center; margin-top:30px; }
-
-/* --- 2. Карточки (Card) и кнопки описания --- */
+/* ---------------------------------------------------- */
+/* --- 2. Стили Карточек (Серверы/Правила/События/Лидеры) --- */
+/* ---------------------------------------------------- */
 .card { 
-    position: relative; 
-    background: #2a2a2a; 
-    border-radius: 15px; 
-    padding: 15px; 
-    margin: 15px 0; 
-    display: flex; 
-    align-items: center; 
-    justify-content: flex-start; 
+    position: relative; background: #2a2a2a; border-radius: 15px; padding: 15px; 
+    margin: 15px 0; display: flex; align-items: center; justify-content: flex-start; 
     cursor: pointer; 
     transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.3s ease; 
     box-shadow: 0 0 5px rgba(255,0,0,0.3); 
 }
-
+/* Стандартный hover для сервера */
 .card:hover { 
-    transform: scale(1.03); 
-    background: #4a1a1a; 
+    transform: scale(1.03); background: #4a1a1a; 
     box-shadow: 0 0 35px rgba(255,0,0,1), 0 0 60px rgba(255,50,50,0.8); 
 }
-
-.card img { width:40px; height:40px; margin-right:15px; border-radius:10px; filter: drop-shadow(0 0 14px #ff3333); }
-
-.card.online img { filter: drop-shadow(0 0 14px #ff3333); }
-
+.card img { 
+    width:20px; height:20px; margin-right:10px; border-radius:50%; /* Сделаем иконку меньше */
+    filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.7)); 
+    transition: filter 0.3s ease;
+}
 .card h3 { color:#ff5555; margin-bottom:5px; }
+.card p { color:#ccc; line-height:1.4; font-size: 14px; }
+.card p strong { color: #fff; }
 
-.card p { color:#ccc; line-height:1.4; }
-
-.description-btn { 
-    width:30px; 
-    height:30px; 
-    background:url('Описание.png') no-repeat center/cover; 
-    border:none; 
-    cursor:pointer; 
-    position:absolute; 
-    right:15px; 
-    top:50%; 
-    transform:translateY(-50%); 
-    filter: drop-shadow(0 0 10px black); 
-    transition: transform 0.2s ease, filter 0.2s ease; 
+/* --- Онлайн Статус (Зеленый) --- */
+.card.online {
+    border: 1px solid #00ff00; 
+    animation: pulseGreen 2s infinite alternate; 
+}
+.card.online img {
+    filter: drop-shadow(0 0 8px #00ff00); 
+}
+.card.online:hover {
+    background: #1a4a1a; 
+    box-shadow: 0 0 35px #00ff00, 0 0 60px #55ff55; 
+    animation: none; 
+}
+@keyframes pulseGreen {
+    0% { box-shadow: 0 0 10px #00ff00, 0 0 20px rgba(0, 255, 0, 0.4); }
+    100% { box-shadow: 0 0 20px #00ff00, 0 0 40px rgba(0, 255, 0, 0.8); }
 }
 
-.description-btn:hover { 
-    transform: translateY(-50%) scale(1.2); 
-    filter: drop-shadow(0 0 15px red); 
-}
-
-/* --- 3. Правила (Rule) --- */
+/* --- Правила (Rule) --- */
 .rule { 
     background: linear-gradient(145deg, #2b2b2b, #1c1c1c); 
     border-left:5px solid #ff4444; 
     padding:15px 20px; 
     margin:10px 0; 
     border-radius:15px; 
-    font-size:16px; 
-    color:#eee; 
     box-shadow: 0 0 15px rgba(255,0,0,0.3), 0 5px 10px rgba(0,0,0,0.5); 
     transition: transform 0.3s ease, box-shadow 0.5s ease; 
-    cursor: default; 
     position: relative; 
     animation: floatRule 2s ease-in-out infinite alternate;
 } 
-
 .rule::before { 
     content: ''; 
     position: absolute; 
@@ -150,51 +214,29 @@ section.active { display:block; }
     filter: blur(4px); 
     transition: all 0.3s ease; 
 }
-
 .rule:hover { 
     transform: scale(1.05); 
     box-shadow: 0 0 35px rgba(255,0,0,0.9), 0 8px 20px rgba(0,0,0,0.7); 
 }
-
 .rule:hover::before { box-shadow: 0 0 40px rgba(255,0,0,1), 0 0 60px rgba(255,0,0,0.8); }
 
-/* --- 4. Секция События (Calendar) --- */
-#calendar { 
-    flex-wrap: wrap; 
-    justify-content: center; 
-    gap: 20px; 
-    padding: 20px 0; 
-}
-
+/* --- События (Calendar) --- */
 .calendar { 
     background: linear-gradient(145deg, #2b2b2b, #1c1c1c); 
     border-radius: 15px; 
     padding: 20px; 
     width: 250px; 
     box-shadow: 0 0 20px rgba(255,0,0,0.5), 0 5px 15px rgba(0,0,0,0.7); 
-    position: relative; 
     transition: transform 0.3s ease, box-shadow 0.3s ease; 
 }
-
 .calendar:hover { 
     transform: translateY(-5px) scale(1.05); 
     box-shadow: 0 0 35px rgba(255,0,0,0.8), 0 10px 25px rgba(0,0,0,0.8); 
     animation: pulseEvent 1.2s infinite alternate; 
 }
 
-.calendar h3 { 
-    color: #ff5555; 
-    margin-bottom: 10px; 
-    text-shadow: 0 0 5px #ff0000, 0 0 15px #ff2222; 
-    text-align: center; 
-}
-
-.calendar p { color: #ccc; font-weight: bold; line-height: 1.4; text-align: center; }
-.calendar small { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); font-size: 11px; color: #999; }
-
-/* --- 5. Должности (Leaders) --- */
+/* --- Должности (Leaders) --- */
 .leaders { display:flex; flex-wrap:wrap; gap:20px; }
-
 .leader-card { 
     background: linear-gradient(145deg, #2a2a2a, #1c1c1c); 
     border-radius: 15px; 
@@ -204,659 +246,574 @@ section.active { display:block; }
     box-shadow: 0 0 20px rgba(255, 0, 0, 0.5), 0 5px 15px rgba(0,0,0,0.7); 
     border: 2px solid #ff2222; 
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; 
-    position: relative; 
-    overflow: hidden; 
 }
-
 .leader-card:hover { 
     transform: scale(1.08); 
     box-shadow: 0 0 30px rgba(255,0,0,0.9), 0 0 50px rgba(255,50,50,0.6); 
-    transition: transform 0.4s ease, box-shadow 0.4s ease; 
-}
-
-/* Адский эффект для М-3 */
-#leader-m3 { position: relative; overflow: visible; transition: transform 0.5s ease; }
-#leader-m3:hover { transform: scale(1.25) rotate(-4deg); animation: pulseRed 1.2s infinite alternate; }
-
-#leader-m3::before { 
-    content: ""; 
-    position: absolute; 
-    top: -20px; left: -20px; right: -20px; bottom: -20px; 
-    background: radial-gradient(circle, rgba(255,0,0,0.8), transparent 70%); 
-    filter: blur(30px); 
-    opacity: 0; 
-    transition: opacity 0.4s ease; 
-    z-index: -1; 
-}
-#leader-m3:hover::before { opacity: 1; }
-
-#leader-m3::after { 
-    content: ""; 
-    position: absolute; 
-    width: 100%; height: 100%;
-    left: 0; top: 0;
-    background: radial-gradient(circle, rgba(255,150,0,0.7) 1px, transparent 2px);
-    background-size: 25px 30px; 
-    opacity: 0; 
-    animation: hellParticles 1.5s infinite linear; 
-    transition: opacity 0.4s ease; 
-    z-index: -2; 
-    mix-blend-mode: color-dodge; 
-}
-#leader-m3:hover::after { opacity: 1; }
-
-.leader-card h3 { color: #ff5555; text-shadow: 0 0 8px #ff5555, 0 0 20px #ff2222; margin-bottom: 10px; }
-.leader-card p { color: #ccc; font-weight: bold; text-shadow: 0 0 5px #ff0000; }
-
-/* --- 6. Кнопки переключения и фильтрации --- */
-.button-switch { 
-    background: #2b2b2b; 
-    border: 2px solid #555; 
-    padding: 12px 20px; 
-    margin: 10px 10px; 
-    border-radius: 10px; 
-    color: #fff; 
-    text-align: center; 
-    cursor: pointer; 
-    transition: all 0.3s ease; 
-    flex-grow: 1; 
-    max-width: 200px;
-}
-
-.button-switch:hover { 
-    transform: scale(1.05); 
-    background: #444; 
-    box-shadow: 0 0 15px rgba(255, 50, 50, 0.5); 
-}
-
-.button-switch.active { 
-    background: #ff0000; 
-    border-color: #ff5555; 
-    box-shadow: 0 0 30px rgba(255, 0, 0, 1), 0 0 60px rgba(0, 50, 255, 0.7); 
-    transform: scale(1.05);
-    animation: switchPulse 0.8s infinite alternate; 
-}
-
-.filter-btn { margin:5px; padding:10px 15px; border:none; border-radius:5px; background:#444; color:#fff; cursor:pointer; transition:0.2s; }
-
-.filter-btn:hover { 
-    background:#C00000; 
-    transform:scale(1.1); 
-    box-shadow: 0 0 12px rgba(255, 0, 0, 0.8); 
-}
-
-.filter-btn.active { 
-    background:#ff0000;
-    box-shadow: 0 0 15px rgba(255, 0, 0, 1); 
-    animation: filterPulse 1.5s infinite alternate; 
-}
-
-/* --- 7. Модальное окно (Modal) --- */
-.modal { 
-    display: none; 
-    position: fixed; 
-    top: 0; left: 0; 
-    width: 100%; height: 100%; 
-    background: rgba(0,0,0,0.85); 
-    justify-content: center; 
-    align-items: center; 
-    z-index: 999; 
-    opacity: 0; 
-    transition: opacity 0.3s ease; 
-}
-
-.modal.show { display: flex; opacity: 1; }
-
-.modal-content { 
-    background: linear-gradient(145deg, #2a2a2a, #1c1c1c); 
-    padding: 25px; 
-    border-radius: 15px; 
-    max-width: 500px; 
-    text-align: center; 
-    color: #eee; 
-    box-shadow: 0 0 30px #ff5555; 
-    
-    /* Начальные параметры для анимации "прыжка" */
-    opacity: 0; 
-    transform: scale(0.7) translateY(-50px); 
-    transition: opacity 0.4s ease-out, transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55); 
-}
-
-.modal.show .modal-content { 
-    opacity: 1; 
-    transform: scale(1) translateY(0); 
-}
-
-#modal-avatar { 
-    width: 180px; height: 180px; 
-    border-radius: 20px; 
-    border: 4px solid #ff5555; 
-    display: none; 
-    object-fit: cover; 
-    box-shadow: 0 0 25px #ff5555; 
-    transform: scale(0); 
-    transition: transform 0.4s ease; 
-}
-
-.modal.show #modal-avatar { display: block; transform: scale(1); }
-
-#modal-text { border-left: 3px solid #ff4444; padding-left: 10px; }
-
-.modal-content h2 { color: #ff5555; text-shadow: 0 0 8px #ff5555, 0 0 20px #ff2222; }
-
-.modal-close-btn { 
-    margin-top: 15px; 
-    padding: 10px 20px; 
-    background: #ff5555; 
-    color: #fff; 
-    border: 2px solid #ff0000;
-    border-radius: 10px; 
-    cursor: pointer; 
-    font-size: 16px;
-    box-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
-    transition: all 0.3s ease;
-}
-.modal-close-btn:hover {
-    background: #ff0000;
-    transform: scale(1.05);
-    box-shadow: 0 0 20px #ff0000, 0 0 30px #ff5555;
-}
-
-/* --- 8. Панель настроек (ДЕКСТОП - СВЕРХУ) --- */
-#settings-panel-desktop {
-    position: absolute; 
-    top: 75px;
-    right: 15px;
-    z-index: 999;
-    display: none; /* Скрыта по умолчанию */
-    flex-direction: column;
-    gap: 8px;
-    padding: 10px;
-    background: rgba(43, 43, 43, 0.9);
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
-    animation: fadeIn 0.3s ease-out;
-}
-
-/* Панель настроек в разделе "Главная" (скрыта по умолчанию) */
-#settings-panel-mobile {
-    display: none; 
-    background: #1c1c1c;
-    border-radius: 10px;
-    padding: 15px;
-    margin-bottom: 20px;
-    flex-direction: column;
-    gap: 10px;
-    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.setting-btn {
-    padding: 8px 12px;
-    background: #444;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.2s ease, transform 0.2s ease;
-    font-size: 14px;
-}
-
-.setting-btn:hover {
-    background: #666;
-    transform: scale(1.05);
-}
-
-.setting-btn.active {
-    background: #ff5555;
-    box-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
 }
 
 
-/* --- 9. РЕЖИМ ТЕСТИРОВЩИКА (УСИЛЕННЫЙ GLOW MODE) --- */
-.tester-glow * {
-    transition: none !important; 
-    animation-duration: 0.5s !important; 
-}
+/* ---------------------------------------------------- */
+/* --- 3. РЕЖИМЫ ГРАФИКИ (Усилен Hard Mode) --- */
+/* ---------------------------------------------------- */
 
-.tester-glow header, 
-.tester-glow .card:hover, 
-.tester-glow .rule,
-.tester-glow .calendar:hover,
-.tester-glow .leader-card:hover,
-.tester-glow .button-switch.active,
-.tester-glow .filter-btn.active {
-    animation: testerPulse 0.5s infinite alternate !important; 
-}
-
-.tester-glow .card:hover,
-.tester-glow .rule:hover,
-.tester-glow .calendar:hover,
-.tester-glow .leader-card:hover {
-    transform: scale(1.1) rotate(2deg) !important; 
-}
-
-@keyframes testerPulse {
-    0% {
-        box-shadow: 0 0 30px #ff0000, 0 0 60px #8a2be2, 0 0 90px #0000ff; 
-        text-shadow: 0 0 10px #fff, 0 0 20px #ff00ff;
-    }
-    100% {
-        box-shadow: 0 0 40px #ff4444, 0 0 80px #9370db, 0 0 120px #4169e1;
-        text-shadow: 0 0 15px #fff, 0 0 30px #ff00ff;
-    }
-}
-
-.no-glow * {
+/* --- 3.1. РЕЖИМ СУПЕР-ОПТИМИЗАЦИИ (Value = 0) --- */
+.super-optimized-mode .card,
+.super-optimized-mode .rule,
+.super-optimized-mode .leader-card,
+.super-optimized-mode .calendar,
+.super-optimized-mode header {
     transition: none !important; 
     animation: none !important; 
-}
-
-.no-glow header, 
-.no-glow .card:hover, 
-.no-glow .rule,
-.no-glow .calendar:hover,
-.no-glow .leader-card:hover,
-.no-glow .button-switch.active {
-    text-shadow: none !important;
     box-shadow: none !important;
+    text-shadow: none !important;
+    filter: none !important;
+    border-radius: 0 !important;
+    background: #2b2b2b !important;
+    border: 1px solid #444 !important;
+    transform: none !important;
+}
+.super-optimized-mode .rule::before { display: none !important; }
+
+/* --- 3.2. РЕЖИМ ОПТИМИЗАЦИИ (Value = 1) --- */
+.optimized-mode .card,
+.optimized-mode .rule,
+.optimized-mode .leader-card,
+.optimized-mode .calendar,
+.optimized-mode header {
+    transition: none !important; 
+    animation: none !important; 
+    box-shadow: none !important;
+    text-shadow: none !important;
     filter: none !important;
 }
+.optimized-mode .card:hover, .optimized-mode .rule:hover, .optimized-mode .leader-card:hover {
+    transform: none !important;
+}
+.optimized-mode .card.online { animation: none !important; border: 1px solid #00aa00 !important; }
+.optimized-mode .card.online img { filter: none !important; }
+.optimized-mode .rule::before { display: none !important; }
 
-.no-glow .card:hover { 
-    transform: scale(1.0) !important; 
-    background: #3a3a3a !important;
+
+/* --- 3.3. РЕЖИМ СЛОЖНЫЙ (Hard Mode) (Value = 3) --- */
+
+@keyframes hardPulse {
+    /* Более мощный, фиолетово-красный блюм */
+    0% { box-shadow: 0 0 40px #ff0000, 0 0 80px #8a2be2, 0 0 120px #ff5555; filter: blur(0px); }
+    100% { box-shadow: 0 0 60px #ff4444, 0 0 100px #9370db, 0 0 150px #ff0000; filter: blur(1.5px); } /* Усилено размытие до 1.5px */
+}
+@keyframes hardPulseGreen {
+    /* Более мощный, бирюзово-зеленый блюм */
+    0% { box-shadow: 0 0 40px #00ff00, 0 0 80px #00ffaa, 0 0 120px #00ffff; filter: blur(0px); }
+    100% { box-shadow: 0 0 60px #55ff55, 0 0 100px #33ffee, 0 0 150px #66ffff; filter: blur(1.5px); }
+}
+@keyframes glitch {
+    0% { transform: translate(0px, 0px) skew(0deg); } 
+    30% { transform: translate(-2px, 0px) skew(3deg); } /* Чуть усилен глитч */
+    70% { transform: translate(2px, 0px) skew(-3deg); }
+    100% { transform: translate(0px, 0px) skew(0deg); }
 }
 
-.no-glow .rule::before {
-    display: none !important;
+.hard-mode .rule,
+.hard-mode .calendar,
+.hard-mode .leader-card,
+.hard-mode header {
+    animation: hardPulse 0.8s infinite alternate !important; 
+    filter: contrast(150%);
 }
 
-/* --- 10. Анимации (без изменений) --- */
-@keyframes floatRule { 
-    0% { transform: translateY(0) rotate(0deg); } 
-    25% { transform: translateY(-6px) rotate(-1deg); } 
-    50% { transform: translateY(0) rotate(0deg); } 
-    75% { transform: translateY(6px) rotate(1deg); } 
-    100% { transform: translateY(0) rotate(0deg); } 
+.hard-mode .card {
+    /* Применяем усиленный блюм к серверам */
+    animation: hardPulse 0.8s infinite alternate !important; 
+    filter: contrast(150%);
 }
 
-@keyframes pulseEvent { 
-    0% { box-shadow: 0 0 20px rgba(255,0,0,0.5); } 
-    50% { box-shadow: 0 0 30px rgba(255,0,0,0.7); } 
-    100% { box-shadow: 0 0 20px rgba(255,0,0,0.5); } 
+/* ОТКЛЮЧЕНИЕ УВЕЛИЧЕНИЯ СЕРВЕРОВ (Hard Mode) */
+.hard-mode .card:hover {
+    transform: none !important; 
+    background: #4a1a1a; /* Сохраняем изменение фона */
+    /* Усиленный эффект при наведении, но без движения */
+    box-shadow: 0 0 80px rgba(255, 0, 0, 1), 0 0 150px rgba(255, 50, 50, 0.8) !important;
 }
 
-@keyframes hellParticles { 
-    0% { background-position: 0 0; } 
-    100% { background-position: 0 -50px; } 
+/* Сохраняем hover для Правил/Событий/Лидеров */
+.hard-mode .rule:hover,
+.hard-mode .calendar:hover,
+.hard-mode .leader-card:hover {
+    transform: scale(1.05) !important; 
 }
 
-@keyframes pulseRed { 
-    0% { box-shadow: 0 0 40px rgba(255,0,0,0.6), 0 10px 30px rgba(255,0,0,0.4); } 
-    50% { box-shadow: 0 0 60px rgba(255,0,0,0.9), 0 15px 45px rgba(255,0,0,0.6); } 
-    100% { box-shadow: 0 0 50px rgba(255,0,0,0.8), 0 12px 40px rgba(255,0,0,0.5); } 
+.hard-mode .card.online,
+.hard-mode .card.online:hover {
+    animation: hardPulseGreen 0.8s infinite alternate !important; 
+    filter: contrast(150%);
 }
 
-@keyframes filterPulse {
-    0% {
-        box-shadow: 0 0 10px rgba(255, 0, 0, 0.8), 0 0 20px rgba(255, 50, 50, 0.5);
-        transform: scale(1.0);
-    }
-    100% {
-        box-shadow: 0 0 20px rgba(255, 0, 0, 1), 0 0 40px rgba(255, 50, 50, 0.9);
-        transform: scale(1.05);
-    }
+.hard-mode body {
+    animation: glitch 0.1s infinite alternate;
+    /* Усилено общее размытие для Hard Mode */
+    filter: blur(0.5px); 
 }
 
-@keyframes switchPulse {
-    0% { 
-        box-shadow: 0 0 30px rgba(255, 0, 0, 1), 
-                    0 0 60px rgba(0, 50, 255, 0.7); 
-    }
-    100% { 
-        box-shadow: 0 0 45px rgba(255, 50, 50, 1), 
-                    0 0 90px rgba(0, 100, 255, 1); 
-    }
-}
 
-/* --- 11. Медиа-запросы (Мобильная адаптация) --- */
+/* ---------------------------------------------------- */
+/* --- 4. Прочие стили и медиа-запросы ---------------- */
+/* ---------------------------------------------------- */
+/* (Оставлено без изменений) */
+.mode-slider {
+    -webkit-appearance: none; width: 100%; height: 10px; background: #555; outline: none; border-radius: 5px; transition: opacity .2s;
+}
+.mode-slider::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none; width: 20px; height: 20px; border-radius: 50%; background: #ff5555; cursor: pointer; box-shadow: 0 0 10px rgba(255, 0, 0, 0.8); transition: background 0.3s, box-shadow 0.3s;
+}
+.mode-slider:hover::-webkit-slider-thumb { background: #ff0000; }
+
 @media(max-width:600px){ 
-    nav button{padding:10px 12px;font-size:14px;margin:3px 5px;} 
-    .card{flex-direction:column; align-items:flex-start;} 
-    .leader-card{width:100%;} 
-    .card img{margin-bottom:10px;} 
-    .description-btn{position:static; transform:none; margin-top:10px;} 
-
-    /* Скрываем кнопку "Настройки" в хедере на мобильных, так как есть панель в разделе "Главная" */
-    #settings-btn { 
-        display: none; 
-    }
-    
-    /* Скрываем панель настроек десктопа */
-    #settings-panel-desktop {
-        display: none !important;
-    }
-    
-    /* Показываем панель настроек в разделе "Главная" */
-    #settings-panel-mobile {
-        display: flex; /* Показываем на мобильных */
-    }
-
-    #home-content {
-        margin-top: 10px; /* Уменьшаем отступ, чтобы панель была сверху */
-    }
+    #settings-btn { display: none; }
+    #settings-panel-desktop { display: none !important; }
+    #settings-panel-mobile { display: flex; }
 }
 
-#servers, #rules { overflow: hidden; }
-
+section { display:none; padding:30px 20px; }
+section.active { display:block; }
+#calendar.active { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 20px 0; } 
+#home-content { background:#2b2b2b; border-radius:15px; padding:20px; text-align:center; margin-top:30px; }
+.description-btn { 
+    width:30px; height:30px; background:url('Описание.png') no-repeat center/cover; border:none; 
+    cursor:pointer; position:absolute; right:15px; top:50%; transform:translateY(-50%); 
+    filter: drop-shadow(0 0 10px black); transition: transform 0.2s ease, filter 0.2s ease; 
+}
+.modal { 
+    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+    background: rgba(0,0,0,0.85); justify-content: center; align-items: center; 
+    z-index: 999; opacity: 0; transition: opacity 0.3s ease; 
+}
+.modal.show { display: flex; opacity: 1; }
+.modal-content { 
+    background: linear-gradient(145deg, #2a2a2a, #1c1c1c); padding: 25px; 
+    border-radius: 15px; max-width: 500px; text-align: center; color: #eee; 
+    box-shadow: 0 0 30px #ff5555; opacity: 0; transform: scale(0.7) translateY(-50px); 
+    transition: opacity 0.4s ease-out, transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55); 
+}
+.modal.show .modal-content { opacity: 1; transform: scale(1) translateY(0); }
+.modal-close-btn { 
+    margin-top: 15px; padding: 10px 20px; background: #ff5555; color: #fff; 
+    border: 2px solid #ff0000; border-radius: 10px; cursor: pointer; font-size: 16px;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.8); transition: all 0.3s ease;
+}
+#copy-code-btn {
+    display: none; width: 90%; padding: 10px; margin-top: 10px; background: #00ff00; 
+    color: #1a1a1a; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; 
+    transition: background 0.2s;
+}
 footer { position:fixed; bottom:5px; left:5px; font-size:10px; color:#777; }
     </style>
 </head>
 
 <body>
+<div class="container"> <header>
+        SHD Каталог и не только!
+        <button id="settings-btn" onclick="toggleSettingsPanel()">Настройки</button>
+    </header>
 
-<header>
-    SHD Каталог и не только!
-    <button id="settings-btn" onclick="toggleSettingsPanel('desktop')">Настройки</button>
-</header>
+    <nav>
+        <button onclick="showSection('home')">Главная</button>
+        <button onclick="showSection('servers')">Официальные</button>
+        <button onclick="showSection('rules')">Правила</button>
+        <button onclick="showSection('calendar')">События</button>
+        <button onclick="showSection('leaders')">Должности</button>
+    </nav>
 
-<nav>
-    <button onclick="showSection('home')">Главная</button>
-    <button onclick="showSection('servers')">Официальные</button>
-    <button onclick="showSection('rules')">Правила</button>
-    <button onclick="showSection('calendar')">События</button>
-    <button onclick="showSection('leaders')">Должности</button>
-</nav>
-
-<section id="home" class="active">
-    
-    <div id="settings-panel-mobile">
-        <div style="font-weight: bold; color: #ff9999; margin-bottom: 5px;">Настройки внешнего вида (Мобильный)</div>
-        <div style="display: flex; gap: 10px;">
-            <button id="glow-toggle-mobile" class="setting-btn" onclick="toggleGlowMode('mobile')">Режим Экономии</button>
-            <button id="tester-toggle-mobile" class="setting-btn" onclick="toggleTesterMode('mobile')">Тестировщик</button>
+    <section id="home" class="active">
+        
+        <div id="settings-panel-mobile">
+            <div class="setting-group">
+                <label for="mode-slider-mobile">Режимы Графики</label>
+                <input type="range" id="mode-slider-mobile" class="mode-slider" min="0" max="3" value="2" step="1" oninput="applyMode(this.value)">
+                <small id="current-mode-mobile" style="text-align: center; color: #ccc;">Обычный режим</small>
+            </div>
+            <div class="setting-group">
+                <label>Дополнительные функции</label>
+                <button id="tester-toggle-mobile" class="toggle-btn" onclick="toggleTesterMode()">Тестировщик</button>
+            </div>
         </div>
-    </div>
-    <div id="home-content">
-        <h2>Здравствуйте! Вы попали в SHD Catalog v4.0, в котором собрана информация о проектах и серверах клана, также правила и события.</h2>
-        <p>Одна из целей клана: собрать самых адекватных игроков и создать своё комьюнити адекватных серверов!</p>
-        <p>Catalog/каталог By R1SS5</p>
-    </div>
-</section>
+        <div id="home-content">
+            <h2>Здравствуйте! Вы попали в SHD Catalog v1, в котором собрана информация о проектах и серверах клана, также правила и события.</h2>
+            <p>Одна из целей клана: собрать самых адекватных игроков и создать своё комьюнити адекватных серверов!</p>
+            <p>Catalog/каталог By R1SS5</p>
+        </div>
+    </section>
 
-<section id="servers">
-    <h2>Сервера и Проекты</h2>
-    <div style="display:flex; justify-content:center; gap:20px; margin-bottom: 20px;">
-        <div class="button-switch active" onclick="showServerList('servers-list')">Сервера</div>
-        <div class="button-switch" onclick="showServerList('projects-list')">Проекты</div>
-    </div>
+    <section id="servers">
+        <h2>Сервера и Проекты</h2>
+        <div style="display:flex; justify-content:center; gap:20px; margin-bottom: 20px;">
+            <div class="button-switch active" onclick="showServerList('servers-list')">Сервера</div>
+            <div class="button-switch" onclick="showServerList('projects-list')">Проекты</div>
+        </div>
 
     <div style="text-align:center; margin:20px 0;">
-        <button class="filter-btn active" onclick="filterType('all', this)">Все</button>
-        <button class="filter-btn" onclick="filterType('pvp', this)">PvP</button>
-        <button class="filter-btn" onclick="filterType('parkour', this)">Паркур</button>
-        <button class="filter-btn" onclick="filterType('escape', this)">Побег</button>
-        <button class="filter-btn" onclick="filterType('anarchy', this)">Анархия</button>
-        <button class="filter-btn" onclick="filterType('rp', this)">RP</button>
+            <button class="filter-btn active" onclick="filterType('all')">Все</button>
+            <button class="filter-btn" onclick="filterType('pvp')">PvP</button>
+            <button class="filter-btn" onclick="filterType('parkour')">Паркур</button>
+            <button class="filter-btn" onclick="filterType('escape')">Побег</button>
+            <button class="filter-btn" onclick="filterType('anarchy')">Анархия</button>
+            <button class="filter-btn" onclick="filterType('rp')">RP</button>
+        </div>
+
+        <div id="servers-list">
+            <div class="card" data-type="pvp" data-status-id="0" data-server-code="G7R9" data-info="Активен"> 
+                <img src="Офлайн.png" alt="Статус"> 
+                <div>
+                    <h3>SHD-PvP</h3>
+                    <p>Статус: Загрузка...</p>
+                </div>
+                <button class="description-btn" onclick="openModal('**SHD-PvP** — это сервер для тренировок и клановых боев. Акцент на честное состязание и развитие навыков PvP. \n\n*Особенности:* Клановые бои, 1v1 арена, регулярные турниры.','G7R9', 'Тестовый код: G7R9, IP: 192.168.0.1')"></button>
+            </div>
+            <div class="card" data-type="parkour" data-status-id="0" data-server-code="A1B5" data-info="Ожидает обновления">
+                <img src="Офлайн.png" alt="Статус">
+                <div>
+                    <h3>Паркур на крюках</h3>
+                    <p>Статус: Загрузка...</p>
+                </div>
+                <button class="description-btn" onclick="openModal('Уникальный паркур-сервер, где для прохождения используются крюки (grappling hooks). \n\n*Особенности:* Многоуровневые карты, таблицы лидеров, система испытаний. Сервер ожидает крупное обновление карты и механик.','A1B5', 'Тестовый код: A1B5, IP: 192.168.0.2')"></button>
+            </div>
+            <div class="card" data-type="escape" data-status-id="0" data-server-code="C3P0" data-info="Идет вайп">
+                <img src="Офлайн.png" alt="Статус">
+                <div>
+                    <h3>Побег из тюрьмы "S.H.A.D.E"</h3>
+                    <p>Статус: Загрузка...</p>
+                </div>
+                <button class="description-btn" onclick="openModal('Классический сервер "Побег из тюрьмы" с кастомными механиками и системой прокачки. \n\n*Особенности:* Различные классы, зоны охраны, секретные пути и экономика. В данный момент идет полный вайп перед новым сезоном.','C3P0', 'Тестовый код: C3P0, IP: 192.168.0.3')"></button>
+            </div>
+        </div>
+
+        <div id="projects-list" style="display:none;">
+            <div class="card" data-type="project-escape" data-status-id="0" data-server-code="X5Y7" data-info="Альфа-тестирование">
+                <img src="Офлайн.png" alt="Статус">
+                <div>
+                    <h3>Побег из тюрьмы "S.H.A.D.E" (с модами)</h3>
+                    <p>Статус: Загрузка...</p>
+                </div>
+                <button class="description-btn" onclick="openModal('**Побег из тюрьмы с модами** — расширенная версия классического Побега. Включает модификации для улучшения геймплея, новые предметы и механики. Оптимизирован и находится на стадии **Альфа-тестирования**.\n\n*Особенности:* Кастомные моды, глубокая система крафта, новые квесты.','X5Y7', 'Продюсер: R1SS5\nСтадия: Альфа')"></button>
+            </div>
+            <div class="card" data-type="project-anarchy" data-status-id="0" data-server-code="K2M9" data-info="Новый сезон">
+                <img src="Офлайн.png" alt="Статус">
+                <div>
+                    <h3>Criminal Islands (с модами)</h3>
+                    <p>Статус: Загрузка...</p>
+                </div>
+                <button class="description-btn" onclick="openModal('**Criminal Islands** — сервер анархии с элементами модов. Полная свобода действий, отсутствие правил, кроме самых базовых. \n\n*Особенности:* Кастомные моды, уникальный мир, система кейсов. Скоро старт нового сезона.','K2M9', 'Продюсер: Красный\nСтадия: Бета')"></button>
+            </div>
+            <div class="card" data-type="project-rp" data-status-id="0" data-server-code="L3R4" data-info="Релиз">
+                <img src="Офлайн.png" alt="Статус">
+                <div>
+                    <h3>RayRP (с модами)</h3>
+                    <p>Статус: Загрузка...</p>
+                </div>
+                <button class="description-btn" onclick="openModal('**RayRP** — полноценный RolePlay проект с глубокой проработкой лора, профессий и взаимодействия между игроками. \n\n*Особенности:* Модификации для РП, стабильный онлайн, система фракций. Проект вышел в **Релиз** и активно развивается.','L3R4', 'Продюсер: REisain\nСтадия: Релиз')"></button>
+            </div>
+        </div>
+    </section>
+
+    <section id="rules">
+        <h2>Правила</h2>
+        <div class="rule">1. **18+ контент** запрещен — Кик/Мут/Бан</div>
+        <div class="rule">2. **Спам** (сообщения, команды) запрещён — Мут</div>
+        <div class="rule">3. **Скам и мошенничество** (обман игроков/администрации) запрещено — Перманентный Бан</div>
+        <div class="rule">4. **Оскорбления** (в адрес игроков, администрации, проекта) запрещены — Мут/Бан</div>
+        <div class="rule">5. **Предательство** (клана, союзников) — Бан на проектах/исключение из клана</div>
+        <div class="rule">6. **Неактив** (без предупреждения) — Кик с проекта/исключение из клана</div>
+        <div class="rule">7. **Не перечить Администратору** (в рамках правил) — Мут/Бан на усмотрение Администрации</div>
+        <div class="rule">8. **Использование читов/стороннего ПО** — Перманентный Бан</div>
+    </section>
+
+    <section id="calendar">
+        <h2>События</h2>
+        <div class="calendar">
+            <h3>6 число</h3>
+            <p>Собрание клана. Обсуждение новостей, планов и проблем.</p>
+            <small>КАЖДЫЙ МЕСЯЦ</small>
+        </div>
+        <div class="calendar">
+            <h3>20 число</h3>
+            <p>Клановый турнир PvP. Соревнование за звание лучшего бойца.</p>
+            <small>КАЖДЫЙ МЕСЯЦ</small>
+        </div>
+        <div class="calendar">
+            <h3>Дата будет объявлена</h3>
+            <p>Масштабное событие на RayRP. Следите за анонсами в Discord!</p>
+            <small>СЛЕДИТЕ ЗА НОВОСТЯМИ</small>
+        </div>
+    </section>
+
+    <section id="leaders">
+        <h2>Должности</h2>
+        <div class="leaders">
+            <div id="leader-m3" class="leader-card"><h3>М-3 [SHD]</h3><p>Вождь | Основатель</p></div>
+            <div class="leader-card"><h3>REisain [SHD]</h3><p>Заместитель | Главный разработчик</p></div>
+            <div class="leader-card"><h3>Красный [SHD]</h3><p>Заместитель | Продюсер Criminal Islands</p></div>
+            <div class="leader-card"><h3>Melope [SHD]</h3><p>Министр | Ответственный за дисциплину</p></div>
+            <div class="leader-card"><h3>Ваш Ник</h3><p>Рядовой клана</p></div>
+        </div>
+    </section>
+
+    <div id="settings-panel-desktop">
+        <div class="setting-group">
+            <label for="mode-slider-desktop">Режимы Графики</label>
+            <input type="range" id="mode-slider-desktop" class="mode-slider" min="0" max="3" value="2" step="1" oninput="applyMode(this.value)">
+            <small id="current-mode-desktop" style="text-align: center; color: #ccc;">Обычный режим</small>
+        </div>
+        <div class="setting-group">
+            <label>Дополнительные функции</label>
+            <button id="tester-toggle-desktop" class="toggle-btn" onclick="toggleTesterMode()">Тестировщик</button>
+        </div>
     </div>
 
-    <div id="servers-list">
-        <div class="card" data-type="pvp">
-            <img src="Офлайн.png">
-            <div>
-                <h3>SHD-PvP</h3>
-                <p>Статус: Офлайн</p>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-content-inner" style="display:flex; flex-direction: column; align-items:center; justify-content:center; gap:15px; width:100%;">
+                <img id="modal-avatar" src="" alt="Аватар" style="width:180px; height:180px; border-radius:20px; border:4px solid #ff5555; display:none; object-fit:cover; box-shadow:0 0 20px #ff5555;">
+                <p id="modal-text" style="white-space:pre-wrap; font-size:16px; color:#eee; margin:0; max-width:100%; text-align: left;"></p>
             </div>
-            <button class="description-btn" onclick="openModal('Пока что ничего нет.', '', 'IP: 192.168.1.1\nВерсия: 1.12.2')"></button>
-        </div>
-        <div class="card online" data-type="parkour">
-            <img src="Офлайн.png">
-            <div>
-                <h3>Паркур на крюках</h3>
-                <p>Статус: Офлайн</p>
-            </div>
-            <button class="description-btn" onclick="openModal('Пока что ничего нет.', '', 'IP: 192.168.1.2\nТип: Паркур')"></button>
-        </div>
-        <div class="card" data-type="escape">
-            <img src="Офлайн.png">
-            <div>
-                <h3>Побег из тюрьмы "S.H.A.D.E"</h3>
-                <p>Статус: Офлайн</p>
-            </div>
-            <button class="description-btn" onclick="openModal('Пока что ничего нет.', '', 'IP: 192.168.1.3\nТип: Побег')"></button>
+            <button id="copy-code-btn" onclick="copyServerCode()">Копировать Код:</button>
+            <button onclick="closeModal()" class="modal-close-btn">Закрыть</button>
         </div>
     </div>
+</div> <script>
+    let isTesterMode = false;
+    let currentServerCode = '';
+    const modeNames = {
+        0: "Режим Супер-Оптимизации",
+        1: "Режим Оптимизации",
+        2: "Обычный режим",
+        3: "Режим Сложный"
+    };
 
-    <div id="projects-list" style="display:none;">
-        <div class="card online" data-type="project-escape">
-            <img src="Офлайн.png">
-            <div>
-                <h3>Побег из тюрьмы "S.H.A.D.E" (с модами)</h3>
-                <p>Статус: Офлайн</p>
-            </div>
-            <button class="description-btn" onclick="openModal('Побег с модами, много фич, оптимизировано', '', 'Продюсер: R1SS5\nСтадия: Альфа')"></button>
-        </div>
-        <div class="card online" data-type="project-anarchy">
-            <img src="Офлайн.png">
-            <div>
-                <h3>Criminal Islands (с модами)</h3>
-                <p>Статус: Офлайн</p>
-            </div>
-            <button class="description-btn" onclick="openModal('Анархия с модами, много фич', 'Аватарка_CI.png', 'Продюсер: Красный\nСтадия: Бета')"></button>
-        </div>
-        <div class="card online" data-type="project-rp">
-            <img src="Офлайн.png">
-            <div>
-                <h3>RayRP (с модами)</h3>
-                <p>Статус: Офлайн</p>
-            </div>
-            <button class="description-btn" onclick="openModal('Очень хорошое РП с модами, оптимизировано, много фич', '', 'Продюсер: REisain\nСтадия: Релиз')"></button>
-        </div>
-    </div>
-</section>
+    // --- Утилиты ---
+    function showSection(sectionId) {
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.remove('active');
+            section.style.display = 'none'; // Убедимся, что скрыто
+        });
+        document.getElementById(sectionId).classList.add('active');
+        document.getElementById(sectionId).style.display = (sectionId === 'calendar') ? 'flex' : 'block';
 
-<section id="rules">
-    <h2>Правила</h2>
-    <div class="rule">1. 18+ контент запрещен — Кик</div>
-    <div class="rule">2. Спам запрещён — Мут</div>
-    <div class="rule">3. Скам и мошенничество запрещено — Бан</div>
-    <div class="rule">4. Оскорбления запрещены — Мут</div>
-    <div class="rule">5. Предательство — Бан</div>
-    <div class="rule">6. Неактив — Кик</div>
-    <div class="rule">7. Не перечить Администратору — Мут/Бан</div>
-</section>
-
-<section id="calendar">
-    <h2>События</h2>
-    <div class="calendar">
-        <h3>6 число</h3>
-        <p>Собрание клана</p>
-        <small>КАЖДЫЙ МЕСЯЦ</small>
-    </div>
-</section>
-
-<section id="leaders">
-    <h2>Должности</h2>
-    <div class="leaders">
-        <div id="leader-m3" class="leader-card"><h3>М-3 [SHD]</h3><p>Вождь</p></div>
-        <div class="leader-card"><h3>REisain [SHD]</h3><p>Заместитель</p></div>
-        <div class="leader-card"><h3>Красный [SHD]</h3><p>Заместитель</p></div>
-        <div class="leader-card"><h3>Melope [SHD]</h3><p>Министр</p></div>
-    </div>
-</section>
-
-<div id="settings-panel-desktop">
-    <button id="glow-toggle-desktop" class="setting-btn" onclick="toggleGlowMode('desktop')">Режим Экономии</button>
-    <button id="tester-toggle-desktop" class="setting-btn" onclick="toggleTesterMode('desktop')">Тестировщик</button>
-</div>
-
-<div id="modal" class="modal">
-    <div class="modal-content">
-        <div class="modal-content-inner" style="display:flex; align-items:center; justify-content:space-between; gap:20px;">
-            <p id="modal-text" style="white-space:pre-wrap; font-size:16px; color:#eee; margin:0; max-width:300px;"></p>
-            <img id="modal-avatar" src="" alt="Аватар" style="width:180px; height:180px; border-radius:20px; border:4px solid #ff5555; display:none; object-fit:cover; box-shadow:0 0 20px #ff5555;">
-        </div>
-        <button onclick="closeModal()" class="modal-close-btn">Закрыть</button>
-    </div>
-</div>
-
-<script>
-// --- Глобальная переменная для режима Тестировщика ---
-let isTesterMode = false;
-
-// --- Основные функции навигации ---
-function showSection(id){ 
-    document.querySelectorAll('section').forEach(s => s.classList.remove('active')); 
-    document.getElementById(id).classList.add('active'); 
-}
-
-function showServerList(listId){ 
-    document.getElementById('servers-list').style.display = 'none'; 
-    document.getElementById('projects-list').style.display = 'none'; 
-    document.getElementById(listId).style.display = 'block'; 
-    
-    // Корректное переключение активного класса
-    const buttons = document.querySelectorAll('#servers .button-switch'); 
-    buttons.forEach(b => b.classList.remove('active')); 
-    if(listId === 'servers-list') {
-        buttons[0].classList.add('active');
-    } else {
-        buttons[1].classList.add('active');
+        document.querySelectorAll('nav button').forEach(button => {
+            button.classList.remove('active');
+        });
+        const activeNavButton = document.querySelector(`nav button[onclick="showSection('${sectionId}')"]`);
+        if (activeNavButton) {
+            activeNavButton.classList.add('active');
+        }
     }
-}
 
-function filterType(type, btn){ 
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active')); 
-    btn.classList.add('active'); 
-    document.querySelectorAll('#servers-list .card, #projects-list .card').forEach(card => { 
-        if(type === 'all' || card.dataset.type === type || 
-           (type === 'escape' && card.dataset.type === 'project-escape') || 
-           (type === 'anarchy' && card.dataset.type === 'project-anarchy') || 
-           (type === 'rp' && card.dataset.type === 'project-rp')){ 
-            card.style.display = 'flex'; 
-        } else { 
-            card.style.display = 'none'; 
-        } 
-    }); 
-}
+    function showServerList(listId) {
+        document.getElementById('servers-list').style.display = 'none';
+        document.getElementById('projects-list').style.display = 'none';
+        document.getElementById(listId).style.display = 'block';
 
-// --- Модальное окно и Тестировщик ---
-function openModal(text, avatar='', debugInfo=''){ 
-    document.getElementById('modal-text').innerText = text; 
-    
-    // Добавление Debug Info, если Тестировщик включен
-    if (isTesterMode && debugInfo) {
-        document.getElementById('modal-text').innerText += '\n\n--- Debug Info ---\n' + debugInfo;
+        document.querySelectorAll('.tab-menu button').forEach(button => {
+            button.classList.remove('active');
+        });
+        const activeTabButton = document.querySelector(`button[onclick="showServerList('${listId}')"]`);
+        if (activeTabButton) {
+            activeTabButton.classList.add('active');
+        }
+        filterType('all');
+    }
+
+    function filterType(type) {
+        const currentList = document.getElementById('servers-list').style.display === 'block' ? 
+                            document.getElementById('servers-list') : 
+                            document.getElementById('projects-list');
+
+        currentList.querySelectorAll('.card').forEach(card => { 
+            const cardType = card.dataset.type;
+            
+            if(type === 'all' || cardType === type || 
+              (type === 'escape' && cardType.includes('escape')) || 
+              (type === 'anarchy' && cardType.includes('anarchy')) || 
+              (type === 'rp' && cardType.includes('rp'))){ 
+                 card.style.display = 'flex'; 
+            } else { 
+                card.style.display = 'none'; 
+            } 
+        });
+        
+        document.querySelectorAll('.filter-menu button').forEach(button => {
+            button.classList.remove('active');
+        });
+        const activeFilterButton = document.querySelector(`.filter-btn[onclick="filterType('${type}')"]`);
+        if (activeFilterButton) {
+            activeFilterButton.classList.add('active');
+        }
+    }
+
+    // --- Настройки и Тестировщик ---
+    function toggleSettingsPanel() {
+        const panelDesktop = document.getElementById('settings-panel-desktop');
+        const panelMobile = document.getElementById('settings-panel-mobile');
+        
+        if (window.innerWidth > 600) {
+            panelDesktop.style.display = (panelDesktop.style.display === 'flex' || panelDesktop.style.display === '') ? 'none' : 'flex';
+        } else {
+            panelMobile.style.display = (panelMobile.style.display === 'flex' || panelMobile.style.display === '') ? 'none' : 'flex';
+        }
+    }
+
+    function toggleTesterMode() {
+        isTesterMode = !isTesterMode;
+        
+        // ИСПРАВЛЕНИЕ: Использование правильных ID кнопок
+        const btnDesktop = document.getElementById('tester-toggle-desktop');
+        const btnMobile = document.getElementById('tester-toggle-mobile');
+        
+        const servers = document.querySelectorAll('.card');
+        
+        servers.forEach(card => {
+            card.classList.toggle('tester-mode', isTesterMode);
+        });
+
+        const btnText = isTesterMode ? 'Тестировщик: ВКЛ' : 'Тестировщик';
+        
+        if (btnDesktop) {
+            btnDesktop.textContent = btnText;
+            btnDesktop.classList.toggle('active', isTesterMode);
+        }
+        if (btnMobile) {
+            btnMobile.textContent = btnText;
+            btnMobile.classList.toggle('active', isTesterMode);
+        }
+        // Переоткрытие модального окна, если оно открыто, чтобы обновить Debug Info
+        const modal = document.getElementById('modal');
+        if (modal.classList.contains('show')) {
+            const currentModalText = document.getElementById('modal-text').dataset.originalText;
+            const currentServerCode = document.getElementById('copy-code-btn').textContent.replace('Копировать Код: ', '');
+            const card = document.querySelector(`.card[data-server-code="${currentServerCode}"]`);
+            if (card) {
+                const debugInfo = card.querySelector('.description-btn').getAttribute('onclick').match(/'([^']*)'\s*\)$/)[1];
+                openModal(currentModalText, currentServerCode, debugInfo);
+            }
+        }
     }
     
-    const avatarEl = document.getElementById('modal-avatar'); 
-    if(avatar){ 
-        avatarEl.src = avatar; 
-        avatarEl.style.display = 'block'; 
-    } else { 
-        avatarEl.style.display = 'none'; 
-    } 
-    const modal = document.getElementById('modal'); 
-    modal.classList.add('show'); 
-    modal.style.display = 'flex'; 
-}
-
-function closeModal(){ 
-    const modal = document.getElementById('modal'); 
-    modal.classList.remove('show'); 
-    setTimeout(()=> modal.style.display='none', 400); 
-}
-
-// --- Функции управления панелями и режимами ---
-
-// Функция для переключения десктопной панели
-function toggleSettingsPanel() {
-    const panel = document.getElementById('settings-panel-desktop');
-    if (panel.style.display === 'flex') {
-        panel.style.display = 'none';
-    } else {
-        panel.style.display = 'flex';
+    function updateSliderLabel(value) {
+        const name = modeNames[value];
+        document.getElementById('current-mode-desktop').innerText = name;
+        document.getElementById('current-mode-mobile').innerText = name;
+        document.getElementById('mode-slider-mobile').value = value;
+        document.getElementById('mode-slider-desktop').value = value;
     }
-}
 
-// Универсальная функция для переключения Режима Экономии
-function toggleGlowMode(source) {
-    const isMobile = window.innerWidth <= 600;
-    
-    // Определяем, какие кнопки нужно обновить
-    const glowBtnDesktop = document.getElementById('glow-toggle-desktop');
-    const testerBtnDesktop = document.getElementById('tester-toggle-desktop');
-    const glowBtnMobile = document.getElementById('glow-toggle-mobile');
-    const testerBtnMobile = document.getElementById('tester-toggle-mobile');
-    
-    // Отключаем Тестировщик
-    document.body.classList.remove('tester-glow');
-    isTesterMode = false;
-    testerBtnDesktop.classList.remove('active');
-    testerBtnDesktop.innerText = 'Тестировщик';
-    testerBtnMobile.classList.remove('active');
-    testerBtnMobile.innerText = 'Тестировщик';
+    function applyMode(value) {
+        value = parseInt(value, 10);
+        const body = document.body;
+        
+        body.classList.remove('super-optimized-mode', 'optimized-mode', 'hard-mode');
 
-    // Переключаем Режим Экономии
-    document.body.classList.toggle('no-glow');
-    const isActive = document.body.classList.contains('no-glow');
-
-    // Обновляем состояние всех кнопок
-    glowBtnDesktop.classList.toggle('active', isActive);
-    glowBtnDesktop.innerText = isActive ? 'Режим Экономии (ON)' : 'Режим Экономии';
-    
-    glowBtnMobile.classList.toggle('active', isActive);
-    glowBtnMobile.innerText = isActive ? 'Режим Экономии (ON)' : 'Режим Экономии';
-
-    // Если это десктоп, закрываем панель после нажатия
-    if (!isMobile && source === 'desktop') {
-        toggleSettingsPanel();
+        switch(value) {
+            case 0: body.classList.add('super-optimized-mode'); break;
+            case 1: body.classList.add('optimized-mode'); break;
+            case 3: body.classList.add('hard-mode'); break;
+        }
+        
+        updateSliderLabel(value);
+        localStorage.setItem('shd_display_mode', value); 
     }
-}
 
-// Универсальная функция для переключения Тестировщика
-function toggleTesterMode(source) {
-    const isMobile = window.innerWidth <= 600;
+    // --- Модальное окно ---
+    function openModal(text, serverCode, debugInfo = '') {
+        const modal = document.getElementById('modal');
+        currentServerCode = serverCode;
+        
+        document.getElementById('modal-text').dataset.originalText = text; // Сохраняем оригинал
+        document.getElementById('modal-text').innerHTML = text.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
 
-    // Определяем, какие кнопки нужно обновить
-    const glowBtnDesktop = document.getElementById('glow-toggle-desktop');
-    const testerBtnDesktop = document.getElementById('tester-toggle-desktop');
-    const glowBtnMobile = document.getElementById('glow-toggle-mobile');
-    const testerBtnMobile = document.getElementById('tester-toggle-mobile');
-    
-    // Отключаем Режим Экономии
-    document.body.classList.remove('no-glow');
-    glowBtnDesktop.classList.remove('active');
-    glowBtnDesktop.innerText = 'Режим Экономии';
-    glowBtnMobile.classList.remove('active');
-    glowBtnMobile.innerText = 'Режим Экономии';
-    
-    // Переключаем Тестировщик
-    isTesterMode = !isTesterMode;
-    document.body.classList.toggle('tester-glow');
-    
-    // Обновляем состояние всех кнопок
-    testerBtnDesktop.classList.toggle('active', isTesterMode);
-    testerBtnDesktop.innerText = isTesterMode ? 'Тестировщик (ON)' : 'Тестировщик';
-
-    testerBtnMobile.classList.toggle('active', isTesterMode);
-    testerBtnMobile.innerText = isTesterMode ? 'Тестировщик (ON)' : 'Тестировщик';
-    
-    // Если это десктоп, закрываем панель после нажатия
-    if (!isMobile && source === 'desktop') {
-        toggleSettingsPanel();
+        if (isTesterMode && debugInfo) {
+            document.getElementById('modal-text').innerHTML += '<br><br>--- <strong>Debug Info</strong> ---<br>' + debugInfo.replace(/\n/g, '<br>');
+        }
+        
+        const avatarMap = {
+            'K2M9': 'Аватарка_CI.png'
+        };
+        
+        const avatarImg = document.getElementById('modal-avatar');
+        if (avatarMap[serverCode]) {
+            avatarImg.src = avatarMap[serverCode];
+            avatarImg.style.display = 'block';
+        } else {
+            avatarImg.style.display = 'none';
+        }
+        
+        document.getElementById('copy-code-btn').textContent = `Копировать Код: ${currentServerCode}`;
+        document.getElementById('copy-code-btn').style.display = 'block';
+        
+        modal.classList.add('show'); 
+        modal.style.display = 'flex'; 
     }
-}
 
-/* Плавное появление страницы после полной загрузки */
-document.addEventListener('DOMContentLoaded', () => {
-    document.body.style.opacity = 1;
-});
+    function closeModal() { 
+        const modal = document.getElementById('modal'); 
+        modal.classList.remove('show'); 
+        setTimeout(()=> modal.style.display='none', 400); 
+    }
+
+    function copyServerCode() {
+        if (currentServerCode) {
+            navigator.clipboard.writeText(currentServerCode).then(() => {
+                const btn = document.getElementById('copy-code-btn');
+                const originalText = btn.textContent;
+                btn.textContent = 'Код скопирован! 🎉';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                }, 1500);
+            });
+        }
+    }
+
+    // --- Инициализация статусов серверов ---
+    function initializeServerStatus() {
+        const savedMode = localStorage.getItem('shd_display_mode');
+        if (savedMode !== null) {
+            applyMode(savedMode);
+        } else {
+            applyMode(2); 
+        }
+        
+        document.querySelectorAll('.card').forEach(card => {
+            const statusId = Math.floor(Math.random() * 2); 
+            const info = card.dataset.info || 'Нет информации';
+            const img = card.querySelector('img');
+            const p = card.querySelector('p');
+            
+            let statusText = '';
+            
+            card.dataset.statusId = statusId;
+
+            if (statusId === 1) {
+                img.src = 'Онлайн.png';
+                statusText = `Статус: <strong>ОНЛАЙН</strong>`; 
+                card.classList.add('online'); 
+            } else {
+                img.src = 'Офлайн.png';
+                statusText = `Статус: Офлайн`;
+                card.classList.remove('online');
+            }
+            
+            statusText += `<br>Доп. инфо: <strong>${info}</strong>`;
+            
+            p.innerHTML = statusText;
+        });
+    }
+
+    // --- Запуск ---
+    document.addEventListener('DOMContentLoaded', () => {
+        document.body.style.opacity = 1;
+        initializeServerStatus(); 
+        showSection('home'); // Стартовая секция
+        showServerList('servers-list'); // Стартовый список
+        filterType('all'); // Стартовый фильтр
+    });
 </script>
 
 <footer>BY R1SS5|REisain</footer>
