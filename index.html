@@ -6,9 +6,7 @@
     <title>SHD Каталог и не только!</title>
     
     <style>
-/* ---------------------------------------------------- */
-/* - 1. ОСНОВНЫЕ И ГЛОБАЛЬНЫЕ СТИЛИ (ФИКСИРОВАНЫ) - */
-/* ---------------------------------------------------- */
+/* 1. ОСНОВНЫЕ СТИЛИ */
 body { 
     margin:0; 
     font-family:'Arial',sans-serif; 
@@ -21,7 +19,6 @@ body.modal-active {
     animation: modalPulseBackground 2s infinite alternate; 
 }
 
-/* - КОНТЕЙНЕР - */
 .container {
     max-width: 900px; 
     margin: 20px auto; 
@@ -36,7 +33,6 @@ body.modal-active {
     border-radius: 15px 15px 0 0; 
 }
 
-/* - HEADER (С ГЛИТЧЕМ) - */
 header { 
     background: linear-gradient(120deg, #660000, #990000); 
     padding:20px; 
@@ -45,12 +41,10 @@ header {
     font-weight:bold; 
     letter-spacing:2px; 
     color: #fff; 
-    /* Основной текст заголовка */
     position: relative;
     text-shadow: 0 0 10px #ff0000, 0 0 20px #ff2222;
 }
 
-/* Добавление Глитч-эффекта на сам заголовок */
 header::before, header::after {
     content: attr(data-text); 
     position: absolute;
@@ -65,18 +59,18 @@ header::before, header::after {
 header::before {
     content: "SHD Каталог и не только!";
     left: 2px;
-    text-shadow: -1px 0 #00ffff; /* Синий/Голубой оттенок */
+    text-shadow: -1px 0 #00ffff;
     animation: textGlitch 4s infinite linear alternate-reverse;
 }
 header::after {
     content: "SHD Каталог и не только!";
     left: -2px;
-    text-shadow: 1px 0 #00ff00; /* Зеленый оттенок */
+    text-shadow: 1px 0 #00ff00;
     animation: textGlitch 3s infinite linear alternate;
 }
 
 header::before, header::after {
-    color: #fff; /* Цвет глитча */
+    color: #fff;
     opacity: 0.8;
 }
 
@@ -84,7 +78,6 @@ header span {
     position: relative;
     z-index: 10;
 }
-
 
 header::after {
     content: "V.7.0.3"; 
@@ -98,7 +91,6 @@ header::after {
 }
 header:hover { text-shadow: 0 0 20px #ff4444, 0 0 40px #ff0000; }
 
-/* - Навигация (С ЭФФЕКТОМ BLOOM) - */
 nav { display:flex; justify-content:center; background:#222; padding:15px; flex-wrap:wrap; }
 nav button { 
     margin:5px 10px; padding:12px 20px; background:#880000; color:#fff; border:none; 
@@ -107,19 +99,15 @@ nav button {
 nav button:hover { 
     background:#ff0000; 
     transform:scale(1.1); 
-    /* Красный и синий BLOOM */
-    box-shadow: 0 0 20px rgba(255, 0, 0, 1), 0 0 30px rgba(0, 50, 255, 0.7);
+    box-shadow: 0 0 20px rgba(255, 0, 0, 1);
 }
 nav button:active { transform:scale(0.95); }
 nav button.active {
     background: #ff0000;
-    /* Красный и синий BLOOM */
-    box-shadow: 0 0 30px rgba(255, 0, 0, 1.5), 0 0 40px rgba(0, 50, 255, 1);
+    box-shadow: 0 0 30px rgba(255, 0, 0, 1.5);
     transform: scale(1.05);
 }
 
-
-/* - Кнопки переключения (Сервера/Проекты) - */
 .button-switch { 
     background: #2b2b2b; border: 2px solid #555; padding: 12px 20px; 
     margin: 10px 10px; border-radius: 10px; color: #fff; text-align: center; 
@@ -130,11 +118,10 @@ nav button.active {
 }
 .button-switch.active { 
     background: #ff0000; border-color: #ff5555; 
-    box-shadow: 0 0 30px rgba(255, 0, 0, 1), 0 0 60px rgba(0, 50, 255, 0.7); 
+    box-shadow: 0 0 30px rgba(255, 0, 0, 1), 0 0 60px rgba(255, 0, 0, 0.7); 
     transform: scale(1.05); animation: switchPulse 0.8s infinite alternate; 
 }
 
-/* - Кнопки фильтрации - */
 .filter-btn { margin:5px; padding:10px 15px; border:none; border-radius:5px; background:#444; color:#fff; cursor:pointer; transition:0.2s; }
 .filter-btn:hover { 
     background:#C00000; transform:scale(1.1); box-shadow: 0 0 12px rgba(255, 0, 0, 0.8); 
@@ -146,10 +133,7 @@ nav button.active {
     transform: scale(1.05);
 }
 
-
-/* ---------------------------------------------------- */
-/* - 2. СТИЛИ КАРТОЧЕК (СЕРВЕРЫ/ПРОЕКТЫ) - */
-/* ---------------------------------------------------- */
+/* 2. СТИЛИ КАРТОЧЕК */
 .card { 
     position: relative; background: #2a2a2a; border-radius: 15px; padding: 15px; 
     margin: 15px 0; display: flex; align-items: center; justify-content: flex-start; 
@@ -163,31 +147,27 @@ nav button.active {
     box-shadow: 0 0 35px rgba(255,0,0,1), 0 0 60px rgba(255,50,50,0.8); 
 }
 
+/* ИЗМЕНЕНИЯ ЗДЕСЬ: УВЕЛИЧЕНИЕ РАЗМЕРА НА 30% (20px -> 26px) И УДАЛЕНИЕ СВЕЧЕНИЯ */
 .card img { 
-    width:20px; height:20px; margin-right:10px; border-radius:50%;
-    filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.7)); 
+    width:50px; height:50px; margin-right:10px; border-radius:50%;
     transition: filter 0.3s ease;
 }
 .card h3 { color:#ff5555; margin-bottom:5px; }
 .card p { color:#ccc; line-height:1.4; font-size: 14px; }
 .card p strong { color: #fff; }
 
-/* - Онлайн Статус (Зеленый) - */
 .card.online {
-    border: 1px solid #00ff00; 
-    animation: pulseGreen 2s infinite alternate; 
+    /* Свечение статуса убрано */
 }
 .card.online img {
-    filter: drop-shadow(0 0 8px #00ff00); 
+    /* Свечение статуса убрано */
 }
 .card.online:hover {
-    background: #1a4a1a; 
-    box-shadow: 0 0 35px #00ff00, 0 0 60px #55ff55; 
+    background: #4a1a1a;
+    box-shadow: 0 0 35px #ff0000, 0 0 60px #ff5555;
     animation: none; 
 }
 
-
-/* - Кнопка Описания - */
 .description-btn { 
     width:30px; 
     height:30px; 
@@ -207,8 +187,6 @@ nav button.active {
     filter: drop-shadow(0 0 15px rgba(255, 0, 0, 0.8));
 }
 
-
-/* - Правила, События, Должности - */
 .rule { background: linear-gradient(145deg, #2b2b2b, #1c1c1c); border-left:5px solid #ff4444; padding:15px 20px; margin:10px 0; border-radius:15px; box-shadow: 0 0 15px rgba(255,0,0,0.3), 0 5px 10px rgba(0,0,0,0.5); transition: transform 0.3s ease, box-shadow 0.5s ease; position: relative; animation: floatRule 2s ease-in-out infinite alternate;} 
 .rule::before { content: ''; position: absolute; top: -5px; left: -5px; right: -5px; bottom: -5px; border-radius: 18px; box-shadow: 0 0 20px rgba(255,0,0,0.7), 0 0 40px rgba(255,0,0,0.5); opacity: 0.5; filter: blur(4px); transition: all 0.3s ease;}
 .rule:hover { transform: scale(1.05); box-shadow: 0 0 35px rgba(255,0,0,0.9), 0 8px 20px rgba(0,0,0,0.7);}
@@ -222,15 +200,25 @@ nav button.active {
 .leader-card { background: linear-gradient(145deg, #2a2a2a, #1c1c1c); border-radius: 15px; padding: 20px; width: 200px; text-align: center; box-shadow: 0 0 20px rgba(255, 0, 0, 0.5), 0 5px 15px rgba(0,0,0,0.7); border: 2px solid #ff2222; transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;}
 .leader-card:hover { transform: scale(1.08); box-shadow: 0 0 30px rgba(255,0,0,0.9), 0 0 50px rgba(255,50,50,0.6);}
 
-
-/* ---------------------------------------------------- */
-/* - 3. СТИЛИ МОДАЛЬНОГО ОКНА - */
-/* ---------------------------------------------------- */
-
+/* 3. МОДАЛЬНОЕ ОКНО */
 section { display:none; padding:30px 20px; }
 section.active { display:block; }
 #calendar.active { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 20px 0; } 
-#home-content { background:#2b2b2b; border-radius:15px; padding:20px; text-align:center; margin-top:30px; }
+#home-content { background:#2b2b2b; border-radius:15px; padding:20px; text-align:center; margin-top:15px; }
+
+.settings-toggle {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 14px;
+    color: #ccc;
+}
+.settings-toggle input {
+    width: 18px;
+    height: 18px;
+}
 
 .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); justify-content: center; align-items: center; z-index: 999; opacity: 0; transition: opacity 0.3s ease;}
 .modal.show { display: flex; opacity: 1;}
@@ -247,7 +235,6 @@ section.active { display:block; }
 .modal-close-btn { margin-top: 25px; padding: 10px 30px; background: #660000; color: #fff; border: 2px solid #ff0000; border-radius: 10px; cursor: pointer; font-size: 16px; box-shadow: 0 0 15px rgba(255, 0, 0, 1), 0 0 25px rgba(255, 100, 100, 0.5); transition: all 0.3s ease;}
 .modal-close-btn:hover { background: #ff0000; box-shadow: 0 0 20px rgba(255, 0, 0, 1.5), 0 0 35px rgba(255, 100, 100, 0.8);}
 
-/* - Стили для вкладок модалки - */
 #modal-title {
     color: #ff5555; text-shadow: 0 0 10px #ff0000, 0 0 20px #ff2222; margin-bottom: 20px !important; font-size: 28px; transition: text-shadow 0.3s ease; border-bottom: 2px solid #555; padding-bottom: 5px; width: 100%;
 }
@@ -268,7 +255,6 @@ section.active { display:block; }
 .modal-section { display: none; padding: 10px 0;}
 .modal-section.active { display: block;}
 
-/* Стили для секции "КОД" */
 #code-section-display {
     text-align: center; padding: 20px; background: #1a1a1a; border-radius: 8px; border: 1px solid #ff0000; font-size: 30px; font-weight: bold; color: #00ff00; letter-spacing: 2px; box-shadow: 0 0 20px rgba(0, 255, 0, 0.5); cursor: pointer; transition: all 0.2s; animation: codeFlicker 0.5s infinite alternate; 
 }
@@ -276,9 +262,7 @@ section.active { display:block; }
     box-shadow: 0 0 30px rgba(0, 255, 0, 0.8), 0 0 40px rgba(0, 255, 0, 0.3);
 }
 
-/* ---------------------------------------------------- */
-/* - 4. ANIMATIONS - */
-/* ---------------------------------------------------- */
+/* 4. ANIMATIONS */
 @keyframes textFlicker {
     0%, 100% { opacity: 1; }
     50% { opacity: 0.8; }
@@ -288,10 +272,6 @@ section.active { display:block; }
 @keyframes floatRule {
     0% { transform: translateY(-2px); }
     100% { transform: translateY(2px); }
-}
-@keyframes pulseGreen {
-    0% { box-shadow: 0 0 10px #00ff00, 0 0 20px rgba(0, 255, 0, 0.4); }
-    100% { box-shadow: 0 0 20px #00ff00, 0 0 40px rgba(0, 255, 0, 0.8); }
 }
 @keyframes gradientShift {
     0% { background-position: 0% 50%; }
@@ -310,7 +290,6 @@ section.active { display:block; }
     50% { opacity: 0.95; text-shadow: 0 0 15px #00ff00, 0 0 20px #005500; }
     100% { opacity: 1; text-shadow: 0 0 10px #00ff00; }
 }
-/* АНИМАЦИЯ ГЛИТЧА ДЛЯ ЗАГОЛОВКА */
 @keyframes textGlitch {
     0% { clip: rect(2px, 9999px, 8px, 0); }
     25% { clip: rect(10px, 9999px, 15px, 0); }
@@ -318,7 +297,6 @@ section.active { display:block; }
     75% { clip: rect(18px, 9999px, 23px, 0); }
     100% { clip: rect(2px, 9999px, 8px, 0); }
 }
-
 @keyframes glitch-box-before {
     0% { transform: translate(0px, 0px); }
     25% { transform: translate(-7px, 5px); } 
@@ -334,8 +312,8 @@ section.active { display:block; }
     100% { transform: translate(0px, 0px); }
 }
 @keyframes switchPulse {
-    0% { box-shadow: 0 0 30px rgba(255, 0, 0, 1), 0 0 60px rgba(0, 50, 255, 0.7); }
-    100% { box-shadow: 0 0 40px rgba(255, 50, 50, 1.2), 0 0 70px rgba(50, 50, 255, 0.9); }
+    0% { box-shadow: 0 0 30px rgba(255, 0, 0, 1), 0 0 60px rgba(255, 0, 0, 0.7); }
+    100% { box-shadow: 0 0 40px rgba(255, 50, 50, 1.2), 0 0 70px rgba(255, 50, 50, 0.9); }
 }
 @keyframes filterPulse {
     0% { box-shadow: 0 0 15px rgba(255, 0, 0, 1); }
@@ -346,6 +324,119 @@ section.active { display:block; }
     100% { border-color: #ff5555; box-shadow: 0 0 8px #ff5555; }
 }
 
+/* 5. ОТКЛЮЧЕНИЕ СВЕЧЕНИЯ (ДЛЯ НАСТРОЙКИ) */
+body.no-glow .container { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important; }
+body.no-glow header { text-shadow: none !important; }
+body.no-glow header::before, body.no-glow header::after { text-shadow: none !important; }
+body.no-glow header:hover { text-shadow: none !important; }
+body.no-glow nav button:hover, body.no-glow nav button.active { box-shadow: none !important; }
+body.no-glow .button-switch:hover { box-shadow: none !important; }
+body.no-glow .button-switch.active { box-shadow: none !important; animation: none !important; }
+body.no-glow .filter-btn:hover, body.no-glow .filter-btn.active { box-shadow: none !important; animation: none !important; }
+body.no-glow .card { box-shadow: none !important; }
+body.no-glow .card:hover { box-shadow: none !important; }
+body.no-glow .card img { filter: none !important; }
+body.no-glow .card.online:hover { box-shadow: none !important; }
+body.no-glow .description-btn { filter: none !important; }
+body.no-glow .description-btn:hover { filter: none !important; }
+body.no-glow .rule { box-shadow: 0 5px 10px rgba(0,0,0,0.5) !important; animation: none !important; }
+body.no-glow .rule::before { box-shadow: none !important; }
+body.no-glow .rule:hover { box-shadow: 0 8px 20px rgba(0,0,0,0.7) !important; }
+body.no-glow .rule:hover::before { box-shadow: none !important; }
+body.no-glow .calendar { box-shadow: none !important; animation: none !important; }
+body.no-glow .calendar:hover { box-shadow: none !important; animation: none !important; }
+body.no-glow .leader-card { box-shadow: 0 5px 15px rgba(0,0,0,0.7) !important; }
+body.no-glow .leader-card:hover { box-shadow: 0 5px 15px rgba(0,0,0,0.7) !important; }
+body.no-glow body.modal-active { animation: none !important; }
+body.no-glow .modal-content { box-shadow: none !important; animation: none !important; }
+body.no-glow .modal.show .modal-content { box-shadow: none !important; }
+body.no-glow .modal-close-btn { box-shadow: none !important; }
+body.no-glow .modal-close-btn:hover { box-shadow: none !important; }
+body.no-glow #modal-title { text-shadow: none !important; }
+body.no-glow .modal-tab-btn:hover { text-shadow: none !important; }
+body.no-glow .modal-tab-btn.active { text-shadow: none !important; animation: none !important; }
+body.no-glow #code-section-display { box-shadow: none !important; animation: none !important; }
+body.no-glow #code-section-display:hover { box-shadow: none !important; }
+
+/* 6. АДАПТАЦИЯ ДЛЯ МОБИЛЬНЫХ */
+@media (max-width: 900px) {
+    .container {
+        margin: 10px;
+        width: auto;
+    }
+}
+@media (max-width: 600px) {
+    header {
+        font-size: 24px;
+        padding: 15px;
+    }
+    header::before, header::after {
+        padding: 15px;
+    }
+    nav button {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+    .button-switch {
+        padding: 10px 15px;
+        max-width: 150px;
+    }
+    section {
+        padding: 20px 15px;
+    }
+    .filter-btn {
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+    .card {
+        padding: 10px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .card img {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+    .card h3 {
+        font-size: 16px;
+    }
+    .card p {
+        font-size: 12px;
+    }
+    .description-btn {
+        width: 25px;
+        height: 25px;
+        right: 10px;
+        top: auto;
+        bottom: 10px;
+        transform: none;
+    }
+    .description-btn:hover {
+        transform: scale(1.1);
+    }
+    .leaders {
+        gap: 10px;
+    }
+    .leader-card {
+        width: 100%;
+        max-width: 250px;
+        padding: 15px;
+    }
+    .calendar {
+        width: 100%;
+        max-width: 250px;
+    }
+    .modal-content {
+        padding: 15px;
+    }
+    #modal-title {
+        font-size: 22px;
+    }
+    #code-section-display {
+        font-size: 20px;
+    }
+}
     </style>
 </head>
 
@@ -366,9 +457,14 @@ section.active { display:block; }
     <section id="home" class="active">
         
         <div id="home-content">
-            <h2>Здравствуйте! Вы попали в SHD Catalog V.7.0.3, в котором собрана информация о проектах и серверах клана, также правила и события.</h2>
+            <h2>Здравствуйте! Вы попали в SHD Catalog V.7.0.3...</h2>
             <p>Одна из целей клана: собрать самых адекватных игроков и создать своё комьюнити адекватных серверов!</p>
             <p>Catalog/каталог By R1SS5</p>
+            
+            <div class="settings-toggle">
+                <input type="checkbox" id="glow-toggle">
+                <label for="glow-toggle">Убрать свечение (для слабых устройств)</label>
+            </div>
         </div>
     </section>
 
@@ -390,10 +486,10 @@ section.active { display:block; }
         </div>
 
         <div id="servers-list">
-            <div class="card" data-type="pvp" data-status-id="0" data-server-code="G7R9" data-info="Отключён"
+            <div class="card" data-type="pvp" data-status-id="4" data-server-code="G7R9" data-info="В разработке"
                 onclick="openModal('**SHD-PvP** - сервер в PvP режиме, запускаеться для обучения солдат **SHD** \n\n**Особенности:** Бои 1v1 , арена, регулярный запуск.','G7R9')"> 
-                <img src="Офлайн.png" alt="Статус"> 
-                <div><h3>SHD-PvP</h3><p>Статус: Не работает</p></div>
+                <img src="В разработке.png" alt="Статус"> 
+                <div><h3>SHD-PvP</h3><p>Статус: В разработке</p></div>
                 <button class="description-btn" onclick="event.stopPropagation(); openModal('**SHD-PvP** - сервер в PvP режиме, запускаеться для обучения солдат **SHD** \n\n**Особенности:** Бои 1v1 , арена, регулярный запуск.','G7R9');"></button>
             </div>
             <div class="card" data-type="parkour" data-status-id="0" data-server-code="A1B5" data-info="Новые ивенты!"
@@ -402,80 +498,80 @@ section.active { display:block; }
                 <div><h3>Паркур на крюках</h3><p>Статус: Офлайн</p></div>
                 <button class="description-btn" onclick="event.stopPropagation(); openModal('Паркур, который увеличивает сложность каждым уровнем - крюки в комнатах. \n\n**Особенности:** Многоуровневые карты, таблицы лидеров, система ивентов. Сервер ожидает крупное обновление карты и механик.','A1B5');"></button>
             </div>
-            <div class="card" data-type="escape" data-status-id="0" data-server-code="C3P0" data-info="Отключён"
+            <div class="card" data-type="escape" data-status-id="4" data-server-code="C3P0" data-info="В разработке"
                 onclick="openModal('Классический сервер &quot;Побег из тюрьмы&quot; с кастомными механиками и системой прокачки. \n\n*Особенности:* Различные классы, зоны охраны, секретные пути и экономика. В данный момент идет полный вайп перед новым сезоном, который начнется скоро! Проект без модов.','C3P0')">
-                <img src="Офлайн.png" alt="Статус">
-                <div><h3>Побег из тюрьмы "S.H.A.D.E"</h3><p>Статус: В разработке...</p></div>
+                <img src="В разработке.png" alt="Статус">
+                <div><h3>Побег из тюрьмы "S.H.A.D.E"</h3><p>Статус: В разработке</p></div>
                 <button class="description-btn" onclick="event.stopPropagation(); openModal('Классический сервер &quot;Побег из тюрьмы&quot; с кастомными механиками и системой прокачки. \n\n*Особенности:* Различные классы, зоны охраны, секретные пути и экономика. В данный момент идет полный вайп перед новым сезоном, который начнется скоро! Проект без модов.','C3P0');"></button>
             </div>
             
-            <div class="card" data-type="anarchy" data-status-id="0" data-server-code="0000-45B" data-info="Пусто"
+            <div class="card" data-type="anarchy" data-status-id="3" data-server-code="0000-45B" data-info="Пусто"
                 onclick="openModal('**[ПУСТО]** - это место для вашего сервера! Вы можете выкупить его и разместить здесь свой проект. **Подробности у Администрации.**','0000-45B')"> 
-                <img src="Офлайн.png" alt="Статус"> 
+                <img src="Недоступно.png" alt="Статус"> 
                 <div><h3>[ПУСТО]</h3><p>Статус: Пусто</p></div>
                 <button class="description-btn" onclick="event.stopPropagation(); openModal('**[ПУСТО]** - это место для вашего сервера! Вы можете выкупить его и разместить здесь свой проект. **Подробности у Администрации.**','0000-45B');"></button>
             </div>
-            <div class="card" data-type="pvp" data-status-id="0" data-server-code="0000-45B" data-info="Пусто"
+            <div class="card" data-type="pvp" data-status-id="3" data-server-code="0000-45B" data-info="Пусто"
                 onclick="openModal('**[ПУСТО]** - это место для вашего сервера! Вы можете выкупить его и разместить здесь свой проект. **Подробности у Администрации.**','0000-45B')"> 
-                <img src="Офлайн.png" alt="Статус"> 
+                <img src="Недоступно.png" alt="Статус"> 
                 <div><h3>[ПУСТО]</h3><p>Статус: Пусто</p></div>
                 <button class="description-btn" onclick="event.stopPropagation(); openModal('**[ПУСТО]** - это место для вашего сервера! Вы можете выкупить его и разместить здесь свой проект. **Подробности у Администрации.**','0000-45B');"></button>
             </div>
-            <div class="card" data-type="rp" data-status-id="0" data-server-code="0000-45B" data-info="Пусто"
+            <div class="card" data-type="rp" data-status-id="3" data-server-code="0000-45B" data-info="Пусто"
                 onclick="openModal('**[ПУСТО]** - это место для вашего сервера! Вы можете выкупить его и разместить здесь свой проект. **Подробности у Администрации.**','0000-45B')"> 
-                <img src="Офлайн.png" alt="Статус"> 
+                <img src="Недоступно.png" alt="Статус"> 
                 <div><h3>[ПУСТО]</h3><p>Статус: Пусто</p></div>
                 <button class="description-btn" onclick="event.stopPropagation(); openModal('**[ПУСТО]** - это место для вашего сервера! Вы можете выкупить его и разместить здесь свой проект. **Подробности у Администрации.**','0000-45B');"></button>
             </div>
-            <div class="card" data-type="escape" data-status-id="0" data-server-code="0000-45B" data-info="Пусто"
+            <div class="card" data-type="escape" data-status-id="3" data-server-code="0000-45B" data-info="Пусто"
                 onclick="openModal('**[ПУСТО]** - это место для вашего сервера! Вы можете выкупить его и разместить здесь свой проект. **Подробности у Администрации.**','0000-45B')"> 
-                <img src="Офлайн.png" alt="Статус"> 
+                <img src="Недоступно.png" alt="Статус"> 
                 <div><h3>[ПУСТО]</h3><p>Статус: Пусто</p></div>
                 <button class="description-btn" onclick="event.stopPropagation(); openModal('**[ПУСТО]** - это место для вашего сервера! Вы можете выкупить его и разместить здесь свой проект. **Подробности у Администрации.**','0000-45B');"></button>
             </div>
         </div>
 
         <div id="projects-list" style="display:none;">
-            <div class="card" data-type="project-escape" data-status-id="0" data-server-code="X5Y7" data-info="Закрыто"
+            <div class="card" data-type="project-escape" data-status-id="4" data-server-code="X5Y7" data-info="В разработке"
                 onclick="openModal('**Побег из тюрьмы с модами** - расширенная версия классического Побега. Включает модификации для улучшения геймплея, новые предметы и механики. Оптимизирован и находится на стадии **Альфа-тестирования**.','X5Y7')">
-                <img src="Офлайн.png" alt="Статус">
-                <div><h3>Побег из тюрьмы "S.H.A.D.E" (с модами)</h3><p>Статус: Загрузка...</p></div>
+                <img src="В разработке.png" alt="Статус">
+                <div><h3>Побег из тюрьмы "S.H.A.D.E" (с модами)</h3><p>Статус: В разработке</p></div>
                 <button class="description-btn" onclick="event.stopPropagation(); openModal('**Побег из тюрьмы с модами** - расширенная версия классического Побега. Включает модификации для улучшения геймплея, новые предметы и механики. Оптимизирован и находится на стадии **Альфа-тестирования**.','X5Y7');"></button>
             </div>
-            <div class="card" data-type="project-anarchy" data-status-id="0" data-server-code="K2M9" data-info="В прототипе"
+            <div class="card" data-type="project-anarchy" data-status-id="4" data-server-code="K2M9" data-info="В разработке"
                 onclick="openModal('**Criminal Islands** - Проект, переживший многое, но ему это не помешало... \n\n**Особенности:** Кастомные моды, уникальный мир, система ящиков. **Запуск не скоро***.','K2M9')">
-                <img src="Офлайн.png" alt="Статус">
-                <div><h3>Criminal Islands (с модами)</h3><p>Статус: Не работает</p></div>
+                <img src="В разработке.png" alt="Статус">
+                <div><h3>Criminal Islands (с модами)</h3><p>Статус: В разработке</p></div>
                 <button class="description-btn" onclick="event.stopPropagation(); openModal('**Criminal Islands** - Проект, переживший многое, но ему это не помешало... \n\n**Особенности:** Кастомные моды, уникальный мир, система ящиков. **Запуск не скоро***.','K2M9');"></button>
             </div>
-            <div class="card" data-type="project-rp" data-status-id="0" data-server-code="L3R4" data-info="Не работает"
+            <div class="card" data-type="project-rp" data-status-id="4" data-server-code="L3R4" data-info="В разработке"
                 onclick="openModal('**RayRP** - полноценный RolePlay проект с глубокой проработкой лора, профессий и взаимодействия между игроками. \n\n*Особенности:* Моды для РП, хорошая администрация, система связи. Проект пока-что не сделан **...ЖДИТЕ...**','L3R4')">
-                <img src="Офлайн.png" alt="Статус">
-                <div><h3>RayRP (с модами)</h3><p>Статус: Не работает</p></div>
+                <img src="В разработке.png" alt="Статус">
+                <div><h3>RayRP (с модами)</h3><p>Статус: В разработке</p></div>
                 <button class="description-btn" onclick="event.stopPropagation(); openModal('**RayRP** - полноценный RolePlay проект с глубокой проработкой лора, профессий и взаимодействия между игроками. \n\n*Особенности:* Моды для РП, хорошая администрация, система связи. Проект пока-что не сделан **...ЖДИТЕ...**','L3R4');"></button>
             </div>
             
-            <div class="card" data-type="project-rp" data-status-id="0" data-server-code="0000-45B" data-info="Пусто"
+            <div class="card" data-type="project-rp" data-status-id="3" data-server-code="0000-45B" data-info="Пусто"
                 onclick="openModal('**[ПУСТО]** - это место для вашего проекта! Вы можете выкупить его и разместить здесь свой проект. **Подробности у Администрации.**','0000-45B')">
-                <img src="Офлайн.png" alt="Статус">
+                <img src="Недоступно.png" alt="Статус">
                 <div><h3>[ПУСТО]</h3><p>Статус: Пусто</p></div>
                 <button class="description-btn" onclick="event.stopPropagation(); openModal('**[ПУСТО]** - это место для вашего проекта! Вы можете выкупить его и разместить здесь свой проект. **Подробности у Администрации.**','0000-45B');"></button>
             </div>
-            <div class="card" data-type="project-sandbox" data-status-id="0" data-server-code="0000-45B" data-info="Пусто"
+            <div class="card" data-type="project-sandbox" data-status-id="3" data-server-code="0000-45B" data-info="Пусто"
                 onclick="openModal('**[ПУСТО]** - это место для вашего проекта! Вы можете выкупить его и разместить здесь свой проект. **Подробности у Администрации.**','0000-45B')">
-                <img src="Офлайн.png" alt="Статус">
+                <img src="Недоступно.png" alt="Статус">
                 <div><h3>[ПУСТО]</h3><p>Статус: Пусто</p></div>
                 <button class="description-btn" onclick="event.stopPropagation(); openModal('**[ПУСТО]** - это место для вашего проекта! Вы можете выкупить его и разместить здесь свой проект. **Подробности у Администрации.**','0000-45B');"></button>
             </div>
-            <div class="card" data-type="project-pvp" data-status-id="0" data-server-code="0000-45B" data-info="Пусто"
+            <div class="card" data-type="project-pvp" data-status-id="3" data-server-code="0000-45B" data-info="Пусто"
                 onclick="openModal('**[ПУСТО]** - это место для вашего проекта! Вы можете выкупить его и разместить здесь свой проект. **Подробности у Администрации.**','0000-45B')">
-                <img src="Офлайн.png" alt="Статус">
+                <img src="Недоступно.png" alt="Статус">
                 <div><h3>[ПУСТО]</h3><p>Статус: Пусто</p></div>
                 <button class="description-btn" onclick="event.stopPropagation(); openModal('**[ПУСТО]** - это место для вашего проекта! Вы можете выкупить его и разместить здесь свой проект. **Подробности у Администрации.**','0000-45B');"></button>
             </div>
-            <div class="card" data-type="project-parkour" data-status-id="0" data-server-code="0000-45B" data-info="Пусто"
+            <div class="card" data-type="project-parkour" data-status-id="3" data-server-code="0000-45B" data-info="Пусто"
                 onclick="openModal('**[ПУСТО]** - это место для вашего проекта! Вы можете выкупить его и разместить здесь свой проект. **Подробности у Администрации.**','0000-45B')">
-                <img src="Офлайн.png" alt="Статус">
+                <img src="Недоступно.png" alt="Статус">
                 <div><h3>[ПУСТО]</h3><p>Статус: Пусто</p></div>
                 <button class="description-btn" onclick="event.stopPropagation(); openModal('**[ПУСТО]** - это место для вашего проекта! Вы можете выкупить его и разместить здесь свой проект. **Подробности у Администрации.**','0000-45B');"></button>
             </div>
@@ -554,42 +650,56 @@ section.active { display:block; }
     let currentServerCode = '';
     const EMPTY_CODE = '0000-45B';
 
-    // - Функция обновления статуса -
     function updateServerStatus(card) {
         const statusId = parseInt(card.dataset.statusId, 10);
         const img = card.querySelector('img');
         const statusTextElement = card.querySelector('p');
         const info = card.dataset.info || 'Нет данных';
 
-        if (card.dataset.serverCode === EMPTY_CODE) {
-             card.classList.remove('online');
-             img.src = 'Офлайн.png';
-             statusTextElement.innerHTML = `Статус: Пусто`;
-             return; 
-        }
+        card.classList.remove('online');
 
-        if (statusId === 1) {
-            card.classList.add('online');
-            img.src = 'Онлайн.png';
-            statusTextElement.innerHTML = `Статус: <strong>Активен</strong> (${info})`;
-        } else {
-            card.classList.remove('online');
-            img.src = 'Офлайн.png';
-            statusTextElement.innerHTML = `Статус: Неактивен (${info})`;
+        switch (statusId) {
+            case 1:
+                card.classList.add('online');
+                img.src = 'Онлайн.png';
+                statusTextElement.innerHTML = `Статус: <strong>Активен</strong> (${info})`;
+                break;
+            case 3:
+                img.src = 'Недоступно.png';
+                statusTextElement.innerHTML = `Статус: Пусто`;
+                break;
+            case 4:
+                img.src = 'В разработке.png';
+                statusTextElement.innerHTML = `Статус: В разработке`;
+                break;
+            case 0:
+            default:
+                img.src = 'Офлайн.png';
+                statusTextElement.innerHTML = `Статус: Неактивен (${info})`;
+                break;
         }
     }
 
-    // - Инициализация статусов при загрузке -
     function initializeStatuses() {
         document.querySelectorAll('.card').forEach(card => {
             updateServerStatus(card);
         });
-        // Активация кнопки "Главная" при загрузке
+        
         document.querySelector('nav button[onclick="showSection(\'home\')"]').classList.add('active');
         document.body.style.opacity = 1;
+
+        const glowToggle = document.getElementById('glow-toggle');
+        if (glowToggle) {
+            glowToggle.addEventListener('change', function() {
+                if (this.checked) {
+                    document.body.classList.add('no-glow');
+                } else {
+                    document.body.classList.remove('no-glow');
+                }
+            });
+        }
     }
 
-    // - Утилиты -
     function showSection(sectionId) {
         document.querySelectorAll('section').forEach(section => {
             section.classList.remove('active');
@@ -634,7 +744,8 @@ section.active { display:block; }
 
         currentList.querySelectorAll('.card').forEach(card => { 
             const cardType = card.dataset.type;
-            const is_empty = card.dataset.serverCode === EMPTY_CODE;
+            const statusId = parseInt(card.dataset.statusId, 10);
+            const is_empty = (statusId === 3);
             
             let should_show = false;
 
@@ -643,8 +754,6 @@ section.active { display:block; }
             } else if (type === 'empty') {
                 should_show = is_empty;
             } else {
-                // Для всех остальных фильтров (pvp, rp и т.д.)
-                // Показываем, только если это НЕ пустой слот И тип совпадает
                 should_show = !is_empty && (cardType === type || cardType.includes(type)); 
             }
 
@@ -665,7 +774,6 @@ section.active { display:block; }
         }
     }
 
-    // - Модальное окно: Логика вкладок -
     function showModalSection(sectionId) {
         
         document.querySelectorAll('.modal-section').forEach(section => {
@@ -682,24 +790,19 @@ section.active { display:block; }
         }
     }
 
-    // - Модальное окно: Открытие и заполнение -
     function openModal(text, serverCode) { 
         const modal = document.getElementById('modal');
         currentServerCode = serverCode;
 
-        // 1. Обновляем секцию ОПИСАНИЕ
         let modalContent = text.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
         document.getElementById('modal-text').innerHTML = modalContent;
         
-        // 2. Обновляем заголовок
         const displayCode = serverCode === EMPTY_CODE ? '[ПУСТО]' : serverCode;
         document.getElementById('modal-title').innerHTML = `Описание: <span id="modal-project-name">${displayCode}</span>`;
 
-        // 3. Обновляем секцию КОД
         const codeDisplay = document.getElementById('code-section-display');
         codeDisplay.textContent = currentServerCode;
 
-        // 4. Обработка Аватара
         const avatarMap = {
             'K2M9': 'Аватарка_CI.png'
         };
@@ -711,7 +814,6 @@ section.active { display:block; }
             avatarImg.style.display = 'none';
         }
         
-        // 5. Показываем модалку и активируем вкладку "Описание" по умолчанию
         modal.classList.add('show'); 
         modal.style.display = 'flex'; 
         document.body.classList.add('modal-active');
@@ -728,7 +830,6 @@ section.active { display:block; }
         }, 300); 
     }
     
-    // - Копирование кода из модалки -
     function copyServerCode() {
         const code = document.getElementById('code-section-display').textContent;
 
