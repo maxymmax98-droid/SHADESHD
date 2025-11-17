@@ -133,6 +133,32 @@ nav button.active {
     transform: scale(1.05);
 }
 
+/* New style for the optimization button */
+.super-opt-btn {
+    padding: 12px 25px; 
+    background: #660000; 
+    color: #fff; 
+    border: 2px solid #ff0000; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    transition: transform 0.2s ease, background 0.25s ease, box-shadow 0.5s ease;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-top: 15px; /* Added margin for separation */
+}
+.super-opt-btn:hover { 
+    background:#990000; 
+    transform:scale(1.05); 
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+}
+.super-opt-btn.active {
+    background: #ff0000;
+    box-shadow: 0 0 30px rgba(255, 0, 0, 1), 0 0 60px rgba(255, 0, 0, 0.7);
+    transform: scale(1.05);
+    animation: switchPulse 0.8s infinite alternate;
+}
+
 /* 2. СТИЛИ КАРТОЧЕК */
 .card { 
     position: relative; background: #2a2a2a; border-radius: 15px; padding: 15px; 
@@ -215,10 +241,10 @@ section.active { display:block; }
     font-size: 14px;
     color: #ccc;
 }
-.settings-toggle input {
-    width: 18px;
-    height: 18px;
-}
+/* .settings-toggle input { REMOVED */
+/* width: 18px; REMOVED */
+/* height: 18px; REMOVED */
+/*} REMOVED */
 
 .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); justify-content: center; align-items: center; z-index: 999; opacity: 0; transition: opacity 0.3s ease;}
 .modal.show { display: flex; opacity: 1;}
@@ -357,6 +383,9 @@ body.no-glow .modal-tab-btn:hover { text-shadow: none !important; }
 body.no-glow .modal-tab-btn.active { text-shadow: none !important; animation: none !important; }
 body.no-glow #code-section-display { box-shadow: none !important; animation: none !important; }
 body.no-glow #code-section-display:hover { box-shadow: none !important; }
+body.no-glow .super-opt-btn { box-shadow: none !important; animation: none !important; border-color: #555 !important; }
+body.no-glow .super-opt-btn:hover { background:#666666 !important; transform: none !important; }
+body.no-glow .super-opt-btn.active { background: #990000 !important; transform: none !important; }
 
 /* 6. АДАПТАЦИЯ ДЛЯ МОБИЛЬНЫХ */
 @media (max-width: 900px) {
@@ -462,8 +491,9 @@ body.no-glow #code-section-display:hover { box-shadow: none !important; }
             <p>Catalog/каталог By R1SS5</p>
             
             <div class="settings-toggle">
-                <input type="checkbox" id="glow-toggle">
-                <label for="glow-toggle">Убрать свечение (для слабых устройств)</label>
+                <button id="super-optimization-btn" class="super-opt-btn">
+                    Супер оптимизация
+                </button>
             </div>
         </div>
     </section>
@@ -688,14 +718,27 @@ body.no-glow #code-section-display:hover { box-shadow: none !important; }
         document.querySelector('nav button[onclick="showSection(\'home\')"]').classList.add('active');
         document.body.style.opacity = 1;
 
-        const glowToggle = document.getElementById('glow-toggle');
-        if (glowToggle) {
-            glowToggle.addEventListener('change', function() {
-                if (this.checked) {
-                    document.body.classList.add('no-glow');
+        const optimizationBtn = document.getElementById('super-optimization-btn');
+        if (optimizationBtn) {
+            
+            const updateOptimizationButtonState = () => {
+                const isActive = document.body.classList.contains('no-glow');
+                if (isActive) {
+                    optimizationBtn.classList.add('active');
+                    optimizationBtn.textContent = 'Супер оптимизация (ВКЛ)';
                 } else {
-                    document.body.classList.remove('no-glow');
+                    optimizationBtn.classList.remove('active');
+                    optimizationBtn.textContent = 'Супер оптимизация';
                 }
+            };
+
+            // Set initial state
+            updateOptimizationButtonState();
+
+            // Add click listener
+            optimizationBtn.addEventListener('click', function() {
+                document.body.classList.toggle('no-glow');
+                updateOptimizationButtonState();
             });
         }
     }
