@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SHD Каталог и не только! v.10.6.9</title>
+    <title>SHD Каталог и не только! v.10.9.9</title>
     
     <style>
 /* 1. ОСНОВНЫЕ СТИЛИ */
@@ -131,7 +131,7 @@ header span {
 
 /* ОБНОВЛЕННАЯ ВЕРСИЯ */
 header::after {
-    content: "v.10.6.9"; 
+    content: "v.10.9.9"; 
     position: absolute;
     bottom: 5px;
     right: 5px;
@@ -473,14 +473,14 @@ section.active { display:block; }
 #modal-avatar {
     width: 80px;
     height: 80px;
-    border-radius: 50%;
+    border-radius: 10px; /* ИЗМЕНЕНО: Квадратная аватарка */
     margin: 10px auto 20px auto;
     border: 3px solid #ff0000;
     box-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
     transition: transform 0.3s ease;
 }
 #modal-avatar:hover {
-    transform: rotate(360deg) scale(1.1);
+    transform: scale(1.1); /* ИЗМЕНЕНО: Более простой эффект для квадрата */
 }
 
 
@@ -593,7 +593,7 @@ body.no-glow .settings-pc-btn img { filter: none !important; }
 
         <section id="home" class="active">
             <div id="home-content">
-                <h2>Здравствуйте! Вы попали в SHD Catalog v.10.6.9</h2>
+                <h2>Здравствуйте! Вы попали в SHD Catalog v.10.9.9</h2>
                 <p>Одна из целей клана: собрать самых адекватных игроков и создать своё комьюнити адекватных серверов!</p>
                 <p>Catalog/каталог By R1SS5</p>
             </div>
@@ -662,8 +662,8 @@ body.no-glow .settings-pc-btn img { filter: none !important; }
                      <button class="description-btn" onclick="event.stopPropagation(); openModal('**[ПУСТО]** - это место для вашего сервера! Вы можете выкупить его и разместить здесь свой проект. **Подробности у Администрации.**','0000-45B');"></button>
                 </div>
                 <div class="card" data-type="escape" data-status-id="3" data-server-code="0000-45B" data-info="Пусто"
-                     onclick="openModal('**[ПУСТО]** - это место для вашего сервера! Вы можете выкупить его и разместить здесь свой проект. **Подробности у Администрации.**','0000-45B')"> 
-                     <img src="Недоступно.png" alt="Статус"> 
+                     onclick="openModal('**[ПУСТО]** - это место для вашего сервера! Вы можете выкупить его и разместить здесь свой проект. **Подробности у Администрации.**','0000-45B')">
+                     <img src="Недоступно.png" alt="Статус">
                      <div><h3>[ПУСТО]</h3><p>Статус: Пусто</p></div>
                      <button class="description-btn" onclick="event.stopPropagation(); openModal('**[ПУСТО]** - это место для вашего сервера! Вы можете выкупить его и разместить здесь свой проект. **Подробности у Администрации.**','0000-45B');"></button>
                 </div>
@@ -780,6 +780,9 @@ body.no-glow .settings-pc-btn img { filter: none !important; }
             <div class="tickets-form-container">
                 <h3>Создание нового тикета</h3>
                 <form id="ticket-form">
+                    <label for="ticket-nickname">Ваш никнейм:</label>
+                    <input type="text" id="ticket-nickname" name="nickname" required maxlength="50">
+
                     <label for="ticket-type">Тип обращения:</label>
                     <select id="ticket-type" name="type" required>
                         <option value="">Выберите тип</option>
@@ -1047,7 +1050,7 @@ body.no-glow .settings-pc-btn img { filter: none !important; }
             codeDisplay.textContent = currentServerCode;
 
             const avatarMap = {
-                'K2M9': 'Аватар_CriminalIslands.png', 
+                'K2M9': 'Аватарка_CI.png', // ИЗМЕНЕНИЕ ПО ЗАПРОСУ ПОЛЬЗОВАТЕЛЯ
                 'C3P0': 'Аватар_SHADE.png',
                 'X5Y7': 'Аватар_SHADE_v2.png', 
                 'R7M1': 'Аватар_SHD_V10.png',
@@ -1103,10 +1106,11 @@ body.no-glow .settings-pc-btn img { filter: none !important; }
             });
         }
 
-        // *** ЛОГИКА ТИКЕТОВ (ЕДИНСТВЕННАЯ ФУНКЦИОНАЛЬНАЯ ПРАВКА) ***
+        // *** ЛОГИКА ТИКЕТОВ ***
         document.getElementById('ticket-form').addEventListener('submit', function(e) {
             e.preventDefault();
             
+            const nickname = document.getElementById('ticket-nickname').value; // <<< ПОЛУЧЕНИЕ НИКНЕЙМА
             const type = document.getElementById('ticket-type').value;
             const title = document.getElementById('ticket-title').value;
             const description = document.getElementById('ticket-description').value;
@@ -1135,6 +1139,7 @@ body.no-glow .settings-pc-btn img { filter: none !important; }
                     description: description,
                     color: embedColor,
                     fields: [
+                        { name: "Никнейм пользователя", value: nickname, inline: false }, // <<< ДОБАВЛЕН НИКНЕЙМ
                         { name: "Тип обращения", value: type.charAt(0).toUpperCase() + type.slice(1).replace('-', ' '), inline: true },
                     ],
                     timestamp: new Date().toISOString()
