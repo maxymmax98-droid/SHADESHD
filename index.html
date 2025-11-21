@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SHD Каталог и не только! v.10.9.9</title>
+    <title>SHD Каталог и не только! v.11.0.0 (Dark Only)</title>
     
     <style>
 /* 1. ОСНОВНЫЕ СТИЛИ */
@@ -14,99 +14,25 @@ body {
     color:#eee; 
     opacity: 0; 
     transition: opacity 1s ease-out; 
-    /* НОВАЯ ФОНОВАЯ АНИМАЦИЯ */
     background: repeating-linear-gradient(45deg, #1a1a1a, #1a1a1a 10px, #222 10px, #222 20px);
     animation: backgroundMove 60s linear infinite;
-}
-body.modal-active {
-    /* АНИМАЦИЯ МОДАЛЬНОГО ФОНА УДАЛЕНА ПО ТРЕБОВАНИЮ */
-}
-
-/* СВЕТЛАЯ ТЕМА */
-body.light-mode {
-    background: #f0f0f0;
-    color: #333;
-    background: repeating-linear-gradient(45deg, #f0f0f0, #f0f0f0 10px, #ddd 10px, #ddd 20px);
-}
-body.light-mode .container { 
-    background: #fff; 
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), 0 0 10px rgba(0, 0, 0, 0.1); 
-}
-body.light-mode header {
-    background: linear-gradient(120deg, #ff9999, #ff5555);
-    color: #333;
-    text-shadow: none;
-}
-body.light-mode header::before, body.light-mode header::after {
-    text-shadow: none;
-}
-body.light-mode nav button { 
-    background: #ff5555; 
-    color: #333;
-}
-body.light-mode nav button:hover { 
-    background: #ff7777; 
-    box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
-}
-body.light-mode nav button.active {
-    background: #ff7777;
-    box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
-}
-body.light-mode .button-switch { 
-    background: #eee; 
-    border-color: #ccc; 
-    color: #333;
-}
-body.light-mode .button-switch:hover { 
-    background: #fff; 
-    box-shadow: 0 0 10px rgba(255, 100, 100, 0.5); 
-}
-body.light-mode .button-switch.active { 
-    background: #ff0000; 
-    border-color: #ff5555; 
-    color: #fff;
-}
-body.light-mode .filter-btn { background:#ccc; color:#333; }
-body.light-mode .filter-btn:hover { background:#ff5555; color:#fff; }
-body.light-mode .card { 
-    background: #f5f5f5; 
-    box-shadow: 0 0 3px rgba(0,0,0,0.2); 
-}
-body.light-mode .card:hover { 
-    background: #fff; 
-}
-body.light-mode .card h3 { color:#ff0000; }
-body.light-mode .card p { color:#666; }
-body.light-mode .card p strong { color: #333; }
-body.light-mode .rule { 
-    background: linear-gradient(145deg, #eee, #fff); 
-    border-left-color: #ff0000; 
-    color: #333;
-}
-body.light-mode .leader-card { 
-    background: linear-gradient(145deg, #f5f5f5, #fff); 
-    border-color: #ff5555;
-    color: #333;
-}
-body.light-mode #home-content { 
-    background:#eee; 
-    color: #333;
+    position: relative;
+    min-height: 100vh;
 }
 
+/* КОНТЕЙНЕР */
 .container {
     max-width: 900px; 
     margin: 20px auto; 
     background: #222; 
     border-radius: 15px; 
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 50px rgba(255, 0, 0, 0.4); 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 60px rgba(255, 0, 0, 0.7); 
     padding: 0;
     overflow: hidden; 
-}
-.container header {
-    margin: 0;
-    border-radius: 15px 15px 0 0; 
+    position: relative;
 }
 
+/* HEADER */
 header { 
     background: linear-gradient(120deg, #660000, #990000); 
     padding:20px; 
@@ -116,22 +42,14 @@ header {
     letter-spacing:2px; 
     color: #fff; 
     position: relative;
-    text-shadow: 0 0 10px #ff0000, 0 0 20px #ff2222;
+    text-shadow: 0 0 15px #ff0000, 0 0 30px #ff2222;
 }
-
-/* УДАЛЕНИЕ ГЛИТЧ-ЭФФЕКТА: Убираем псевдоэлементы, которые создавали глитч */
-header::before, header::after {
-    content: none !important; 
-}
-
 header span {
     position: relative;
     z-index: 10;
 }
-
-/* ОБНОВЛЕННАЯ ВЕРСИЯ */
 header::after {
-    content: "v.10.9.9"; 
+    content: "v.11.0.0"; 
     position: absolute;
     bottom: 5px;
     right: 5px;
@@ -140,8 +58,9 @@ header::after {
     text-shadow: none;
     letter-spacing: 0;
 }
-header:hover { text-shadow: 0 0 20px #ff4444, 0 0 40px #ff0000; }
+header:hover { text-shadow: 0 0 30px #ff4444, 0 0 50px #ff0000; }
 
+/* NAVIGATION */
 nav { display:flex; justify-content:center; background:#222; padding:15px; flex-wrap:wrap; }
 nav button { 
     margin:5px 10px; padding:12px 20px; background:#880000; color:#fff; border:none; 
@@ -150,16 +69,34 @@ nav button {
 nav button:hover { 
     background:#ff0000; 
     transform:scale(1.1); 
-    box-shadow: 0 0 20px rgba(255, 0, 0, 1);
+    box-shadow: 0 0 30px rgba(255, 0, 0, 1.5);
 }
 nav button:active { transform:scale(0.95); }
 nav button.active {
     background: #ff0000;
-    box-shadow: 0 0 30px rgba(255, 0, 0, 1.5);
+    box-shadow: 0 0 40px rgba(255, 0, 0, 2);
     transform: scale(1.05);
 }
 
-/* НОВАЯ КНОПКА НАСТРОЕК ДЛЯ ПК */
+/* КНОПКА БЕЙДЖИ (ОСОБЫЙ СТИЛЬ) */
+nav button.badges-btn {
+    background: linear-gradient(45deg, #b8860b, #ffd700);
+    color: #000;
+    font-weight: bold;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+}
+nav button.badges-btn:hover {
+    background: linear-gradient(45deg, #ffd700, #ffec8b);
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.8);
+    transform: scale(1.1);
+}
+nav button.badges-btn.active {
+    background: #ffd700;
+    box-shadow: 0 0 35px rgba(255, 215, 0, 1);
+    color: #000;
+}
+
+/* SETTINGS BUTTON */
 .settings-pc-btn {
     position: absolute;
     top: 50%;
@@ -176,20 +113,18 @@ nav button.active {
     width: 24px; 
     height: 24px; 
     vertical-align: middle;
-    filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.8));
+    filter: drop-shadow(0 0 8px rgba(255, 0, 0, 0.8));
     transition: transform 0.2s, filter 0.2s;
 }
 .settings-pc-btn:hover img {
-    filter: drop-shadow(0 0 10px #ff0000);
+    filter: drop-shadow(0 0 15px #ff0000);
     transform: rotate(30deg);
 }
-/* Скрываем изображение, когда no-glow активен */
 body.no-glow .settings-pc-btn img {
     filter: none;
 }
 
-
-/* СТИЛИ КНОПОК НАСТРОЕК (КРАСНЫЕ) */
+/* SETTINGS GROUP */
 .settings-btn-group {
     display: flex;
     flex-direction: column;
@@ -211,37 +146,19 @@ body.no-glow .settings-pc-btn img {
     text-align: center;
     box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
 }
-
 .setting-btn:hover {
     background: #ff0000;
     transform: scale(1.02);
     box-shadow: 0 0 20px rgba(255, 0, 0, 1);
 }
-
 .setting-btn.active {
     background: #ff0000;
     border-color: #fff;
     box-shadow: 0 0 30px rgba(255, 0, 0, 1.5);
     animation: switchPulse 0.8s infinite alternate; 
 }
-.light-mode .setting-btn {
-    background: #ff5555;
-    color: #333;
-    border-color: #ff0000;
-    box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
-}
-.light-mode .setting-btn:hover {
-    background: #ff7777;
-    color: #333;
-    box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
-}
-.light-mode .setting-btn.active {
-    background: #ff0000;
-    color: #fff;
-    border-color: #333;
-}
 
-
+/* SWITCH BUTTONS */
 .button-switch { 
     background: #2b2b2b; border: 2px solid #555; padding: 12px 20px; 
     margin: 10px 10px; border-radius: 10px; color: #fff; text-align: center; 
@@ -252,22 +169,23 @@ body.no-glow .settings-pc-btn img {
 }
 .button-switch.active { 
     background: #ff0000; border-color: #ff5555; 
-    box-shadow: 0 0 30px rgba(255, 0, 0, 1), 0 0 60px rgba(255, 0, 0, 0.7); 
+    box-shadow: 0 0 40px rgba(255, 0, 0, 1.5), 0 0 80px rgba(255, 0, 0, 1); 
     transform: scale(1.05); animation: switchPulse 0.8s infinite alternate; 
 }
 
-.filter-btn { margin:5px; padding:10px 15px; border:none; border-radius:5px; background:#444; color:#fff; cursor:pointer; transition:0.2s; }
+/* FILTER BUTTONS */
+.filter-btn { margin:5px; padding:10px 15px; border:none; border-radius:5px; background:#444; color:#fff; cursor:pointer; transition:0.2s; box-shadow: 0 0 5px rgba(255,0,0,0.3); }
 .filter-btn:hover { 
-    background:#C00000; transform:scale(1.1); box-shadow: 0 0 12px rgba(255, 0, 0, 0.8); 
+    background:#C00000; transform:scale(1.1); box-shadow: 0 0 20px rgba(255, 0, 0, 1); 
 }
 .filter-btn.active { 
     background:#ff0000; 
-    box-shadow: 0 0 15px rgba(255, 0, 0, 1); 
+    box-shadow: 0 0 25px rgba(255, 0, 0, 1.5); 
     animation: filterPulse 1.5s infinite alternate; 
     transform: scale(1.05);
 }
 
-/* 2. СТИЛИ КАРТОЧЕК */
+/* SERVER CARDS */
 .card { 
     position: relative; background: #2a2a2a; border-radius: 15px; padding: 15px; 
     margin: 15px 0; display: flex; align-items: center; justify-content: flex-start; 
@@ -278,31 +196,17 @@ body.no-glow .settings-pc-btn img {
 .card:hover { 
     transform: scale(1.03); 
     background: #4a1a1a; 
-    box-shadow: 0 0 35px rgba(255,0,0,1), 0 0 60px rgba(255,50,50,0.8); 
+    box-shadow: 0 0 50px rgba(255,0,0,1.5), 0 0 80px rgba(255,50,50,1); 
 }
-
-/* ИЗМЕНЕНИЯ: УВЕЛИЧЕНИЕ РАЗМЕРА НА 30% (20px -> 26px) И УДАЛЕНИЕ СВЕЧЕНИЯ */
 .card img { 
-    width:65px; /* 50px * 1.3 = 65px */
-    height:65px; /* 50px * 1.3 = 65px */
+    width:65px; 
+    height:65px; 
     margin-right:10px; border-radius:50%;
     transition: filter 0.3s ease;
 }
 .card h3 { color:#ff5555; margin-bottom:5px; }
 .card p { color:#ccc; line-height:1.4; font-size: 14px; }
 .card p strong { color: #fff; }
-
-.card.online {
-    /* Свечение статуса убрано */
-}
-.card.online img {
-    /* Свечение статуса убрано */
-}
-.card.online:hover {
-    background: #4a1a1a;
-    box-shadow: 0 0 35px #ff0000, 0 0 60px #ff5555;
-    animation: none; 
-}
 
 .description-btn { 
     width:30px; 
@@ -323,39 +227,109 @@ body.no-glow .settings-pc-btn img {
     filter: drop-shadow(0 0 15px rgba(255, 0, 0, 0.8));
 }
 
-.rule { background: linear-gradient(145deg, #2b2b2b, #1c1c1c); border-left:5px solid #ff4444; padding:15px 20px; margin:10px 0; border-radius:15px; box-shadow: 0 0 15px rgba(255,0,0,0.3), 0 5px 10px rgba(0,0,0,0.5); transition: transform 0.3s ease, box-shadow 0.5s ease; position: relative; animation: floatRule 2s ease-in-out infinite alternate;} 
-.rule::before { content: ''; position: absolute; top: -5px; left: -5px; right: -5px; bottom: -5px; border-radius: 18px; box-shadow: 0 0 20px rgba(255,0,0,0.7), 0 0 40px rgba(255,0,0,0.5); opacity: 0.5; filter: blur(4px); transition: all 0.3s ease;}
-.rule:hover { transform: scale(1.05); box-shadow: 0 0 35px rgba(255,0,0,0.9), 0 8px 20px rgba(0,0,0,0.7);}
-.rule:hover::before { box-shadow: 0 0 40px rgba(255,0,0,1), 0 0 60px rgba(255,0,0,0.8);}
+/* RULES */
+.rule { 
+    background: linear-gradient(145deg, #2b2b2b, #1c1c1c); border-left:5px solid #ff4444; padding:15px 20px; margin:10px 0; border-radius:15px; 
+    box-shadow: 0 0 20px rgba(255,0,0,0.5), 0 5px 10px rgba(0,0,0,0.5); transition: transform 0.3s ease, box-shadow 0.5s ease; position: relative; animation: floatRule 2s ease-in-out infinite alternate;} 
+.rule::before { content: ''; position: absolute; top: -5px; left: -5px; right: -5px; bottom: -5px; border-radius: 18px; 
+    box-shadow: 0 0 30px rgba(255,0,0,0.9), 0 0 50px rgba(255,0,0,0.7); opacity: 0.7; filter: blur(6px); transition: all 0.3s ease;}
+.rule:hover { transform: scale(1.05); 
+    box-shadow: 0 0 50px rgba(255,0,0,1.2), 0 8px 20px rgba(0,0,0,0.7);}
+.rule:hover::before { 
+    box-shadow: 0 0 60px rgba(255,0,0,1.5), 0 0 90px rgba(255,0,0,1);}
 
-.calendar { background: linear-gradient(135deg, #500000, #700000, #900000, #700000, #500000); background-size: 200% 200%; border-radius: 15px; padding: 20px; width: 250px; box-shadow: 0 0 15px rgba(255,0,0,0.5); transition: transform 0.3s ease, box-shadow 0.3s ease; animation: gradientShift 5s ease-in-out infinite alternate;}
+/* CALENDAR */
+.calendar { background: linear-gradient(135deg, #500000, #700000, #900000, #700000, #500000); background-size: 200% 200%; border-radius: 15px; padding: 20px; width: 250px; box-shadow: 0 0 20px rgba(255,0,0,0.7); transition: transform 0.3s ease, box-shadow 0.3s ease; animation: gradientShift 5s ease-in-out infinite alternate;}
 .calendar h3 { color: #ff9999; }
-.calendar:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 0 25px rgba(255,0,0,0.8); animation: gradientShift 2s ease-in-out infinite alternate;}
+.calendar:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 0 30px rgba(255,0,0,1); animation: gradientShift 2s ease-in-out infinite alternate;}
 
+/* LEADERS */
 .leaders { display:flex; flex-wrap:wrap; gap:20px; justify-content: center; } 
-.leader-card { background: linear-gradient(145deg, #2a2a2a, #1c1c1c); border-radius: 15px; padding: 20px; width: 200px; text-align: center; box-shadow: 0 0 20px rgba(255, 0, 0, 0.5), 0 5px 15px rgba(0,0,0,0.7); border: 2px solid #ff2222; transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;}
-.leader-card:hover { transform: scale(1.08); box-shadow: 0 0 30px rgba(255,0,0,0.9), 0 0 50px rgba(255,50,50,0.6);}
+.leader-card { 
+    background: linear-gradient(145deg, #2a2a2a, #1c1c1c); 
+    border-radius: 15px; 
+    padding: 20px; 
+    width: 200px; 
+    text-align: center; 
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.5), 0 5px 15px rgba(0,0,0,0.7); 
+    border: 2px solid #ff2222; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    position: relative;
+}
+.leader-card:hover { transform: scale(1.08); box-shadow: 0 0 40px rgba(255,0,0,1.2), 0 0 60px rgba(255,50,50,0.9);}
 
-/* 3. МОДАЛЬНОЕ ОКНО И СЕКЦИИ */
+/* MINI BADGE IN LEADER CARD */
+.mini-badge {
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+    margin-right: 5px;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+}
+
+/* BADGES SECTION STYLES */
+.badges-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 10px;
+}
+
+.badge-card {
+    background: linear-gradient(145deg, #222, #111);
+    border: 1px solid #d4af37; /* Gold border */
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+    transition: all 0.3s ease;
+}
+
+.badge-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+    border-color: #ffd700;
+}
+
+.badge-img-large {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin-bottom: 15px;
+    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.3));
+    transition: transform 0.3s;
+}
+
+.badge-card:hover .badge-img-large {
+    transform: scale(1.1) rotate(5deg);
+    filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8));
+}
+
+.badge-title {
+    color: #ffd700;
+    font-size: 20px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.badge-desc {
+    color: #ccc;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* SECTIONS */
 section { display:none; padding:30px 20px; }
 section.active { display:block; }
 #calendar.active { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 20px 0; } 
 #home-content { background:#2b2b2b; border-radius:15px; padding:20px; text-align:center; margin-top:15px; }
 
-/* ТУМБЛЕР ОПТИМИЗАЦИИ ДЛЯ МОБИЛОК (ПЕРЕНЕСЕН В НАСТРОЙКИ) */
-.settings-toggle {
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    font-size: 14px;
-    color: #ccc;
-    /* УДАЛЕНО: на мобилках будет в секции "Настройки" */
-}
-
-/* СТИЛИ ФОРМЫ ТИКЕТОВ */
-.tickets-form-container {
+/* FORMS */
+.tickets-form-container, .report-form-container {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -364,18 +338,19 @@ section.active { display:block; }
     border-radius: 15px;
     border: 1px solid #ff4444;
 }
-.tickets-form-container h3 {
+.tickets-form-container h3, .report-form-container h3 {
     color: #ff5555;
     text-align: center;
     border-bottom: 1px solid #444;
     padding-bottom: 10px;
 }
-.tickets-form-container label {
+.tickets-form-container label, .report-form-container label {
     display: block;
     margin-bottom: 5px;
     color: #ccc;
 }
-.tickets-form-container select, .tickets-form-container input, .tickets-form-container textarea {
+.tickets-form-container select, .tickets-form-container input, .tickets-form-container textarea,
+.report-form-container select, .report-form-container input, .report-form-container textarea {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
@@ -385,7 +360,7 @@ section.active { display:block; }
     color: #eee;
     box-sizing: border-box;
 }
-.tickets-form-container button {
+.tickets-form-container button[type="submit"], .report-form-container button[type="submit"] {
     padding: 12px 20px;
     background: #ff0000;
     color: #fff;
@@ -394,23 +369,37 @@ section.active { display:block; }
     cursor: pointer;
     transition: background 0.2s, transform 0.2s;
 }
-.tickets-form-container button:hover {
+.tickets-form-container button:hover, .report-form-container button:hover {
     background: #cc0000;
     transform: scale(1.02);
 }
+.cancel-btn {
+    background: #4a0000;
+    border: 2px solid #ff4444;
+    color: #fff;
+    font-weight: bold;
+    margin-top: 10px; 
+    box-shadow: 0 0 15px rgba(255, 68, 68, 0.7);
+    transition: all 0.3s ease;
+}
+.cancel-btn:hover {
+    background: #660000;
+    box-shadow: 0 0 25px rgba(255, 68, 68, 1);
+    transform: scale(1.02);
+}
 
-
+/* MODAL */
 .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); justify-content: center; align-items: center; z-index: 999; opacity: 0; transition: opacity 0.3s ease;}
 .modal.show { display: flex; opacity: 1;}
 
 .modal-content { 
     position: relative; background: linear-gradient(145deg, #2a2a2a, #1c1c1c); padding: 25px; border-radius: 15px; 
-    max-width: 550px; width: 90%; text-align: center; color: #eee; box-shadow: 0 0 30px #ff0000; 
-    opacity: 0; transform: scale(0.7) translateY(-50px); transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55); border: 1px solid #ff0000; 
-    /* АНИМАЦИЯ МОДАЛЬНОГО ОКНА УДАЛЕНА ПО ТРЕБОВАНИЮ */
+    max-width: 550px; width: 90%; text-align: center; color: #eee; 
+    box-shadow: 0 0 40px #ff0000; 
+    opacity: 0; transform: scale(0.7) translateY(-50px); transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55); border: 2px solid #ff0000; 
     overflow: hidden; 
 }
-.modal.show .modal-content { opacity: 1; transform: scale(1) translateY(0); box-shadow: 0 0 40px rgba(255, 0, 0, 1), 0 0 80px rgba(255, 50, 50, 0.8);}
+.modal.show .modal-content { opacity: 1; transform: scale(1) translateY(0); box-shadow: 0 0 50px rgba(255, 0, 0, 1.5), 0 0 100px rgba(255, 50, 50, 1);}
 
 .modal-close-btn { 
     margin-top: 25px; padding: 10px 30px; background: #660000; color: #fff; border: 2px solid #ff0000; border-radius: 10px; 
@@ -453,7 +442,7 @@ section.active { display:block; }
 #code-section-display {
     font-family: 'Consolas', 'Courier New', monospace;
     font-size: 24px;
-    color: #00ff00; /* Neon Green */
+    color: #00ff00;
     background: #000000;
     padding: 10px;
     border: 2px solid #00ff00;
@@ -473,29 +462,28 @@ section.active { display:block; }
 #modal-avatar {
     width: 80px;
     height: 80px;
-    border-radius: 10px; /* ИЗМЕНЕНО: Квадратная аватарка */
+    border-radius: 10px; 
     margin: 10px auto 20px auto;
     border: 3px solid #ff0000;
     box-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
     transition: transform 0.3s ease;
 }
 #modal-avatar:hover {
-    transform: scale(1.1); /* ИЗМЕНЕНО: Более простой эффект для квадрата */
+    transform: scale(1.1);
 }
 
-
-/* 4. АНИМАЦИИ */
+/* ANIMATIONS */
 @keyframes backgroundMove {
     0% { background-position: 0% 0%; }
     100% { background-position: 100% 100%; }
 }
 @keyframes switchPulse {
-    0% { box-shadow: 0 0 30px rgba(255, 0, 0, 1), 0 0 60px rgba(255, 0, 0, 0.7); }
-    100% { box-shadow: 0 0 20px rgba(255, 0, 0, 0.8), 0 0 40px rgba(255, 0, 0, 0.5); }
+    0% { box-shadow: 0 0 40px rgba(255, 0, 0, 2), 0 0 80px rgba(255, 0, 0, 1); }
+    100% { box-shadow: 0 0 20px rgba(255, 0, 0, 1), 0 0 40px rgba(255, 0, 0, 0.7); }
 }
 @keyframes filterPulse {
-    0% { box-shadow: 0 0 15px rgba(255, 0, 0, 1); }
-    100% { box-shadow: 0 0 10px rgba(255, 0, 0, 0.7); }
+    0% { box-shadow: 0 0 25px rgba(255, 0, 0, 1.5); }
+    100% { box-shadow: 0 0 15px rgba(255, 0, 0, 1); }
 }
 @keyframes floatRule {
     0% { transform: translateY(-2px); }
@@ -505,14 +493,13 @@ section.active { display:block; }
     0% { background-position: 0% 50%; }
     100% { background-position: 100% 50%; }
 }
-/* АНИМАЦИИ МОДАЛЬНОГО ОКНА УДАЛЕНЫ */
 @keyframes codeFlicker {
     0% { opacity: 1; text-shadow: 0 0 5px #00ff00; }
     50% { opacity: 0.9; text-shadow: 0 0 8px #00ff00, 0 0 15px rgba(0, 255, 0, 0.4); }
     100% { opacity: 1; text-shadow: 0 0 5px #00ff00; }
 }
 
-/* 5. НОВЫЕ СТИЛИ ДЛЯ ОТКЛЮЧЕНИЯ СВЕЧЕНИЯ (ОПТИМИЗАЦИЯ) */
+/* NO-GLOW MODE */
 body.no-glow .container { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important; animation: none !important; }
 body.no-glow header { text-shadow: none !important; }
 body.no-glow nav button:hover { box-shadow: none !important; }
@@ -524,7 +511,6 @@ body.no-glow .filter-btn.active { box-shadow: none !important; animation: none !
 body.no-glow .card { box-shadow: none !important; }
 body.no-glow .card:hover { box-shadow: 0 0 20px rgba(0, 0, 0, 0.6) !important; background: #4a1a1a !important; animation: none !important;}
 body.no-glow .card.online:hover { box-shadow: 0 0 20px rgba(0, 0, 0, 0.6) !important; background: #4a1a1a !important; animation: none !important;}
-body.no-glow .description-btn:hover { filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.5)) !important; }
 body.no-glow .rule { box-shadow: 0 5px 10px rgba(0,0,0,0.5) !important; animation: none !important; }
 body.no-glow .rule::before { box-shadow: none !important; }
 body.no-glow .rule:hover { box-shadow: 0 8px 20px rgba(0,0,0,0.7) !important; }
@@ -533,7 +519,6 @@ body.no-glow .calendar { box-shadow: none !important; animation: none !important
 body.no-glow .calendar:hover { box-shadow: none !important; animation: none !important; }
 body.no-glow .leader-card { box-shadow: 0 5px 15px rgba(0,0,0,0.7) !important; }
 body.no-glow .leader-card:hover { box-shadow: 0 5px 15px rgba(0,0,0,0.7) !important; }
-body.no-glow body.modal-active { animation: none !important; }
 body.no-glow .modal-content { box-shadow: none !important; animation: none !important; }
 body.no-glow .modal.show .modal-content { box-shadow: none !important; }
 body.no-glow .modal-close-btn { box-shadow: none !important; }
@@ -543,11 +528,13 @@ body.no-glow .modal-tab-btn:hover { text-shadow: none !important; }
 body.no-glow .modal-tab-btn.active { text-shadow: none !important; animation: none !important; }
 body.no-glow #code-section-display { box-shadow: none !important; animation: none !important; border-color: #00ff00 !important; }
 body.no-glow #code-section-display:hover { box-shadow: none !important; }
-body.no-glow .settings-pc-btn img { filter: none !important; } 
+body.no-glow .settings-pc-btn img { filter: none !important; }
+body.no-glow .badge-card { box-shadow: none !important; border-color: #665500 !important; }
+body.no-glow nav button.badges-btn { box-shadow: none !important; animation: none !important; }
 
-/* 6. АДАПТИВ ДЛЯ МОБИЛОК */
+/* MOBILE */
 @media (max-width: 600px) {
-    .container { margin: 10px; border-radius: 0; box-shadow: none; }
+    .container { margin: 10px; border-radius: 0; box-shadow: none; min-height: auto; }
     header { font-size: 24px; padding: 15px; }
     nav { padding: 10px 5px; }
     nav button { margin: 5px 5px; padding: 10px 15px; font-size: 14px; }
@@ -555,11 +542,7 @@ body.no-glow .settings-pc-btn img { filter: none !important; }
     #settings-mobile-container { display: block !important; } 
     section { padding: 15px 10px; }
     .card { padding: 10px; }
-    .card img { 
-        width: 50px; 
-        /* Возвращаем к старому размеру на мобилках */
-        height: 50px; 
-    }
+    .card img { width: 50px; height: 50px; }
     .card h3 { font-size: 16px; }
     .card p { font-size: 12px; }
     .description-btn { width: 25px; height: 25px; right: 10px; top: auto; bottom: 10px; transform: none; }
@@ -589,11 +572,12 @@ body.no-glow .settings-pc-btn img { filter: none !important; }
             <button onclick="showSection('calendar')">События</button>
             <button onclick="showSection('leaders')">Должности</button>
             <button onclick="showSection('tickets')">Тикеты</button>
+            <button onclick="showSection('badges')" class="badges-btn">Бейджи</button>
         </nav>
 
         <section id="home" class="active">
             <div id="home-content">
-                <h2>Здравствуйте! Вы попали в SHD Catalog v.10.9.9</h2>
+                <h2>Здравствуйте! Вы попали в SHD Catalog v.11.0.0</h2>
                 <p>Одна из целей клана: собрать самых адекватных игроков и создать своё комьюнити адекватных серверов!</p>
                 <p>Catalog/каталог By R1SS5</p>
             </div>
@@ -601,7 +585,6 @@ body.no-glow .settings-pc-btn img { filter: none !important; }
             <div id="settings-mobile-container" class="settings-toggle-mobile" style="display:none; text-align: center; margin-top: 20px;">
                 <h3 style="color:#ff5555;">Основные настройки</h3>
                 <div class="settings-btn-group" style="padding: 0; margin-top: 15px;">
-                    <button id="theme-toggle-btn-mobile" class="setting-btn" onclick="toggleTheme()">Переключить тему (Текущая: Тёмная)</button>
                     <button id="glow-toggle-btn-mobile" class="setting-btn" onclick="toggleGlow()">Супер Оптимизация (Свечение: Вкл)</button>
                 </div>
             </div>
@@ -617,110 +600,96 @@ body.no-glow .settings-pc-btn img { filter: none !important; }
 
             <div id="servers-list" class="servers-container active">
                 <div style="display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-bottom: 20px;">
-                    <div class="filter-btn active" data-filter="all" onclick="filterServers('all')">Все</div>
-                    <div class="filter-btn" data-filter="pvp" onclick="filterServers('pvp')">PVP</div>
-                    <div class="filter-btn" data-filter="parkour" onclick="filterServers('parkour')">Паркур</div>
-                    <div class="filter-btn" data-filter="escape" onclick="filterServers('escape')">Побег</div>
-                    <div class="filter-btn" data-filter="anarchy" onclick="filterServers('anarchy')">Анархия</div>
-                    <div class="filter-btn" data-filter="rp" onclick="filterServers('rp')">RP</div>
+                    <div class="filter-btn active" data-filter="all" onclick="filterServers('all', 'servers-list')">Все</div>
+                    <div class="filter-btn" data-filter="pvp" onclick="filterServers('pvp', 'servers-list')">PVP</div>
+                    <div class="filter-btn" data-filter="parkour" onclick="filterServers('parkour', 'servers-list')">Паркур</div>
+                    <div class="filter-btn" data-filter="escape" onclick="filterServers('escape', 'servers-list')">Побег</div>
+                    <div class="filter-btn" data-filter="anarchy" onclick="filterServers('anarchy', 'servers-list')">Анархия</div>
+                    <div class="filter-btn" data-filter="rp" onclick="filterServers('rp', 'servers-list')">RP</div>
                 </div>
 
-                <div class="card" data-type="pvp" data-status-id="4" data-server-code="G7R9" data-info="В разработке"
-                     onclick="openModal('**SHD-PvP** - сервер в PvP режиме, запускаеться для обучения солдат **SHD** \n\n**Особенности:** Бои 1v1 , арена, регулярный запуск.','G7R9')"> 
+                <div class="card" data-type="pvp" data-status-id="4" data-server-code="G7R9" data-info="В разработке" data-name="SHD-PvP"> 
                      <img src="В разработке.png" alt="Статус"> 
                      <div><h3>SHD-PvP</h3><p>Статус: В разработке</p></div>
-                     <button class="description-btn" onclick="event.stopPropagation(); openModal('**SHD-PvP** - сервер в PvP режиме, запускаеться для обучения солдат **SHD** \n\n**Особенности:** Бои 1v1 , арена, регулярный запуск.','G7R9');"></button>
+                     <button class="description-btn" onclick="event.stopPropagation(); openModal('**SHD-PvP** - сервер в PvP режиме, запускаеться для обучения солдат **SHD** \n\n**Особенности:** Бои 1v1 , арена, регулярный запуск.','G7R9', 'SHD-PvP');"></button>
                 </div>
-                <div class="card" data-type="parkour" data-status-id="0" data-server-code="A1B5" data-info="Новые ивенты!"
-                     onclick="openModal('Паркур, который увеличивает сложность каждым уровнем - крюки в комнатах. \n\n**Особенности:** Многоуровневые карты, таблицы лидеров, система ивентов. Сервер ожидает крупное обновление карты и механик.','A1B5')">
+                <div class="card" data-type="parkour" data-status-id="0" data-server-code="A1B5" data-info="Новые ивенты!" data-name="Паркур на крюках">
                      <img src="Офлайн.png" alt="Статус">
                      <div><h3>Паркур на крюках</h3><p>Статус: Офлайн</p></div>
-                     <button class="description-btn" onclick="event.stopPropagation(); openModal('Паркур, который увеличивает сложность каждым уровнем - крюки в комнатах. \n\n**Особенности:** Многоуровневые карты, таблицы лидеров, система ивентов. Сервер ожидает крупное обновление карты и механик.','A1B5');"></button>
+                     <button class="description-btn" onclick="event.stopPropagation(); openModal('Паркур, который увеличивает сложность каждым уровнем - крюки в комнатах. \n\n**Особенности:** Многоуровневые карты, таблицы лидеров, система ивентов. Сервер ожидает крупное обновление карты и механик.','A1B5', 'Паркур на крюках');"></button>
                 </div>
-                <div class="card" data-type="escape" data-status-id="4" data-server-code="C3P0" data-info="В разработке"
-                     onclick="openModal('Классический сервер &quot;Побег из тюрьмы&quot; с кастомными механиками и системой прокачки. \n\n*Особенности:* Различные классы, зоны охраны, секретные пути и экономика. В данный момент идет полный вайп перед новым сезоном, который начнется скоро! Проект без модов.','C3P0')">
+                <div class="card" data-type="escape" data-status-id="4" data-server-code="C3P0" data-info="В разработке" data-name="Побег из тюрьмы 'S.H.A.D.E'">
                      <img src="В разработке.png" alt="Статус">
                      <div><h3>Побег из тюрьмы "S.H.A.D.E"</h3><p>Статус: В разработке</p></div>
-                     <button class="description-btn" onclick="event.stopPropagation(); openModal('Классический сервер &quot;Побег из тюрьмы&quot; с кастомными механиками и системой прокачки. \n\n*Особенности:* Различные классы, зоны охраны, секретные пути и экономика. В данный момент идет полный вайп перед новым сезоном, который начнется скоро! Проект без модов.','C3P0');"></button>
+                     <button class="description-btn" onclick="event.stopPropagation(); openModal('Классический сервер &quot;Побег из тюрьмы&quot; с кастомными механиками и системой прокачки. \n\n*Особенности:* Различные классы, зоны охраны, секретные пути и экономика. В данный момент идет полный вайп перед новым сезоном, который начнется скоро! Проект без модов.','C3P0', 'Побег из тюрьмы &quot;S.H.A.D.E&quot;');"></button>
                 </div>
-                <div class="card" data-type="anarchy" data-status-id="3" data-server-code="0000-45B" data-info="Пусто"
-                     onclick="openModal('**[ПУСТО]** - это место для вашего сервера! Вы можете выкупить его и разместить здесь свой проект. **Подробности у Администрации.**','0000-45B')"> 
+                <div class="card" data-type="anarchy" data-status-id="3" data-server-code="0000-45B" data-info="Пусто" data-name="[ПУСТО] Анархия"> 
                      <img src="Недоступно.png" alt="Статус"> 
-                     <div><h3>[ПУСТО]</h3><p>Статус: Пусто</p></div>
-                     <button class="description-btn" onclick="event.stopPropagation(); openModal('**[ПУСТО]** - это место для вашего сервера! Вы можете выкупить его и разместить здесь свой проект. **Подробности у Администрации.**','0000-45B');"></button>
+                     <div><h3>[ПУСТО] Анархия</h3><p>Статус: Пусто</p></div>
+                     <button class="description-btn" onclick="event.stopPropagation(); openModal('**[ПУСТО]** - это место для вашего сервера! Вы можете выкупить его и разместить здесь свой проект. **Подробности у Администрации.**','0000-45B_A', '[ПУСТО] Анархия');"></button>
                 </div>
-                <div class="card" data-type="pvp" data-status-id="3" data-server-code="0000-45B" data-info="Пусто"
-                     onclick="openModal('**[ПУСТО]** - это место для вашего сервера! Вы можете выкупить его и разместить здесь свой проект. **Подробности у Администрации.**','0000-45B')"> 
+                <div class="card" data-type="pvp" data-status-id="3" data-server-code="0000-45B" data-info="Пусто" data-name="[ПУСТО] PvP"> 
                      <img src="Недоступно.png" alt="Статус"> 
-                     <div><h3>[ПУСТО]</h3><p>Статус: Пусто</p></div>
-                     <button class="description-btn" onclick="event.stopPropagation(); openModal('**[ПУСТО]** - это место для вашего сервера! Вы можете выкупить его и разместить здесь свой проект. **Подробности у Администрации.**','0000-45B');"></button>
+                     <div><h3>[ПУСТО] PvP</h3><p>Статус: Пусто</p></div>
+                     <button class="description-btn" onclick="event.stopPropagation(); openModal('**[ПУСТО]** - это место для вашего сервера! Вы можете выкупить его и разместить здесь свой проект. **Подробности у Администрации.**','0000-45B_B', '[ПУСТО] PvP');"></button>
                 </div>
-                <div class="card" data-type="rp" data-status-id="3" data-server-code="0000-45B" data-info="Пусто"
-                     onclick="openModal('**[ПУСТО]** - это место для вашего сервера! Вы можете выкупить его и разместить здесь свой проект. **Подробности у Администрации.**','0000-45B')"> 
+                <div class="card" data-type="rp" data-status-id="3" data-server-code="0000-45B" data-info="Пусто" data-name="[ПУСТО] RP"> 
                      <img src="Недоступно.png" alt="Статус"> 
-                     <div><h3>[ПУСТО]</h3><p>Статус: Пусто</p></div>
-                     <button class="description-btn" onclick="event.stopPropagation(); openModal('**[ПУСТО]** - это место для вашего сервера! Вы можете выкупить его и разместить здесь свой проект. **Подробности у Администрации.**','0000-45B');"></button>
+                     <div><h3>[ПУСТО] RP</h3><p>Статус: Пусто</p></div>
+                     <button class="description-btn" onclick="event.stopPropagation(); openModal('**[ПУСТО]** - это место для вашего сервера! Вы можете выкупить его и разместить здесь свой проект. **Подробности у Администрации.**','0000-45B_C', '[ПУСТО] RP');"></button>
                 </div>
-                <div class="card" data-type="escape" data-status-id="3" data-server-code="0000-45B" data-info="Пусто"
-                     onclick="openModal('**[ПУСТО]** - это место для вашего сервера! Вы можете выкупить его и разместить здесь свой проект. **Подробности у Администрации.**','0000-45B')">
+                <div class="card" data-type="escape" data-status-id="3" data-server-code="0000-45B" data-info="Пусто" data-name="[ПУСТО] Побег">
                      <img src="Недоступно.png" alt="Статус">
-                     <div><h3>[ПУСТО]</h3><p>Статус: Пусто</p></div>
-                     <button class="description-btn" onclick="event.stopPropagation(); openModal('**[ПУСТО]** - это место для вашего сервера! Вы можете выкупить его и разместить здесь свой проект. **Подробности у Администрации.**','0000-45B');"></button>
+                     <div><h3>[ПУСТО] Побег</h3><p>Статус: Пусто</p></div>
+                     <button class="description-btn" onclick="event.stopPropagation(); openModal('**[ПУСТО]** - это место для вашего сервера! Вы можете выкупить его и разместить здесь свой проект. **Подробности у Администрации.**','0000-45B_D', '[ПУСТО] Побег');"></button>
                 </div>
             </div>
 
             <div id="projects-list" class="servers-container" style="display:none;">
                 <div style="display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-bottom: 20px;">
-                    <div class="filter-btn active" data-filter="all" onclick="filterServers('all')">Все</div>
-                    <div class="filter-btn" data-filter="project-escape" onclick="filterServers('project-escape')">Побег</div>
-                    <div class="filter-btn" data-filter="project-anarchy" onclick="filterServers('project-anarchy')">Анархия</div>
-                    <div class="filter-btn" data-filter="project-rp" onclick="filterServers('project-rp')">RP</div>
-                    <div class="filter-btn" data-filter="project-sandbox" onclick="filterServers('project-sandbox')">Sandbox</div>
-                    <div class="filter-btn" data-filter="project-pvp" onclick="filterServers('project-pvp')">PVP</div>
-                    <div class="filter-btn" data-filter="project-parkour" onclick="filterServers('project-parkour')">Паркур</div>
+                    <div class="filter-btn active" data-filter="all" onclick="filterServers('all', 'projects-list')">Все</div>
+                    <div class="filter-btn" data-filter="project-escape" onclick="filterServers('project-escape', 'projects-list')">Побег</div>
+                    <div class="filter-btn" data-filter="project-anarchy" onclick="filterServers('project-anarchy', 'projects-list')">Анархия</div>
+                    <div class="filter-btn" data-filter="project-rp" onclick="filterServers('project-rp', 'projects-list')">RP</div>
+                    <div class="filter-btn" data-filter="project-sandbox" onclick="filterServers('project-sandbox', 'projects-list')">Sandbox</div>
+                    <div class="filter-btn" data-filter="project-pvp" onclick="filterServers('project-pvp', 'projects-list')">PVP</div>
+                    <div class="filter-btn" data-filter="project-parkour" onclick="filterServers('project-parkour', 'projects-list')">Паркур</div>
                 </div>
 
-                <div class="card" data-type="project-escape" data-status-id="4" data-server-code="X5Y7" data-info="В разработке"
-                     onclick="openModal('**Побег из тюрьмы с модами** - расширенная версия классического Побега. Включает модификации для улучшения геймплея, новые предметы и механики. Оптимизирован и находится на стадии **Альфа-тестирования**.','X5Y7')">
+                <div class="card" data-type="project-escape" data-status-id="4" data-server-code="X5Y7" data-info="В разработке" data-name="Побег из тюрьмы 'S.H.A.D.E' (с модами)">
                      <img src="В разработке.png" alt="Статус">
                      <div><h3>Побег из тюрьмы "S.H.A.D.E" (с модами)</h3><p>Статус: В разработке</p></div>
-                     <button class="description-btn" onclick="event.stopPropagation(); openModal('**Побег из тюрьмы с модами** - расширенная версия классического Побега. Включает модификации для улучшения геймплея, новые предметы и механики. Оптимизирован и находится на стадии **Альфа-тестирования**.','X5Y7');"></button>
+                     <button class="description-btn" onclick="event.stopPropagation(); openModal('**Побег из тюрьмы с модами** - расширенная версия классического Побега. Включает модификации для улучшения геймплея, новые предметы и механики. Оптимизирован и находится на стадии **Альфа-тестирования**.','X5Y7', 'Побег из тюрьмы "S.H.A.D.E" (с модами)');"></button>
                 </div>
-                <div class="card" data-type="project-anarchy" data-status-id="4" data-server-code="K2M9" data-info="В разработке"
-                     onclick="openModal('**Criminal Islands** - Проект, переживший многое, но ему это не помешало... \n\n**Особенности:** Кастомные моды, уникальный мир, система ящиков. **Запуск не скоро***.','K2M9')">
+                <div class="card" data-type="project-anarchy" data-status-id="4" data-server-code="K2M9" data-info="В разработке" data-name="Criminal Islands (с модами)">
                      <img src="В разработке.png" alt="Статус">
                      <div><h3>Criminal Islands (с модами)</h3><p>Статус: В разработке</p></div>
-                     <button class="description-btn" onclick="event.stopPropagation(); openModal('**Criminal Islands** - Проект, переживший многое, но ему это не помешало... \n\n**Особенности:** Кастомные моды, уникальный мир, система ящиков. **Запуск не скоро***.','K2M9');"></button>
+                     <button class="description-btn" onclick="event.stopPropagation(); openModal('**Criminal Islands** - Проект, переживший многое, но ему это не помешало... \n\n**Особенности:** Кастомные моды, уникальный мир, система ящиков. **Запуск не скоро***.','K2M9', 'Criminal Islands (с модами)');"></button>
                 </div>
-                <div class="card" data-type="project-rp" data-status-id="4" data-server-code="L3R4" data-info="В разработке"
-                     onclick="openModal('**RayRP** - полноценный RolePlay проект с глубокой проработкой лора, профессий и взаимодействия между игроками. \n\n*Особенности:* Моды для РП, хорошая администрация, система связи. Проект пока-что не сделан **...ЖДИТЕ...**','L3R4')">
+                <div class="card" data-type="project-rp" data-status-id="4" data-server-code="L3R4" data-info="В разработке" data-name="RayRP (с модами)">
                      <img src="В разработке.png" alt="Статус">
                      <div><h3>RayRP (с модами)</h3><p>Статус: В разработке</p></div>
-                     <button class="description-btn" onclick="event.stopPropagation(); openModal('**RayRP** - полноценный RolePlay проект с глубокой проработкой лора, профессий и взаимодействия между игроками. \n\n*Особенности:* Моды для РП, хорошая администрация, система связи. Проект пока-что не сделан **...ЖДИТЕ...**','L3R4');"></button>
+                     <button class="description-btn" onclick="event.stopPropagation(); openModal('**RayRP** - полноценный RolePlay проект с глубокой проработкой лора, профессий и взаимодействия между игроками. \n\n*Особенности:* Моды для РП, хорошая администрация, система связи. Проект пока-что не сделан **...ЖДИТЕ...**','L3R4', 'RayRP (с модами)');"></button>
                 </div>
-                <div class="card" data-type="project-rp" data-status-id="3" data-server-code="0000-45B" data-info="Пусто"
-                     onclick="openModal('**[ПУСТО]** - это место для вашего проекта! Вы можете выкупить его и разместить здесь свой проект. **Подробности у Администрации.**','0000-45B')">
+                <div class="card" data-type="project-rp" data-status-id="3" data-server-code="0000-45B" data-info="Пусто" data-name="[ПУСТО] Проект RP">
                      <img src="Недоступно.png" alt="Статус">
-                     <div><h3>[ПУСТО]</h3><p>Статус: Пусто</p></div>
-                     <button class="description-btn" onclick="event.stopPropagation(); openModal('**[ПУСТО]** - это место для вашего проекта! Вы можете выкупить его и разместить здесь свой проект. **Подробности у Администрации.**','0000-45B');"></button>
+                     <div><h3>[ПУСТО] Проект RP</h3><p>Статус: Пусто</p></div>
+                     <button class="description-btn" onclick="event.stopPropagation(); openModal('**[ПУСТО]** - это место для вашего проекта! Вы можете выкупить его и разместить здесь свой проект. **Подробности у Администрации.**','0000-45B_E', '[ПУСТО] Проект RP');"></button>
                 </div>
-                <div class="card" data-type="project-sandbox" data-status-id="3" data-server-code="0000-45B" data-info="Пусто"
-                     onclick="openModal('**[ПУСТО]** - это место для вашего проекта! Вы можете выкупить его и разместить здесь свой проект. **Подробности у Администрации.**','0000-45B')">
+                <div class="card" data-type="project-sandbox" data-status-id="3" data-server-code="0000-45B" data-info="Пусто" data-name="[ПУСТО] Sandbox">
                      <img src="Недоступно.png" alt="Статус">
-                     <div><h3>[ПУСТО]</h3><p>Статус: Пусто</p></div>
-                     <button class="description-btn" onclick="event.stopPropagation(); openModal('**[ПУСТО]** - это место для вашего проекта! Вы можете выкупить его и разместить здесь свой проект. **Подробности у Администрации.**','0000-45B');"></button>
+                     <div><h3>[ПУСТО] Sandbox</h3><p>Статус: Пусто</p></div>
+                     <button class="description-btn" onclick="event.stopPropagation(); openModal('**[ПУСТО]** - это место для вашего проекта! Вы можете выкупить его и разместить здесь свой проект. **Подробности у Администрации.**','0000-45B_F', '[ПУСТО] Sandbox');"></button>
                 </div>
-                <div class="card" data-type="project-pvp" data-status-id="3" data-server-code="0000-45B" data-info="Пусто"
-                     onclick="openModal('**[ПУСТО]** - это место для вашего проекта! Вы можете выкупить его и разместить здесь свой проект. **Подробности у Администрации.**','0000-45B')">
+                <div class="card" data-type="project-pvp" data-status-id="3" data-server-code="0000-45B" data-info="Пусто" data-name="[ПУСТО] Проект PvP">
                      <img src="Недоступно.png" alt="Статус">
-                     <div><h3>[ПУСТО]</h3><p>Статус: Пусто</p></div>
-                     <button class="description-btn" onclick="event.stopPropagation(); openModal('**[ПУСТО]** - это место для вашего проекта! Вы можете выкупить его и разместить здесь свой проект. **Подробности у Администрации.**','0000-45B');"></button>
+                     <div><h3>[ПУСТО] Проект PvP</h3><p>Статус: Пусто</p></div>
+                     <button class="description-btn" onclick="event.stopPropagation(); openModal('**[ПУСТО]** - это место для вашего проекта! Вы можете выкупить его и разместить здесь свой проект. **Подробности у Администрации.**','0000-45B_G', '[ПУСТО] Проект PvP');"></button>
                 </div>
-                <div class="card" data-type="project-parkour" data-status-id="3" data-server-code="0000-45B" data-info="Пусто"
-                     onclick="openModal('**[ПУСТО]** - это место для вашего проекта! Вы можете выкупить его и разместить здесь свой проект. **Подробности у Администрации.**','0000-45B')">
+                <div class="card" data-type="project-parkour" data-status-id="3" data-server-code="0000-45B" data-info="Пусто" data-name="[ПУСТО] Проект Паркур">
                      <img src="Недоступно.png" alt="Статус">
-                     <div><h3>[ПУСТО]</h3><p>Статус: Пусто</p></div>
-                     <button class="description-btn" onclick="event.stopPropagation(); openModal('**[ПУСТО]** - это место для вашего проекта! Вы можете выкупить его и разместить здесь свой проект. **Подробности у Администрации.**','0000-45B');"></button>
+                     <div><h3>[ПУСТО] Проект Паркур</h3><p>Статус: Пусто</p></div>
+                     <button class="description-btn" onclick="event.stopPropagation(); openModal('**[ПУСТО]** - это место для вашего проекта! Вы можете выкупить его и разместить здесь свой проект. **Подробности у Администрации.**','0000-45B_H', '[ПУСТО] Проект Паркур');"></button>
                 </div>
             </div>
 
@@ -760,17 +729,28 @@ body.no-glow .settings-pc-btn img { filter: none !important; }
         <section id="leaders">
             <h2>Должности</h2>
             <div class="leaders">
-                <div id="leader-m3" class="leader-card"><h3>М-3 [SHD]</h3><p>Вождь | Основатель</p></div>
-                <div class="leader-card"><h3>REisain [SHD]</h3><p>Заместитель | Главный разработчик</p></div>
-                <div class="leader-card"><h3>Красный [SHD]</h3><p>Заместитель</p></div>
-                <div class="leader-card"><h3>Melope [SHD]</h3><p>Министр | Пвпшер</p></div>
+                <div id="leader-m3" class="leader-card">
+                    <h3><img src="Badge_Вождь.png" class="mini-badge" alt="Badge"> М-3 [SHD]</h3>
+                    <p>Вождь | Основатель</p>
+                </div>
+                <div class="leader-card">
+                    <h3><img src="Badge_Заместитель.png" class="mini-badge" alt="Badge"> REisain [SHD]</h3>
+                    <p>Заместитель | Главный разработчик</p>
+                </div>
+                <div class="leader-card">
+                    <h3><img src="Badge_Заместитель.png" class="mini-badge" alt="Badge"> Красный [SHD]</h3>
+                    <p>Заместитель</p>
+                </div>
+                <div class="leader-card">
+                    <h3><img src="Badge_Министр.png" class="mini-badge" alt="Badge"> Melope [SHD]</h3>
+                    <p>Министр | Пвпшер</p>
+                </div>
             </div>
         </section>
 
         <section id="settings">
             <h2>Настройки</h2>
             <div class="settings-btn-group">
-                <button id="theme-toggle-btn" class="setting-btn" onclick="toggleTheme()">Переключить тему (Текущая: Тёмная)</button>
                 <button id="glow-toggle-btn" class="setting-btn" onclick="toggleGlow()">Супер Оптимизация (Свечение: Вкл)</button>
             </div>
         </section>
@@ -799,9 +779,57 @@ body.no-glow .settings-pc-btn img { filter: none !important; }
                     <label for="ticket-description">Подробное описание:</label>
                     <textarea id="ticket-description" name="description" rows="5" required></textarea>
 
-                    <button type="submit">Отправить Тикет</button>
-                    <p id="ticket-message" style="margin-top: 10px; color: #ff0000; display: none;">Тикеты ещё не работают, но я исправил форму для будущей работы!</p>
+                    <button type="submit" id="ticket-submit-btn">Отправить Тикет</button>
+                    <button type="button" id="ticket-cancel-btn" class="cancel-btn" style="display:none;" onclick="cancelTicketSend()">Отменить отправку (60с)</button>
+                    <p id="ticket-message" style="margin-top: 10px; color: #ff0000; display: none;"></p>
                 </form>
+            </div>
+        </section>
+
+        <section id="badges">
+            <h2>Система Бейджей</h2>
+            <p style="text-align: center; color: #ccc; margin-bottom: 30px;">Знаки отличия высшего руководства и особых заслуг.</p>
+            
+            <div class="badges-grid">
+                <div class="badge-card">
+                    <img src="Badge_Вождь.png" class="badge-img-large" alt="Вождь">
+                    <div class="badge-title">Вождь</div>
+                    <div class="badge-desc">
+                        Высший знак отличия. Присваивается только основателю клана SHD. Обладает абсолютной властью и уважением. Символ единства и силы.
+                    </div>
+                </div>
+
+                <div class="badge-card">
+                    <img src="Badge_Заместитель.png" class="badge-img-large" alt="Заместитель">
+                    <div class="badge-title">Заместитель</div>
+                    <div class="badge-desc">
+                        Правая рука Вождя. Обладает полномочиями управлять кланом в отсутствие лидера. Выдается за преданность и высокие организаторские способности.
+                    </div>
+                </div>
+
+                <div class="badge-card">
+                    <img src="Badge_Генерал.png" class="badge-img-large" alt="Генерал">
+                    <div class="badge-title">Генерал</div>
+                    <div class="badge-desc">
+                        Командующий военными силами клана. Ответственен за тактику, обучение бойцов и защиту территорий. Выдается опытным стратегам.
+                    </div>
+                </div>
+
+                <div class="badge-card">
+                    <img src="Badge_Полковник.png" class="badge-img-large" alt="Полковник">
+                    <div class="badge-title">Полковник</div>
+                    <div class="badge-desc">
+                        Старший офицерский состав. Руководит отдельными отрядами и следит за дисциплиной. Знак высокой боевой подготовки.
+                    </div>
+                </div>
+
+                <div class="badge-card">
+                    <img src="Badge_Министр.png" class="badge-img-large" alt="Министр">
+                    <div class="badge-title">Министр</div>
+                    <div class="badge-desc">
+                        Отвечает за гражданские и административные вопросы, развитие направлений и внутреннюю политику. Выдается за интеллектуальный вклад.
+                    </div>
+                </div>
             </div>
         </section>
         
@@ -814,8 +842,9 @@ body.no-glow .settings-pc-btn img { filter: none !important; }
             <img id="modal-avatar" src="" alt="Аватар проекта" style="display:none;">
 
             <div class="modal-nav">
-                <button class="modal-tab-btn active" onclick="showModalSection('description')">Описание</button>
-                <button class="modal-tab-btn" onclick="showModalSection('code')">Код</button>
+                <button id="tab-description" class="modal-tab-btn active" onclick="showModalSection('description')">Описание</button>
+                <button id="tab-code" class="modal-tab-btn" onclick="showModalSection('code')">Код</button>
+                <button id="tab-report" class="modal-tab-btn" onclick="showModalSection('report')">Репорт</button>
             </div>
 
             <div id="modal-description-section" class="modal-section active">
@@ -827,6 +856,32 @@ body.no-glow .settings-pc-btn img { filter: none !important; }
                 <div id="code-section-display" onclick="copyServerCode()">CODE-HERE</div>
             </div>
 
+            <div id="modal-report-section" class="modal-section">
+                <div class="report-form-container">
+                    <h3>Жалоба на Проект <span id="report-project-name"></span></h3>
+                    <form id="report-form">
+                        <input type="hidden" id="report-server-code" name="serverCode">
+
+                        <label for="report-nickname">Ваш никнейм:</label>
+                        <input type="text" id="report-nickname" name="nickname" required maxlength="50">
+    
+                        <label for="report-issue-type">Тип проблемы:</label>
+                        <select id="report-issue-type" name="issueType" required>
+                            <option value="">Выберите проблему</option>
+                            <option value="broken-mechanic">Сломанная механика</option>
+                            <option value="abuse-admin">Злоупотребление Администратора</option>
+                            <option value="major-bug">Критический баг</option>
+                            <option value="other-report">Другое</option>
+                        </select>
+    
+                        <label for="report-details">Подробности:</label>
+                        <textarea id="report-details" name="details" rows="5" required></textarea>
+                        
+                        <button type="submit">Отправить Репорт</button>
+                        <p id="report-message" style="margin-top: 10px; color: #ff0000; display: none;"></p>
+                    </form>
+                </div>
+            </div>
 
             <button class="modal-close-btn" onclick="closeModal()">Закрыть</button>
         </div>
@@ -834,9 +889,14 @@ body.no-glow .settings-pc-btn img { filter: none !important; }
     
     <script>
         // *** КОНСТАНТЫ ***
-        const EMPTY_CODE = '0000-45B'; // Код для "Пусто"
-        // WEBHOOK СКОПИРОВАН ИЗ ВАШЕГО ЗАПРОСА
-        const WEBHOOK_URL = 'https://discord.com/api/webhooks/1440106757010493510/Bz9MmjCNxdk0LZyOd5hQUJj65eunc6QA3kP2XU8CBSN3AWPu9Qnlhc-bRByDm--BAiiZ';
+        const WEBHOOK_URL = 'https://discord.com/api/webhooks/1440106757010493510/Bz9MmjCNxdk0LZyOd5hQUJj65eunc6QA3kP2XU8CBSN3AWPu9Qnlhc-bRByDm--BAiiZ ';
+        const TICKET_DELAY_MS = 60000; // 1 минута
+
+        // *** ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ***
+        let currentServerCode = ''; 
+        let ticketTimeout = null;
+        let ticketData = null;
+
 
         // *** ФУНКЦИИ НАСТРОЕК ***
         function getSetting(key) {
@@ -849,19 +909,6 @@ body.no-glow .settings-pc-btn img { filter: none !important; }
         function setSetting(key, value) {
             if (typeof localStorage !== 'undefined') {
                 localStorage.setItem(key, value);
-            }
-        }
-
-        function updateThemeButton(isLight) {
-            const btn = document.getElementById('theme-toggle-btn');
-            const btnMobile = document.getElementById('theme-toggle-btn-mobile');
-            if (btn) {
-                btn.textContent = `Переключить тему (Текущая: ${isLight ? 'Светлая' : 'Тёмная'})`;
-                btn.classList.toggle('active', isLight);
-            }
-            if (btnMobile) {
-                btnMobile.textContent = `Переключить тему (Текущая: ${isLight ? 'Светлая' : 'Тёмная'})`;
-                btn.classList.toggle('active', isLight);
             }
         }
 
@@ -878,21 +925,10 @@ body.no-glow .settings-pc-btn img { filter: none !important; }
             }
         }
 
-        function applyTheme(isLight) {
-            document.body.classList.toggle('light-mode', isLight);
-            setSetting('theme', isLight ? 'light' : 'dark');
-            updateThemeButton(isLight);
-        }
-
         function applyGlow(isNoGlow) {
             document.body.classList.toggle('no-glow', isNoGlow);
             setSetting('glow', isNoGlow ? 'off' : 'on');
             updateGlowButton(isNoGlow);
-        }
-
-        function toggleTheme() {
-            const isLight = document.body.classList.contains('light-mode');
-            applyTheme(!isLight);
         }
 
         function toggleGlow() {
@@ -900,11 +936,8 @@ body.no-glow .settings-pc-btn img { filter: none !important; }
             applyGlow(!isNoGlow);
         }
 
-        // НОВАЯ ФУНКЦИЯ ДЛЯ КНОПКИ НАСТРОЕК В ЗАГОЛОВКЕ
         function toggleSettings() {
             const settingsSection = document.getElementById('settings');
-            const homeSection = document.getElementById('home');
-            
             if (settingsSection.classList.contains('active')) {
                 showSection('home');
             } else {
@@ -913,14 +946,7 @@ body.no-glow .settings-pc-btn img { filter: none !important; }
         }
         
         function initializeSettings() {
-            const savedTheme = getSetting('theme');
             const savedGlow = getSetting('glow');
-
-            if (savedTheme === 'light') {
-                applyTheme(true);
-            } else {
-                applyTheme(false);
-            }
 
             if (savedGlow === 'off') {
                 applyGlow(true);
@@ -929,7 +955,8 @@ body.no-glow .settings-pc-btn img { filter: none !important; }
             }
         }
 
-        // *** ФУНКЦИИ НАВИГАЦИИ (НЕ ТРОНУТЫ) ***
+
+        // *** ФУНКЦИИ НАВИГАЦИИ ***
         function showSection(sectionId) {
             document.querySelectorAll('section').forEach(section => {
                 section.classList.remove('active');
@@ -939,9 +966,17 @@ body.no-glow .settings-pc-btn img { filter: none !important; }
             document.querySelectorAll('nav button').forEach(button => {
                 button.classList.remove('active');
             });
-            document.querySelector(`nav button[onclick="showSection('${sectionId}')"]`).classList.add('active');
+            
+            // Особая проверка для кнопки бейджей, так как у неё другой класс
+            if(sectionId === 'badges') {
+                document.querySelector('.badges-btn').classList.add('active');
+            } else {
+                const navButton = document.querySelector(`nav button[onclick="showSection('${sectionId}')"]`);
+                if (navButton) {
+                    navButton.classList.add('active');
+                }
+            }
 
-            // Специальная обработка для мобильных настроек
             const mobileSettings = document.getElementById('settings-mobile-container');
             if (sectionId === 'home' && window.innerWidth <= 600) {
                 mobileSettings.style.display = 'block';
@@ -961,20 +996,17 @@ body.no-glow .settings-pc-btn img { filter: none !important; }
 
             document.getElementById(listId === 'servers-list' ? 'servers-switch-btn' : 'projects-switch-btn').classList.add('active');
             
-            // Сбросить фильтр при переключении
-            if (listId === 'servers-list') {
-                 filterServers('all', 'servers-list');
-                 document.querySelectorAll('#servers-list .filter-btn').forEach(btn => btn.classList.remove('active'));
-                 document.querySelector('#servers-list .filter-btn[data-filter="all"]').classList.add('active');
-            } else {
-                 filterServers('all', 'projects-list');
-                 document.querySelectorAll('#projects-list .filter-btn').forEach(btn => btn.classList.remove('active'));
-                 document.querySelector('#projects-list .filter-btn[data-filter="all"]').classList.add('active');
-            }
+            const container = document.getElementById(listId);
+            const activeFilter = container.querySelector('.filter-btn.active');
+            const defaultFilter = container.querySelector('.filter-btn[data-filter="all"]');
+
+            if (activeFilter) activeFilter.classList.remove('active');
+            if (defaultFilter) defaultFilter.classList.add('active');
+
+            filterServers('all', listId);
         }
 
-        function filterServers(type, listId = null) {
-            const containerId = listId || (document.getElementById('servers-list').style.display === 'block' ? 'servers-list' : 'projects-list');
+        function filterServers(type, containerId) {
             const cards = document.querySelectorAll(`#${containerId} .card`);
             
             cards.forEach(card => {
@@ -989,10 +1021,14 @@ body.no-glow .settings-pc-btn img { filter: none !important; }
             document.querySelectorAll(`#${containerId} .filter-btn`).forEach(btn => {
                 btn.classList.remove('active');
             });
-            document.querySelector(`#${containerId} .filter-btn[data-filter="${type}"]`).classList.add('active');
+            const filterButton = document.querySelector(`#${containerId} .filter-btn[data-filter="${type}"]`);
+            if (filterButton) {
+                filterButton.classList.add('active');
+            }
         }
 
-        // *** ФУНКЦИИ МОДАЛЬНОГО ОКНА И СТАТУСОВ (НЕ ТРОНУТЫ) ***
+
+        // *** ФУНКЦИИ МОДАЛЬНОГО ОКНА И СТАТУСОВ ***
         function updateServerStatus(card) {
             const statusId = parseInt(card.dataset.statusId, 10);
             const img = card.querySelector('img');
@@ -1001,7 +1037,6 @@ body.no-glow .settings-pc-btn img { filter: none !important; }
 
             card.classList.remove('online');
 
-            // ОБНОВЛЕНИЕ ПУТИ К ИЗОБРАЖЕНИЯМ
             const imageMap = {
                 1: 'Онлайн.png',
                 3: 'Недоступно.png',
@@ -1024,33 +1059,39 @@ body.no-glow .settings-pc-btn img { filter: none !important; }
             }
         }
 
-        let currentServerCode = ''; // Для хранения кода сервера для копирования
+        let currentProjectName = '';
 
         function showModalSection(sectionId) {
             document.querySelectorAll('.modal-section').forEach(section => section.classList.remove('active'));
             document.getElementById(`modal-${sectionId}-section`).classList.add('active');
             
             document.querySelectorAll('.modal-tab-btn').forEach(btn => btn.classList.remove('active'));
-            document.querySelector(`.modal-tab-btn[onclick="showModalSection('${sectionId}')"]`).classList.add('active');
+            document.getElementById(`tab-${sectionId}`).classList.add('active');
         }
 
-        function openModal(description, serverCode) {
+        function openModal(description, serverCode, projectName) {
             const modal = document.getElementById('modal');
             const descriptionElement = document.getElementById('modal-description');
             const avatarImg = document.getElementById('modal-avatar');
             
             currentServerCode = serverCode;
+            currentProjectName = projectName;
             
-            descriptionElement.innerHTML = description.replace(/\n/g, '<br>'); // Замена \n на <br>
+            descriptionElement.innerHTML = description.replace(/\n/g, '<br>');
 
-            const displayCode = serverCode === EMPTY_CODE ? '[ПУСТО]' : serverCode;
-            document.getElementById('modal-title').innerHTML = `Описание: <span id="modal-project-name">${displayCode}</span>`;
+            document.getElementById('modal-title').innerHTML = `Описание: <span id="modal-project-name">${projectName}</span>`;
             
             const codeDisplay = document.getElementById('code-section-display');
             codeDisplay.textContent = currentServerCode;
 
+            document.getElementById('report-project-name').textContent = projectName;
+            document.getElementById('report-server-code').value = serverCode;
+            document.getElementById('report-message').style.display = 'none';
+            document.getElementById('report-form').reset();
+
+
             const avatarMap = {
-                'K2M9': 'Аватарка_CI.png', // ИЗМЕНЕНИЕ ПО ЗАПРОСУ ПОЛЬЗОВАТЕЛЯ
+                'K2M9': 'Аватарка_CI.png', 
                 'C3P0': 'Аватар_SHADE.png',
                 'X5Y7': 'Аватар_SHADE_v2.png', 
                 'R7M1': 'Аватар_SHD_V10.png',
@@ -1083,7 +1124,7 @@ body.no-glow .settings-pc-btn img { filter: none !important; }
         function copyServerCode() {
             const code = document.getElementById('code-section-display').textContent;
 
-            if (code === EMPTY_CODE) {
+            if (code === '0000-45B') {
                 const display = document.getElementById('code-section-display');
                 const originalText = display.textContent;
                 display.textContent = 'НЕЛЬЗЯ СКОПИРОВАТЬ ПУСТОТУ';
@@ -1106,47 +1147,10 @@ body.no-glow .settings-pc-btn img { filter: none !important; }
             });
         }
 
-        // *** ЛОГИКА ТИКЕТОВ ***
-        document.getElementById('ticket-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const nickname = document.getElementById('ticket-nickname').value; // <<< ПОЛУЧЕНИЕ НИКНЕЙМА
-            const type = document.getElementById('ticket-type').value;
-            const title = document.getElementById('ticket-title').value;
-            const description = document.getElementById('ticket-description').value;
-            const messageElement = document.getElementById('ticket-message');
-            const submitButton = this.querySelector('button[type="submit"]');
 
-            messageElement.style.display = 'none';
-            messageElement.style.color = '#ff0000';
-            submitButton.disabled = true;
-            submitButton.textContent = 'Отправка...';
-
-            const embedColor = {
-                'report-player': 16711680, // Red
-                'report-admin': 16753920, // Orange
-                'bug': 3447003, // Blue
-                'suggestion': 65280, // Green
-                'other': 10070709 // Purple
-            }[type] || 10070709;
-
-            const data = {
-                username: "SHD Catalog Ticket System",
-                // Замените на аватар вашего бота/системы
-                avatar_url: "https://i.imgur.com/your-avatar.png", 
-                embeds: [{
-                    title: `[НОВЫЙ ТИКЕТ] ${title}`,
-                    description: description,
-                    color: embedColor,
-                    fields: [
-                        { name: "Никнейм пользователя", value: nickname, inline: false }, // <<< ДОБАВЛЕН НИКНЕЙМ
-                        { name: "Тип обращения", value: type.charAt(0).toUpperCase() + type.slice(1).replace('-', ' '), inline: true },
-                    ],
-                    timestamp: new Date().toISOString()
-                }]
-            };
-
-            fetch(WEBHOOK_URL, {
+        // *** ЛОГИКА ТИКЕТОВ С ОТМЕНОЙ ***
+        function sendDiscordWebhook(data, messageElement, isTicket = true) {
+            return fetch(WEBHOOK_URL, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -1154,46 +1158,181 @@ body.no-glow .settings-pc-btn img { filter: none !important; }
                 body: JSON.stringify(data),
             })
             .then(response => {
-                submitButton.disabled = false;
-                submitButton.textContent = 'Отправить Тикет';
                 if (response.ok) {
                     messageElement.style.color = '#00ff00';
-                    messageElement.textContent = '✅ Тикет успешно отправлен в Discord!';
-                    document.getElementById('ticket-form').reset();
+                    messageElement.textContent = `✅ ${isTicket ? 'Тикет' : 'Репорт'} успешно отправлен в Discord!`;
                 } else {
                     messageElement.textContent = `❌ Ошибка при отправке: ${response.status} ${response.statusText}`;
+                    throw new Error('Webhook error');
                 }
             })
             .catch(error => {
-                submitButton.disabled = false;
-                submitButton.textContent = 'Отправить Тикет';
-                messageElement.textContent = '❌ Сетевая ошибка при отправке тикета. Проверьте соединение.';
+                messageElement.textContent = `❌ Сетевая ошибка при отправке ${isTicket ? 'тикета' : 'репорта'}. Проверьте соединение.`;
                 console.error('Error:', error);
             })
             .finally(() => {
                 messageElement.style.display = 'block';
+                if (isTicket) {
+                    const submitButton = document.getElementById('ticket-submit-btn');
+                    const cancelButton = document.getElementById('ticket-cancel-btn');
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Отправить Тикет';
+                    cancelButton.style.display = 'none';
+                    if (messageElement.textContent.startsWith('✅')) {
+                        document.getElementById('ticket-form').reset();
+                    }
+                }
             });
-        });
-
-        // *** ИНИЦИАЛИЗАЦИЯ (ФУНКЦИЯ ЗАПУСКА) ***
-        function initializeStatuses() {
-            // 1. Применяем все настройки из localStorage
-            initializeSettings();
-            
-            // 2. Обновляем статусы для всех карт
-            document.querySelectorAll('.card').forEach(updateServerStatus);
-
-            // 3. Открываем секцию "Главная" и список "Сервера"
-            showSection('home');
-            showServerList('servers-list');
-
-            // 4. ДЕЛАЕМ СТРАНИЦУ ВИДИМОЙ
-            document.body.style.opacity = '1';
         }
 
-        // *** НОВЫЙ ЗАПУСК ***
-        // Вызываем функцию сразу, как только будет загружен скрипт, 
-        // так как он находится в самом конце <body>, и не нужен отдельный обработчик
+        function cancelTicketSend() {
+            clearTimeout(ticketTimeout);
+            ticketTimeout = null;
+            ticketData = null;
+
+            const submitButton = document.getElementById('ticket-submit-btn');
+            const cancelButton = document.getElementById('ticket-cancel-btn');
+            const messageElement = document.getElementById('ticket-message');
+
+            submitButton.disabled = false;
+            submitButton.textContent = 'Отправить Тикет';
+            cancelButton.style.display = 'none';
+
+            messageElement.style.color = '#ff9900';
+            messageElement.textContent = '⚠️ Отправка тикета отменена пользователем.';
+            messageElement.style.display = 'block';
+
+            document.getElementById('ticket-form').reset();
+        }
+
+
+        document.getElementById('ticket-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nickname = document.getElementById('ticket-nickname').value;
+            const type = document.getElementById('ticket-type').value;
+            const title = document.getElementById('ticket-title').value;
+            const description = document.getElementById('ticket-description').value;
+            const messageElement = document.getElementById('ticket-message');
+            const submitButton = document.getElementById('ticket-submit-btn');
+            const cancelButton = document.getElementById('ticket-cancel-btn');
+
+            messageElement.style.display = 'none';
+            submitButton.disabled = true;
+            submitButton.textContent = 'Отправка через 60с...';
+            cancelButton.textContent = 'Отменить отправку (60с)';
+            cancelButton.style.display = 'block';
+
+            const embedColor = {
+                'report-player': 16711680, 
+                'report-admin': 16753920, 
+                'bug': 3447003, 
+                'suggestion': 65280, 
+                'other': 10070709 
+            }[type] || 10070709;
+
+            ticketData = {
+                username: "SHD Catalog Ticket System",
+                avatar_url: "https://i.imgur.com/your-avatar.png ", 
+                embeds: [{
+                    title: `[НОВЫЙ ТИКЕТ] ${title}`,
+                    description: description,
+                    color: embedColor,
+                    fields: [
+                        { name: "Никнейм пользователя", value: nickname, inline: false }, 
+                        { name: "Тип обращения", value: type.charAt(0).toUpperCase() + type.slice(1).replace('-', ' '), inline: true },
+                    ],
+                    timestamp: new Date().toISOString()
+                }]
+            };
+
+            ticketTimeout = setTimeout(() => {
+                sendDiscordWebhook(ticketData, messageElement);
+                ticketTimeout = null;
+                ticketData = null;
+            }, TICKET_DELAY_MS); 
+
+            let secondsLeft = TICKET_DELAY_MS / 1000;
+            const timerInterval = setInterval(() => {
+                secondsLeft--;
+                cancelButton.textContent = `Отменить отправку (${secondsLeft}с)`;
+                
+                if (secondsLeft <= 0 || ticketTimeout === null) {
+                    clearInterval(timerInterval);
+                    if (ticketTimeout === null) {
+                    } else {
+                        cancelButton.style.display = 'none';
+                    }
+                }
+            }, 1000);
+
+            messageElement.style.color = '#00ff00';
+            messageElement.textContent = `⏳ Тикет будет отправлен через 60 секунд. Нажмите "Отменить", чтобы отменить.`;
+            messageElement.style.display = 'block';
+        });
+
+        // *** ЛОГИКА РЕПОРТОВ ***
+        document.getElementById('report-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const serverCode = document.getElementById('report-server-code').value;
+            const nickname = document.getElementById('report-nickname').value;
+            const issueType = document.getElementById('report-issue-type').value;
+            const details = document.getElementById('report-details').value;
+            const messageElement = document.getElementById('report-message');
+            const submitButton = this.querySelector('button[type="submit"]');
+
+            messageElement.style.display = 'none';
+            submitButton.disabled = true;
+            submitButton.textContent = 'Отправка...';
+
+            const embedColor = 16711680;
+
+            const data = {
+                username: `SHD Project Report System (${currentProjectName})`,
+                avatar_url: "https://i.imgur.com/your-avatar.png ", 
+                embeds: [{
+                    title: `🚨 РЕПОРТ: ${currentProjectName} (${serverCode})`,
+                    description: details,
+                    color: embedColor,
+                    fields: [
+                        { name: "Никнейм пользователя", value: nickname, inline: false }, 
+                        { name: "Тип проблемы", value: issueType.charAt(0).toUpperCase() + issueType.slice(1).replace('-', ' '), inline: true },
+                        { name: "Код сервера", value: serverCode, inline: true }
+                    ],
+                    timestamp: new Date().toISOString()
+                }]
+            };
+
+            sendDiscordWebhook(data, messageElement, false)
+                .finally(() => {
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Отправить Репорт';
+                    if (messageElement.textContent.startsWith('✅')) {
+                        document.getElementById('report-form').reset();
+                    }
+                });
+        });
+
+
+        // *** ИНИЦИАЛИЗАЦИЯ ***
+        function initializeStatuses() {
+            initializeSettings();
+            
+            document.querySelectorAll('.card').forEach(updateServerStatus);
+
+            showSection('home');
+            showServerList('servers-list');
+            
+            const mobileSettings = document.getElementById('settings-mobile-container');
+            if (window.innerWidth <= 600) {
+                mobileSettings.style.display = 'block';
+            } else {
+                mobileSettings.style.display = 'none';
+            }
+
+            document.body.style.opacity = '1';
+        }
     </script>
 </body>
 </html>
