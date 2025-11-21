@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SHD Каталог и не только! v.11.0.0 (Dark Only)</title>
-    
+
     <style>
 /* 1. ОСНОВНЫЕ СТИЛИ */
 body { 
@@ -79,22 +79,6 @@ nav button.active {
 }
 
 /* КНОПКА БЕЙДЖИ (ОСОБЫЙ СТИЛЬ) */
-nav button.badges-btn {
-    background: linear-gradient(45deg, #b8860b, #ffd700);
-    color: #000;
-    font-weight: bold;
-    box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
-}
-nav button.badges-btn:hover {
-    background: linear-gradient(45deg, #ffd700, #ffec8b);
-    box-shadow: 0 0 25px rgba(255, 215, 0, 0.8);
-    transform: scale(1.1);
-}
-nav button.badges-btn.active {
-    background: #ffd700;
-    box-shadow: 0 0 35px rgba(255, 215, 0, 1);
-    color: #000;
-}
 
 /* SETTINGS BUTTON */
 .settings-pc-btn {
@@ -472,6 +456,23 @@ section.active { display:block; }
     transform: scale(1.1);
 }
 
+/* КОРРЕКТНОЕ ПОЛОЖЕНИЕ И РАЗМЕР БЕЙДЖА АВТОРА */
+#creator-badge {
+    position: fixed; /* ГЛАВНЫЙ МОМЕНТ: фиксирует элемент в углу экрана */
+    bottom: 15px;    /* 15px от нижнего края */
+    left: 15px;     /* 15px от левого края */
+    width: 120px;     /* 🛑 ЭТО ДЕЛАЕТ ЕГО МАЛЕНЬКИМ! */
+    height: auto; 
+    opacity: 0.5; 
+    transition: opacity 0.3s, transform 0.3s;
+    z-index: 100;    /* Поверх всего контента */
+    cursor: pointer;
+}
+#creator-badge:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
 /* ANIMATIONS */
 @keyframes backgroundMove {
     0% { background-position: 0% 0%; }
@@ -531,6 +532,7 @@ body.no-glow #code-section-display:hover { box-shadow: none !important; }
 body.no-glow .settings-pc-btn img { filter: none !important; }
 body.no-glow .badge-card { box-shadow: none !important; border-color: #665500 !important; }
 body.no-glow nav button.badges-btn { box-shadow: none !important; animation: none !important; }
+body.no-glow #creator-badge { filter: none !important; } /* <-- НОВАЯ СТРОКА ДЛЯ ОПТИМИЗАЦИИ */
 
 /* MOBILE */
 @media (max-width: 600px) {
@@ -551,8 +553,14 @@ body.no-glow nav button.badges-btn { box-shadow: none !important; animation: non
     .leader-card { width: 100%; max-width: 250px; padding: 15px; }
     .calendar { width: 100%; max-width: 250px; }
     .modal-content { padding: 15px; }
-    #modal-title { font-size: 22px; }
+   #modal-title { font-size: 22px; }
     #code-section-display { font-size: 20px; }
+    /* ДОБАВЛЕНО: УМЕНЬШЕНИЕ РАЗМЕРА И ОТКЛЮЧЕНИЕ СВЕЧЕНИЯ */
+    #creator-badge {
+        width: 120px; 
+        bottom: 30px;
+        left: 30px;
+    }
 }
 </style>
 </head>
@@ -705,6 +713,8 @@ body.no-glow nav button.badges-btn { box-shadow: none !important; animation: non
             <div class="rule">6. Неактив (без предупреждения) - Кик с проекта/исключение из клана</div>
             <div class="rule">7. Не перечить Администратору (в рамках правил) - Мут/Бан на усмотрение Администрации</div>
             <div class="rule">8. Использование читов/стороннего ПО - Перманентный Бан</div>
+            <div class="rule">9.Не пиарить сервера разрешения (его можно получить у Президента/Одного из лидеров)</div>
+            <div class="rule">10. Упоминания нацизма/гитлера - 5 варнов</div>
         </section>
 
         <section id="calendar">
@@ -738,7 +748,7 @@ body.no-glow nav button.badges-btn { box-shadow: none !important; animation: non
                     <p>Заместитель | Главный разработчик</p>
                 </div>
                 <div class="leader-card">
-                    <h3><img src="Badge_Заместитель.png" class="mini-badge" alt="Badge"> Rat [SHD]</h3>
+                    <h3><img src="Badge_Заместитель.png" class="mini-badge" alt="Badge"> Red [SHD]</h3>
                     <p>Заместитель</p>
                 </div>
                 <div class="leader-card">
@@ -1372,6 +1382,7 @@ function initializeStatuses() {
 
     document.body.style.opacity = '1';
 }
-    </script>
+</script>
+    <img src="Создано.png" alt="Создано By R1SS5" id="creator-badge">
 </body>
 </html>
