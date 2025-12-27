@@ -414,7 +414,7 @@
                     <p>
                         Вы попали в SHD Catalog v.14.4.8. Одна из целей клана: собрать самых адекватных игроков и создать своё комьюнити адекватных серверов!
                     </p>
-                    <span>Catalog/каталог By R1SS5</span>
+                    <span>Каталог By R1SS5/РИС</span>
                 </div>
             </section>
 
@@ -511,12 +511,6 @@
                         <textarea id="description" placeholder="Подробно опишите ситуацию или причину апелляции" required></textarea>
                     </div>
 
-                    <div class="form-group form-full-width">
-                        <label for="evidenceLink"><i class="fas fa-link"></i> Доказательства (Ссылка на скриншот/видео)</label>
-                        <input type="url" id="evidenceLink" placeholder="Ссылка на Imgur, YouTube, Discord и т.д." required>
-                        <p style="font-size: 10px; color: var(--text-muted); margin-top: 5px;">(Сделайте в видео доступ по ссылке)</p>
-                    </div>
-
                     <button type="submit" class="btn-submit">ОТПРАВИТЬ ТИКЕТ</button>
                 </form>
             </section>
@@ -551,7 +545,8 @@
 { id: 'srv8', name: 'Слот 8', category: 'server', type: 'empty', status: 'empty', code: '—', desc: 'Пусто' },
 { id: 'srv9', name: 'паркур на крюках', category: 'server', type: 'game', status: 'off', code: '3FG4', desc: 'Паркур на крюках с прото-ботинками! (hard mode)' },
 
-            { id: 'proj2', name: 'Слот 2', category: 'project', type: 'empty', status: 'empty', code: '—', desc: 'Пусто' },
+{ id: 'proj1', name: 'Слот 2', category: 'project', type: 'empty', status: 'empty', code: '—', desc: 'Пусто' },
+{ id: 'proj2', name: 'Слот 2', category: 'project', type: 'empty', status: 'empty', code: '—', desc: 'Пусто' },
 { id: 'proj3', name: 'Слот 3', category: 'project', type: 'empty', status: 'empty', code: '—', desc: 'Пусто' },
 { id: 'proj4', name: 'Слот 4', category: 'project', type: 'empty', status: 'empty', code: '—', desc: 'Пусто' },
 { id: 'proj5', name: 'Слот 5', category: 'project', type: 'empty', status: 'empty', code: '—', desc: 'Пусто' },
@@ -721,8 +716,6 @@
             const yourName = document.getElementById('yourName').value;
             const telegramUsername = document.getElementById('telegramUsername').value;
             const targetName = document.getElementById('targetName').value || 'Н/Д (Нет цели)';
-            let description = document.getElementById('description').value;
-            const evidence = document.getElementById('evidenceLink').value;
             
             // Truncate description to prevent Discord 400 error (Max field value is 1024 chars)
             const MAX_FIELD_LENGTH = 1000; 
@@ -746,7 +739,6 @@
                         { name: "Ваш Username Telegram", value: telegramUsername, inline: true },
                         { name: "Никнейм Цели", value: targetName, inline: false },
                         { name: "Описание Ситуации", value: `\`\`\`\n${description}\n\`\``, inline: false },
-                        { name: "Доказательства (Ссылка)", value: `[Клик для просмотра](${evidence})`, inline: false }
                     ],
                     timestamp: new Date().toISOString(),
                     footer: { text: "SHD Catalog Ticket System" }
